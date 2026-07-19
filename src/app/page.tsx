@@ -6,6 +6,7 @@ import Hero from "@/components/sections/hero";
 import ProjectChapter from "@/components/sections/project-chapter";
 import SkillMarquee from "@/components/sections/skill-marquee";
 import GlobeSection from "@/components/sections/globe-section";
+import JourneyTimeline from "@/components/sections/journey-timeline";
 import About from "@/components/sections/about";
 import InvertedContact from "@/components/sections/contact";
 import Footer from "@/components/footer";
@@ -68,6 +69,7 @@ export default function Home() {
 
         <SkillMarquee />
         <GlobeSection />
+        <JourneyTimeline />
         <About />
         <InvertedContact />
       </main>

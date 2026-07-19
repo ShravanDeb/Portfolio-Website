@@ -516,7 +516,7 @@ export default function JourneyTimeline() {
 
       {/* ── Pin wrapper ── */}
       <div ref={pinWrapRef} className="relative">
-        <div ref={stickyRef} className="h-screen w-full overflow-hidden">
+        <div ref={stickyRef} className="h-screen w-full">
           <div className="mx-auto max-w-[860px] h-full relative">
             {/* ── Spine ── */}
             <div
