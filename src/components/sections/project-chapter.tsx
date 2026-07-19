@@ -57,11 +57,12 @@ export default function ProjectChapter({
 
             if (imageRef.current) {
               if (!isReduced) {
+                const isMobile = window.innerWidth < 768;
                 gsap.fromTo(
                   imageRef.current,
-                  { y: 80 },
+                  { y: isMobile ? 20 : 80 },
                   {
-                    y: -80,
+                    y: isMobile ? -20 : -80,
                     ease: "none",
                     scrollTrigger: {
                       trigger: sectionRef.current,
@@ -181,7 +182,7 @@ export default function ProjectChapter({
         <span className="font-mono text-[0.7rem] font-semibold uppercase tracking-[0.12em] text-text-4">
           Chapter {number}
         </span>
-        <span className="font-mono text-[0.6rem] uppercase tracking-[0.15em] text-text-3 opacity-0 group-hover/text:opacity-100 transition-opacity duration-300 border border-border px-1.5 py-0.5 rounded bg-surface-2/50">
+        <span className="font-mono text-[0.6rem] uppercase tracking-[0.15em] text-text-3 opacity-100 md:opacity-0 md:group-hover/text:opacity-100 transition-opacity duration-300 border border-border px-1.5 py-0.5 rounded bg-surface-2/50">
           {annotation}
         </span>
       </div>
@@ -199,7 +200,7 @@ export default function ProjectChapter({
       </p>
       <Link
         href={href}
-        className="group inline-flex items-center gap-2 text-sm text-text-2 transition-colors hover:text-text-1 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-text-1 w-max"
+        className="group inline-flex items-center gap-2 text-sm text-text-2 transition-all hover:text-text-1 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-text-1 w-max"
       >
         <span>View</span>
         <span className="transition-transform group-hover:translate-x-1">
@@ -216,7 +217,7 @@ export default function ProjectChapter({
           <div className="relative">
             <span
               ref={numberRef}
-              className="absolute -top-16 left-0 text-[clamp(6rem,15vw,14rem)] font-[100] leading-[0.85] tracking-[-0.05em] text-text-4 pointer-events-none select-none z-0 opacity-0"
+              className="absolute -top-16 left-0 text-[clamp(6rem,15vw,14rem)] font-[100] leading-[0.85] tracking-[-0.05em] text-text-4 pointer-events-none select-none z-0 opacity-0 hidden md:block"
             >
               {number}
             </span>
@@ -247,17 +248,10 @@ export default function ProjectChapter({
                 : "md:grid-cols-[35fr_65fr]"
             }`}
           >
-            {layout === "image-left" ? (
-              <>
-                {imageElement}
-                {textElement}
-              </>
-            ) : (
-              <>
-                {textElement}
-                {imageElement}
-              </>
-            )}
+            {imageElement}
+            <div className={layout === "image-right" ? "md:order-first" : ""}>
+              {textElement}
+            </div>
           </div>
         </div>
       </div>

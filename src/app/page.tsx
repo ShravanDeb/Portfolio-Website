@@ -61,7 +61,7 @@ export default function Home() {
       <main>
         <Hero />
 
-        <section className="py-32 md:py-48 space-y-32 md:space-y-48">
+        <section className="py-16 md:py-48 space-y-16 md:space-y-48">
           {projects.map((project) => (
             <ProjectChapter key={project.number} {...project} />
           ))}

@@ -36,7 +36,7 @@ export default function KiranAIPage() {
       <ScrollProgress />
       <Nav />
 
-      <main className="pt-32 pb-48">
+      <main className="pt-24 md:pt-32 pb-32 md:pb-48">
         <div className="mx-auto max-w-[720px] px-6">
           <Link
             href="/work"

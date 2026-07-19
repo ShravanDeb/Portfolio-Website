@@ -43,23 +43,23 @@ export default function WorkPage() {
       <ScrollProgress />
       <Nav />
 
-      <main className="pt-32 pb-48">
+      <main className="pt-24 md:pt-32 pb-32 md:pb-48">
         <div className="mx-auto max-w-[1100px] px-6">
           <span className="font-mono text-[0.7rem] font-semibold uppercase tracking-[0.12em] text-text-4 block mb-6">
             Work
           </span>
-          <h1 className="text-[clamp(2.5rem,5vw,4.5rem)] font-medium leading-[1.0] tracking-[-0.03em] text-text-1 mb-24">
+          <h1 className="text-[clamp(2.5rem,5vw,4.5rem)] font-medium leading-[1.0] tracking-[-0.03em] text-text-1 mb-16 md:mb-24">
             Selected projects
           </h1>
 
           <div className="space-y-0">
-            {projects.map((project, index) => (
+            {projects.map((project) => (
               <a
                 key={project.number}
                 href={project.href}
-                className="group block py-12 border-b border-border"
+                className="group block py-8 md:py-12 border-b border-border active:opacity-60 transition-opacity"
               >
-                <div className="grid grid-cols-1 md:grid-cols-[80px_1fr_200px] gap-4 md:gap-8 items-start">
+                <div className="grid grid-cols-[40px_1fr] md:grid-cols-[80px_1fr_200px] gap-4 md:gap-8 items-start">
                   <span className="font-mono text-text-4 text-sm">
                     {project.number}
                   </span>
@@ -71,7 +71,7 @@ export default function WorkPage() {
                       {project.description}
                     </p>
                   </div>
-                  <div className="text-right">
+                  <div className="hidden md:block text-right">
                     <p className="text-text-4 text-sm mb-2">
                       {project.tags.join(" · ")}
                     </p>
