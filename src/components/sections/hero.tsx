@@ -132,7 +132,7 @@ export default function Hero() {
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-screen flex flex-col justify-center px-6 overflow-hidden"
+      className="relative min-h-screen flex flex-col justify-center px-6 blueprint-grid overflow-hidden"
     >
       <div className="mx-auto w-full max-w-[1100px]">
         <div className="max-w-[720px]">

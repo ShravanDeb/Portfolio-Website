@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import { MagneticCursor } from "@/components/ui/magnetic-cursor";
-import BlueprintSubstrate from "@/components/ui/blueprint-substrate";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -71,7 +70,6 @@ export default function RootLayout({
     >
       <body className="min-h-full bg-background text-foreground cursor-none">
         <ThemeProvider>
-          <BlueprintSubstrate />
           <MagneticCursor
             magneticFactor={0.55}
             blendMode="exclusion"
