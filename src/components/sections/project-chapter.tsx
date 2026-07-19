@@ -48,21 +48,26 @@ export default function ProjectChapter({
       ctx = gsap.context(() => {
         mm.add(
           {
+            isMobile: "(max-width: 767px)",
+            isDesktop: "(min-width: 768px)",
             isReduced: "(prefers-reduced-motion: reduce)",
-            isNormal: "(prefers-reduced-motion: no-preference)",
           },
           (context) => {
-            const { isReduced } = context.conditions as { isReduced: boolean; isNormal: boolean };
+            const { isMobile, isDesktop, isReduced } = context.conditions as {
+              isMobile: boolean;
+              isDesktop: boolean;
+              isReduced: boolean;
+            };
+
             const toggleBehavior = isFlagship ? "play none none none" : "play none none reverse";
 
-            if (imageRef.current) {
+            if (isDesktop && imageRef.current) {
               if (!isReduced) {
-                const isMobile = window.innerWidth < 768;
                 gsap.fromTo(
                   imageRef.current,
-                  { y: isMobile ? 20 : 80 },
+                  { y: 80 },
                   {
-                    y: isMobile ? -20 : -80,
+                    y: -80,
                     ease: "none",
                     scrollTrigger: {
                       trigger: sectionRef.current,
@@ -91,7 +96,27 @@ export default function ProjectChapter({
               );
             }
 
-            if (numberRef.current) {
+            if (isMobile && imageRef.current) {
+              gsap.fromTo(
+                imageRef.current,
+                { scale: 0.96, opacity: 0.7, borderColor: "rgba(255, 255, 255, 0.05)" },
+                {
+                  scale: 1,
+                  opacity: 1,
+                  borderColor: "rgba(255, 255, 255, 0.25)",
+                  duration: 0.8,
+                  ease: "power3.out",
+                  scrollTrigger: {
+                    trigger: imageRef.current,
+                    start: "top 75%",
+                    end: "bottom 25%",
+                    toggleActions: "play reverse play reverse",
+                  },
+                }
+              );
+            }
+
+            if (isDesktop && numberRef.current) {
               gsap.fromTo(
                 numberRef.current,
                 { opacity: 0, scale: isReduced ? 1 : 0.8 },
@@ -138,13 +163,13 @@ export default function ProjectChapter({
             if (textRef.current) {
               gsap.fromTo(
                 textRef.current,
-                { opacity: 0, y: isReduced ? 0 : 30 },
+                { opacity: 0, y: isReduced ? 0 : isMobile ? 15 : 30 },
                 {
                   opacity: 1,
                   y: 0,
                   duration: 0.8,
                   ease: "power3.out",
-                  delay: 0.3,
+                  delay: isMobile ? 0.1 : 0.3,
                   scrollTrigger: {
                     trigger: textRef.current,
                     start: "top 88%",
@@ -165,48 +190,86 @@ export default function ProjectChapter({
   }, [isFlagship]);
 
   const imageElement = (
-    <div ref={imageRef} className="relative overflow-hidden group/img" data-cursor="project">
-      <div className="relative aspect-[16/10] bg-surface-2 group">
-        <div className="absolute inset-0 flex items-center justify-center text-text-4 font-mono text-sm uppercase tracking-widest transition-opacity duration-500 group-hover:opacity-50">
+    <div
+      ref={imageRef}
+      className="relative overflow-hidden group/img rounded-xl md:rounded-none border border-border/40 md:border-transparent bg-surface-2 shadow-2xl md:shadow-none transition-transform duration-500 active:scale-[0.98] md:active:scale-100"
+      data-cursor="project"
+    >
+      <div className="relative aspect-[4/3] md:aspect-[16/10] bg-surface-2 group">
+        <div className="absolute inset-0 flex items-center justify-center text-text-4 font-mono text-xs md:text-sm uppercase tracking-widest transition-opacity duration-500 group-hover:opacity-50">
           {imageAlt}
         </div>
-        <div className="absolute inset-0 border border-border-hi opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+        <div className="absolute inset-0 border border-border-hi opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500" />
       </div>
       <ShineBorder shineColor={["#3f3f46", "#fafafa"]} duration={10} borderWidth={1} />
     </div>
   );
 
   const textElement = (
-    <div ref={textRef} className="flex flex-col justify-center group/text">
-      <div className="flex items-center gap-3 mb-4">
+    <div
+      ref={textRef}
+      className="flex flex-col justify-center group/text border-l border-border/60 pl-5 md:border-l-0 md:pl-0 mt-6 md:mt-0"
+    >
+      <div className="hidden md:flex items-center gap-3 mb-4">
         <span className="font-mono text-[0.7rem] font-semibold uppercase tracking-[0.12em] text-text-4">
           Chapter {number}
         </span>
-        <span className="font-mono text-[0.6rem] uppercase tracking-[0.15em] text-text-3 opacity-100 md:opacity-0 md:group-hover/text:opacity-100 transition-opacity duration-300 border border-border px-1.5 py-0.5 rounded bg-surface-2/50">
+        <span className="font-mono text-[0.6rem] uppercase tracking-[0.15em] text-text-3 opacity-0 group-hover/text:opacity-100 transition-opacity duration-300 border border-border px-1.5 py-0.5 rounded bg-surface-2/50">
           {annotation}
         </span>
       </div>
+
       <h2
         ref={titleRef}
-        className="text-3xl md:text-4xl font-medium tracking-[-0.02em] text-text-1 mb-4 overflow-hidden"
+        className="text-2xl sm:text-3xl md:text-4xl font-medium tracking-[-0.02em] text-text-1 mb-3 md:mb-4 overflow-hidden"
       >
         {title}
       </h2>
-      <p className="text-text-2 text-sm leading-relaxed mb-6 max-w-[400px]">
+      <p className="text-text-2 text-sm leading-relaxed mb-6 max-w-none md:max-w-[400px]">
         {description}
       </p>
-      <p className="text-text-4 text-sm mb-8">
-        {tags.join(" · ")}
-      </p>
+      <div className="flex flex-wrap gap-1.5 md:gap-2 mb-8">
+        {tags.map((tag) => (
+          <span
+            key={tag}
+            className="font-mono text-[0.65rem] md:text-xs text-text-3 bg-surface-2/60 md:bg-transparent px-2 py-0.5 md:p-0 rounded border border-border/40 md:border-transparent"
+          >
+            #{tag}
+          </span>
+        ))}
+      </div>
       <Link
         href={href}
-        className="group inline-flex items-center gap-2 text-sm text-text-2 transition-all hover:text-text-1 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-text-1 w-max"
+        className="group inline-flex items-center justify-between md:justify-start gap-3 text-sm font-medium text-text-1 md:text-text-2 transition-all hover:text-text-1 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-text-1 w-full md:w-max py-2.5 md:py-0 px-4 md:px-0 rounded-lg md:rounded-none bg-surface-2 md:bg-transparent border border-border/60 md:border-transparent"
       >
-        <span>View</span>
-        <span className="transition-transform group-hover:translate-x-1">
-          →
-        </span>
+        <span>View Case Study</span>
+        <span className="transition-transform group-hover:translate-x-1">→</span>
       </Link>
+    </div>
+  );
+
+  const desktopWatermark = (
+    <span
+      ref={numberRef}
+      className="hidden md:block absolute -top-16 left-0 text-[clamp(6rem,15vw,14rem)] font-[100] leading-[0.85] tracking-[-0.05em] text-text-4 pointer-events-none select-none z-0 opacity-0"
+    >
+      {number}
+    </span>
+  );
+
+  const mobileHeaderLedger = (
+    <div className="flex md:hidden items-baseline justify-between mb-4 border-b border-border/40 pb-3">
+      <div className="flex items-baseline gap-2">
+        <span className="font-mono text-3xl font-light tracking-tight text-text-2">
+          {number}
+        </span>
+        <span className="font-mono text-[0.6rem] uppercase tracking-widest text-text-4">
+          // Case Study
+        </span>
+      </div>
+      <span className="font-mono text-[0.55rem] uppercase tracking-[0.1em] text-text-3 border border-border/60 px-1.5 py-0.5 rounded bg-surface-2">
+        PROD
+      </span>
     </div>
   );
 
@@ -215,15 +278,11 @@ export default function ProjectChapter({
       <section ref={sectionRef} className="relative px-6">
         <div className="mx-auto max-w-[1100px]">
           <div className="relative">
-            <span
-              ref={numberRef}
-              className="absolute -top-16 left-0 text-[clamp(6rem,15vw,14rem)] font-[100] leading-[0.85] tracking-[-0.05em] text-text-4 pointer-events-none select-none z-0 opacity-0 hidden md:block"
-            >
-              {number}
-            </span>
+            {desktopWatermark}
             <div className="relative z-10">
+              {mobileHeaderLedger}
               {imageElement}
-              <div className="mt-8 max-w-[600px]">{textElement}</div>
+              <div className="mt-2 md:mt-8 max-w-[600px]">{textElement}</div>
             </div>
           </div>
         </div>
@@ -235,20 +294,18 @@ export default function ProjectChapter({
     <section ref={sectionRef} className="relative px-6">
       <div className="mx-auto max-w-[1100px]">
         <div className="relative">
-          <span
-            ref={numberRef}
-            className="absolute -top-16 left-0 text-[clamp(6rem,15vw,14rem)] font-[100] leading-[0.85] tracking-[-0.05em] text-text-4 pointer-events-none select-none z-0 opacity-0"
-          >
-            {number}
-          </span>
+          {desktopWatermark}
           <div
-            className={`relative z-10 grid gap-8 md:gap-12 ${
+            className={`relative z-10 grid gap-4 md:gap-12 ${
               layout === "image-left"
                 ? "md:grid-cols-[65fr_35fr]"
                 : "md:grid-cols-[35fr_65fr]"
             }`}
           >
-            {imageElement}
+            <div className={layout === "image-right" ? "md:order-last" : ""}>
+              {mobileHeaderLedger}
+              {imageElement}
+            </div>
             <div className={layout === "image-right" ? "md:order-first" : ""}>
               {textElement}
             </div>
