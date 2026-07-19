@@ -1,65 +1,83 @@
-import Image from "next/image";
+import SmoothScrollProvider from "@/components/smooth-scroll-provider";
+import NoiseOverlay from "@/components/noise-overlay";
+import ScrollProgress from "@/components/scroll-progress";
+import { MagneticCursor } from "@/components/ui/magnetic-cursor";
+import Nav from "@/components/nav";
+import Hero from "@/components/sections/hero";
+import ProjectChapter from "@/components/sections/project-chapter";
+import SkillMarquee from "@/components/sections/skill-marquee";
+import GlobeSection from "@/components/sections/globe-section";
+import About from "@/components/sections/about";
+import InvertedContact from "@/components/sections/contact";
+import Footer from "@/components/footer";
+
+const projects = [
+  {
+    number: "01",
+    title: "DevMon",
+    description:
+      "Real-time system monitoring and alerting platform. Processes thousands of metrics per second, providing instant visibility into infrastructure health.",
+    tags: ["Python", "Go", "Prometheus", "Grafana", "Kubernetes"],
+    href: "/work/devmon",
+    imageSrc: "/images/devmon.jpg",
+    imageAlt: "DevMon dashboard",
+    layout: "image-left" as const,
+  },
+  {
+    number: "02",
+    title: "Kiran AI",
+    description:
+      "Intelligent virtual assistant powered by custom-trained language models. Features real-time voice interaction, context-aware responses, and multi-language support.",
+    tags: ["PyTorch", "FastAPI", "WebSockets", "React", "Redis"],
+    href: "/work/kiran-ai",
+    imageSrc: "/images/kiran.jpg",
+    imageAlt: "Kiran AI interface",
+    layout: "image-right" as const,
+  },
+  {
+    number: "03",
+    title: "Prism",
+    description:
+      "Collaborative analytics platform that turns raw data into actionable insights. Built for teams that need real-time dashboards without the complexity.",
+    tags: ["Next.js", "PostgreSQL", "DuckDB", "Tailwind CSS", "Vercel"],
+    href: "/work/prism",
+    imageSrc: "/images/prism.jpg",
+    imageAlt: "Prism analytics view",
+    layout: "full-width" as const,
+  },
+];
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+    <MagneticCursor
+      magneticFactor={0.55}
+      blendMode="exclusion"
+      cursorSize={40}
+      contrastBoost={1.5}
+      disableOnTouch
+    >
+      <SmoothScrollProvider>
+        <NoiseOverlay />
+        <ScrollProgress />
+        <Nav />
+
+        <main>
+          <Hero />
+
+          <section className="py-32 md:py-48 space-y-32 md:space-y-48">
+            {projects.map((project) => (
+              <ProjectChapter key={project.number} {...project} />
+            ))}
+          </section>
+
+          <SkillMarquee />
+          <GlobeSection />
+          <About />
+          <InvertedContact />
+        </main>
+
+        <Footer />
+      </SmoothScrollProvider>
+    </MagneticCursor>
   );
 }

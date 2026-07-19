@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shravan Deb — Resume</title>
+  <style>
+    /* ── RESET ──────────────────────────────────────────── */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    /* ── PAGE ───────────────────────────────────────────── */
+    @page {
+      size: letter portrait;
+      margin: 0.75in;
+    }
+
+    html {
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    body {
+      font-family: 'Times New Roman', Times, Georgia, 'Garamond', serif;
+      font-size: 10.5pt;
+      line-height: 1.4;
+      color: #000;
+      background: #fff;
+    }
+
+    /* ── CONTAINER ──────────────────────────────────────── */
+    .page {
+      width: 7in;
+      margin: 0 auto;
+      padding: 0;
+    }
+
+    /* ── HEADER ─────────────────────────────────────────── */
+    .header {
+      text-align: center;
+      padding-bottom: 6px;
+    }
+
+    .header h1 {
+      font-size: 18pt;
+      font-weight: 700;
+      line-height: 1.2;
+      margin: 0 0 2px 0;
+    }
+
+    .header .title {
+      font-size: 13pt;
+      font-weight: 400;
+      line-height: 1.2;
+      margin: 0 0 8px 0;
+    }
+
+    .header .contact {
+      font-size: 10pt;
+      line-height: 1.6;
+    }
+
+    /* ── RULES ──────────────────────────────────────────── */
+    .rule {
+      border: none;
+      border-top: 1px solid #000;
+      margin: 0;
+      padding: 0;
+    }
+
+    .rule--thin {
+      border: none;
+      border-top: 1px solid #000;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* ── PERSONAL DETAILS ──────────────────────────────── */
+    .details {
+      margin: 10px 0 0 0;
+      font-size: 10pt;
+      line-height: 1.5;
+    }
+
+    .details-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 2px;
+    }
+
+    .details-label {
+      flex: 0 0 26%;
+      font-weight: 400;
+    }
+
+    .details-center {
+      flex: 1 1 auto;
+      text-align: center;
+    }
+
+    .details-right-label {
+      flex: 0 0 18%;
+      text-align: right;
+      font-weight: 400;
+    }
+
+    .details-right-value {
+      flex: 0 0 14%;
+      text-align: right;
+    }
+
+    /* ── SECTION ────────────────────────────────────────── */
+    .section {
+      margin-bottom: 4px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      border-top: 1px solid #000;
+      border-bottom: 1px solid #000;
+      padding: 3px 0;
+      margin: 12px 0 8px 0;
+    }
+
+    .section-header h2 {
+      font-size: 11pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      margin: 0;
+    }
+
+    .section-body {
+      display: flex;
+      gap: 0;
+    }
+
+    .col-left {
+      flex: 0 0 20%;
+      padding-right: 14px;
+    }
+
+    .col-right {
+      flex: 1;
+    }
+
+    /* ── ENTRY ──────────────────────────────────────────── */
+    .entry {
+      margin-bottom: 20px;
+    }
+
+    .entry:last-child {
+      margin-bottom: 0;
+    }
+
+    .entry-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 2px;
+    }
+
+    .entry-role {
+      font-size: 12pt;
+      font-weight: 700;
+    }
+
+    .entry-location {
+      font-size: 10pt;
+      font-weight: 400;
+      flex-shrink: 0;
+      margin-left: 10px;
+    }
+
+    .entry-date {
+      font-size: 10pt;
+      padding-top: 2px;
+    }
+
+    /* ── BULLETS ────────────────────────────────────────── */
+    .bullets {
+      list-style: none;
+      margin: 4px 0 0 0;
+      padding: 0;
+    }
+
+    .bullets li {
+      font-size: 10pt;
+      line-height: 1.3;
+      margin: 3px 0;
+      padding-left: 18px;
+      text-indent: -18px;
+    }
+
+    .bullets li::before {
+      content: "•";
+      display: inline;
+      width: 18px;
+      margin-left: -18px;
+      text-indent: 0;
+    }
+
+    /* ── PROFILE ────────────────────────────────────────── */
+    .profile-text {
+      font-size: 10.5pt;
+      line-height: 1.45;
+    }
+
+    /* ── SKILLS ─────────────────────────────────────────── */
+    .skill-row {
+      font-size: 10pt;
+      line-height: 1.5;
+      margin-bottom: 1px;
+    }
+
+    .skill-label {
+      font-weight: 700;
+    }
+
+    /* ── LANGUAGES ──────────────────────────────────────── */
+    .lang-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 10pt;
+      line-height: 1.5;
+      margin-bottom: 1px;
+    }
+
+    /* ── PRINT OVERRIDES ────────────────────────────────── */
+    @media print {
+      body { background: #fff; }
+      .page { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <!-- ════════════════════════════════════════════════════ HEADER -->
+    <div class="header">
+      <h1>Shravan Deb</h1>
+      <div class="title">AI/ML Engineer</div>
+      <div class="contact">
+        Chennai, Tamil Nadu, +91 98765 43210, shravan@email.com,<br>
+        linkedin.com/in/shravandeb, github.com/shravandeb
+      </div>
+    </div>
+    <hr class="rule">
+
+    <!-- ════════════════════════════════════════════════ PERSONAL DETAILS -->
+    <div class="details">
+      <div class="details-row">
+        <span class="details-label">Date / Place of birth</span>
+        <span class="details-center">
+          15 March 2004<br>
+          Chennai, Tamil Nadu<br>
+          India
+        </span>
+        <span class="details-right-label">Marital status</span>
+        <span class="details-right-value">Single</span>
+      </div>
+      <div class="details-row">
+        <span class="details-label">Nationality / Gender</span>
+        <span class="details-center">Indian / Male</span>
+      </div>
+    </div>
+    <hr class="rule">
+
+    <!-- ═══════════════════════════════════════════════════ PROFILE -->
+    <div class="section">
+      <div class="section-header">
+        <h2>Profile</h2>
+      </div>
+      <div class="section-body">
+        <div class="col-left"></div>
+        <div class="col-right">
+          <p class="profile-text">
+            AI/ML engineer with 4+ years of experience building production systems
+            spanning real-time infrastructure, natural language processing, and
+            collaborative analytics. Specialized in deploying intelligent systems
+            at scale &mdash; from anomaly detection pipelines processing 12k
+            events/sec to virtual assistants serving 500+ daily users. Focused on
+            the intersection of machine learning, systems engineering, and developer
+            tooling.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════ EXPERIENCE -->
+    <div class="section">
+      <div class="section-header">
+        <h2>Experience</h2>
+      </div>
+      <div class="section-body">
+        <div class="col-left">
+          <div class="entry">
+            <div class="entry-date">Jan 2025<br>&ndash;<br>May 2025</div>
+          </div>
+          <div class="entry">
+            <div class="entry-date">Aug 2023<br>&ndash;<br>Dec 2023</div>
+          </div>
+        </div>
+        <div class="col-right">
+          <!-- Role 1 -->
+          <div class="entry">
+            <div class="entry-header">
+              <span class="entry-role">ML Engineer Intern &mdash; SRM Embedded Research Lab</span>
+            </div>
+            <ul class="bullets">
+              <li>Designed and deployed a real-time anomaly detection pipeline using PyTorch and Redis Streams, processing 12k+ events/sec across distributed IoT sensors</li>
+              <li>Reduced false positive rate by 38% through custom ensemble architecture combining transformer encoders with statistical process control</li>
+              <li>Built internal CLI tooling in Go for model versioning and A/B deployment, adopted by 4 research teams within first month</li>
+              <li>Authored technical documentation and runbooks adopted as onboarding standard for incoming lab members</li>
+            </ul>
+          </div>
+          <!-- Role 2 -->
+          <div class="entry">
+            <div class="entry-header">
+              <span class="entry-role">Frontend Developer &mdash; SRM Tech Club</span>
+            </div>
+            <ul class="bullets">
+              <li>Shipped event portal with Next.js serving 2,000+ students across 3 major hackathons</li>
+              <li>Implemented real-time leaderboards via WebSockets, reducing perceived latency from 3s to under 200ms</li>
+              <li>Coordinated design handoff with 2 graphic designers, maintaining a component library used by 3 subsequent event teams</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════ EDUCATION -->
+    <div class="section">
+      <div class="section-header">
+        <h2>Education</h2>
+      </div>
+      <div class="section-body">
+        <div class="col-left">
+          <div class="entry">
+            <div class="entry-date">2022 &ndash; 2026</div>
+          </div>
+        </div>
+        <div class="col-right">
+          <div class="entry">
+            <div class="entry-header">
+              <span class="entry-role">B.Tech Computer Science &mdash; AI &amp; Machine Learning</span>
+              <span class="entry-location">SRM IST, Chennai</span>
+            </div>
+            <ul class="bullets">
+              <li>CGPA: 8.5 / 10 &middot; Relevant coursework: Deep Learning, NLP, Computer Vision, Distributed Systems</li>
+              <li>Teaching Assistant for Machine Learning (CS6001), 2 semesters, 60+ students per section</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════ SKILLS -->
+    <div class="section">
+      <div class="section-header">
+        <h2>Skills</h2>
+      </div>
+      <div class="section-body">
+        <div class="col-left">
+          <div class="skill-row"><span class="skill-label">LANGUAGES:</span></div>
+          <div class="skill-row"><span class="skill-label">BACKEND &amp; INFRA:</span></div>
+          <div class="skill-row"><span class="skill-label">CLOUD &amp; TOOLING:</span></div>
+          <div class="skill-row"><span class="skill-label">PRACTICES:</span></div>
+        </div>
+        <div class="col-right">
+          <div class="skill-row">Python, Go, TypeScript, C/C++, SQL</div>
+          <div class="skill-row">Docker, Kubernetes, Prometheus, Grafana, FastAPI</div>
+          <div class="skill-row">AWS, GCP, Git, PostgreSQL, Redis, CI/CD</div>
+          <div class="skill-row">MLOps, System Design, Real-time Data Pipelines, Technical Writing</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════ LANGUAGES -->
+    <div class="section">
+      <div class="section-header">
+        <h2>Languages</h2>
+      </div>
+      <div class="section-body">
+        <div class="col-left"></div>
+        <div class="col-right">
+          <div class="lang-row"><span>English</span><span>Fluent</span></div>
+          <div class="lang-row"><span>Hindi</span><span>Native</span></div>
+          <div class="lang-row"><span>Bengali</span><span>Native</span></div>
+          <div class="lang-row"><span>Tamil</span><span>Conversational</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
