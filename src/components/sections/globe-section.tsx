@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useRef, useEffect, useCallback, useState } from "react";
 import gsap from "gsap";
@@ -102,7 +102,7 @@ export default function GlobeSection() {
               ref={subtextRef}
               className="text-text-3 text-sm leading-relaxed max-w-[380px] mb-10"
             >
-              Adaptable across time zones. Based in Guwahati, India — working
+              Adaptable across time zones. Based in Guwahati, India ΓÇö working
               with teams across the UK and US. Ready for international projects.
             </p>
 
