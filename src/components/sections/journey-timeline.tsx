@@ -7,11 +7,10 @@ import { SplitText } from "gsap/SplitText";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
-// ── Milestones as stories, not résumé entries ──
 const MILESTONES = [
   {
     year: "2019",
-    title: "The First spark",
+    title: "The First Spark",
     institution: "Don Bosco School, Guwahati",
     description:
       "The first time I realised software could create worlds, not just solve equations. A borrowed laptop, a cracked IDE, and the quiet conviction that this was it.",
@@ -67,7 +66,6 @@ const MILESTONES = [
 
 const TOTAL = MILESTONES.length;
 
-// ── Motif SVGs — almost invisible background symbols ──
 function MotifSVG({ type }: { type: string }) {
   const base = "absolute opacity-[0.03] pointer-events-none";
   switch (type) {
@@ -150,6 +148,7 @@ export default function JourneyTimeline() {
   const stickyRef = useRef<HTMLDivElement>(null);
   const spineRef = useRef<HTMLDivElement>(null);
   const spinePulseRef = useRef<HTMLDivElement>(null);
+
   const sceneRefs = useRef<HTMLDivElement[]>([]);
   const cardRefs = useRef<HTMLDivElement[]>([]);
   const connectorRefs = useRef<HTMLDivElement[]>([]);
@@ -160,6 +159,7 @@ export default function JourneyTimeline() {
   const institutionRefs = useRef<HTMLSpanElement[]>([]);
   const descRefs = useRef<HTMLParagraphElement[]>([]);
   const motifRefs = useRef<HTMLDivElement[]>([]);
+
   const mouseRef = useRef({ x: 0, y: 0 });
 
   const handleMouseMove = useCallback((e: MouseEvent) => {
@@ -177,17 +177,14 @@ export default function JourneyTimeline() {
             isMobile: "(max-width: 767px)",
             isDesktop: "(min-width: 768px)",
             isReduced: "(prefers-reduced-motion: reduce)",
-            isNormal: "(prefers-reduced-motion: no-preference)",
           },
           (context) => {
-            const { isReduced, isMobile } = context.conditions as {
+            const { isReduced, isMobile, isDesktop } = context.conditions as {
               isReduced: boolean;
-              isNormal: boolean;
               isMobile: boolean;
               isDesktop: boolean;
             };
 
-            // ── Heading reveal ──
             if (headingRef.current) {
               if (isReduced) {
                 gsap.set(headingRef.current, { opacity: 1 });
@@ -233,48 +230,41 @@ export default function JourneyTimeline() {
 
             if (isReduced || !stickyRef.current || !spineRef.current || !pinWrapRef.current) return;
 
-            // ── Dynamic scroll distance ──
             const vh = window.innerHeight;
-            const scrollDistance = TOTAL * vh;
+            const scrollDistance = isMobile ? TOTAL * vh * 0.5 : TOTAL * vh;
             pinWrapRef.current.style.height = `${scrollDistance}px`;
 
-            // ── Master timeline ──
             const tl = gsap.timeline({
               scrollTrigger: {
                 trigger: pinWrapRef.current,
                 start: "top top",
                 end: "bottom bottom",
-                scrub: 0.8,
+                scrub: isMobile ? 0.35 : 0.8,
                 pin: stickyRef.current,
                 anticipatePin: 1,
                 invalidateOnRefresh: true,
               },
             });
 
-            // ── Spine grows ──
             gsap.set(spineRef.current, { scaleY: 0 });
             tl.to(spineRef.current, { scaleY: 1, duration: 1, ease: "none" }, 0);
 
-            // ── Energy pulse travels down spine ──
             if (spinePulseRef.current) {
               gsap.set(spinePulseRef.current, { top: "0%", opacity: 0 });
-              tl.to(spinePulseRef.current, {
-                keyframes: [
-                  { top: "20%", opacity: 0.8, duration: 0.3 },
-                  { top: "80%", opacity: 0.8, duration: 0.5 },
-                  { top: "100%", opacity: 0, duration: 0.2 },
-                ],
-                ease: "none",
-              }, 0);
+              tl.to(
+                spinePulseRef.current,
+                {
+                  keyframes: [
+                    { top: "20%", opacity: 0.8, duration: 0.3 },
+                    { top: "80%", opacity: 0.8, duration: 0.5 },
+                    { top: "100%", opacity: 0, duration: 0.2 },
+                  ],
+                  ease: "none",
+                },
+                0
+              );
             }
 
-            // ── Per-milestone choreography ──
-            // Timeline budget per segment:
-            //   0.00 – 0.15  ARRIVAL (scene appears, settles)
-            //   0.15 – 0.25  FOCUS  (dot, connector, ring)
-            //   0.25 – 0.45  DISCOVERY (year, title, institution, desc)
-            //   0.45 – 0.85  HOLD   (everything readable, glass, motif drift)
-            //   0.85 – 1.00  DEPARTURE (scene exits) — last milestone skips this
             for (let i = 0; i < TOTAL; i++) {
               const seg = i / TOTAL;
               const dur = 1 / TOTAL;
@@ -295,167 +285,245 @@ export default function JourneyTimeline() {
 
               if (!scene) continue;
 
-              // ══════════════════════════════════════
-              //  ARRIVAL — clear settle, visible blur
-              // ══════════════════════════════════════
               gsap.set(scene, {
-                opacity: 0, y: isMobile ? 25 : 50, scale: scale * 0.96,
+                opacity: 0,
+                y: isMobile ? 25 : 50,
+                scale: scale * 0.96,
                 filter: "blur(6px)",
               });
+              tl.to(
+                scene,
+                {
+                  opacity: 1,
+                  y: 0,
+                  scale: scale,
+                  filter: "blur(0px)",
+                  duration: dur * 0.12,
+                  ease: "power4.out",
+                },
+                seg
+              );
 
-              tl.to(scene, {
-                opacity: 1, y: 0, scale: scale,
-                filter: "blur(0px)",
-                duration: dur * 0.12,
-                ease: "power4.out",
-              }, seg);
-
-              // ══════════════════════════════════════
-              //  FOCUS — dot, ring, connector
-              // ══════════════════════════════════════
               if (ring) {
                 gsap.set(ring, { scale: 0, opacity: 0 });
-                tl.to(ring, {
-                  scale: 2.5, opacity: 0,
-                  duration: dur * 0.3,
-                  ease: "power2.out",
-                }, seg + dur * 0.05);
+                tl.to(
+                  ring,
+                  { scale: 2.5, opacity: 0, duration: dur * 0.3, ease: "power2.out" },
+                  seg + dur * 0.05
+                );
               }
 
               if (dot) {
-                gsap.set(dot, { scale: 0, opacity: 0 });
-                tl.to(dot, {
-                  scale: 1, opacity: 1,
-                  duration: dur * 0.15,
-                  ease: "power3.out",
-                }, seg + dur * 0.06);
+                if (isMobile) {
+                  gsap.set(dot, { scale: 0, opacity: 0, boxShadow: "0 0 0px rgba(255,255,255,0)" });
+                  tl.to(
+                    dot,
+                    {
+                      scale: 1.25,
+                      opacity: 1,
+                      boxShadow: "0 0 12px 3px rgba(255, 255, 255, 0.6)",
+                      duration: dur * 0.15,
+                      ease: "power3.out",
+                    },
+                    seg + dur * 0.06
+                  );
+                } else {
+                  gsap.set(dot, { scale: 0, opacity: 0 });
+                  tl.to(
+                    dot,
+                    { scale: 1, opacity: 1, duration: dur * 0.15, ease: "power3.out" },
+                    seg + dur * 0.06
+                  );
+                }
               }
 
               if (connector) {
                 gsap.set(connector, { opacity: 0, scaleX: 0 });
-                tl.to(connector, {
-                  opacity: 1, scaleX: 1,
-                  duration: dur * 0.2,
-                  ease: "power2.out",
-                }, seg + dur * 0.08);
+                tl.to(
+                  connector,
+                  { opacity: 1, scaleX: 1, duration: dur * 0.2, ease: "power2.out" },
+                  seg + dur * 0.08
+                );
               }
 
-              // ══════════════════════════════════════
-              //  DISCOVERY — text reveals, NO blur on text
-              // ══════════════════════════════════════
               if (year) {
                 gsap.set(year, {
                   opacity: 0,
-                  x: isMobile ? 0 : (isLeft ? -15 : 15),
-                  y: isMobile ? -8 : 0,
+                  x: isMobile ? 0 : isLeft ? -15 : 15,
+                  y: isMobile ? -6 : 0,
                   letterSpacing: "0.25em",
                 });
-                tl.to(year, {
-                  opacity: 1, x: 0, y: 0,
-                  letterSpacing: "0.15em",
-                  duration: dur * 0.2,
-                  ease: "power3.out",
-                }, seg + dur * 0.12);
+                tl.to(
+                  year,
+                  {
+                    opacity: 1,
+                    x: 0,
+                    y: 0,
+                    letterSpacing: "0.15em",
+                    duration: dur * 0.2,
+                    ease: "power3.out",
+                  },
+                  seg + dur * 0.12
+                );
               }
 
               if (title) {
                 gsap.set(title, { opacity: 0, y: 16 });
-                tl.to(title, {
-                  opacity: 1, y: 0,
-                  duration: dur * 0.22,
-                  ease: "power3.out",
-                }, seg + dur * 0.16);
+                tl.to(
+                  title,
+                  { opacity: 1, y: 0, duration: dur * 0.22, ease: "power3.out" },
+                  seg + dur * 0.16
+                );
               }
 
               if (institution) {
                 gsap.set(institution, { opacity: 0, y: 12 });
-                tl.to(institution, {
-                  opacity: 1, y: 0,
-                  duration: dur * 0.18,
-                  ease: "power3.out",
-                }, seg + dur * 0.20);
+                tl.to(
+                  institution,
+                  { opacity: 1, y: 0, duration: dur * 0.18, ease: "power3.out" },
+                  seg + dur * 0.2
+                );
               }
 
               if (desc) {
                 gsap.set(desc, { opacity: 0, y: 10 });
-                tl.to(desc, {
-                  opacity: 1, y: 0,
-                  duration: dur * 0.2,
-                  ease: "power3.out",
-                }, seg + dur * 0.24);
+                tl.to(
+                  desc,
+                  { opacity: 1, y: 0, duration: dur * 0.2, ease: "power3.out" },
+                  seg + dur * 0.24
+                );
               }
 
-              // ══════════════════════════════════════
-              //  HOLD — motif drift, glass effect
-              // ══════════════════════════════════════
               if (motif) {
                 gsap.set(motif, { opacity: 0, scale: 0.85, y: 20 });
-                tl.to(motif, {
-                  opacity: 1, scale: 1, y: 0,
-                  duration: dur * 0.3,
-                  ease: "power1.out",
-                }, seg + dur * 0.15);
-                tl.to(motif, {
-                  y: -10,
-                  duration: dur * 0.6,
-                  ease: "none",
-                }, seg + dur * 0.35);
+                tl.to(
+                  motif,
+                  { opacity: 1, scale: 1, y: 0, duration: dur * 0.3, ease: "power1.out" },
+                  seg + dur * 0.15
+                );
+                tl.to(
+                  motif,
+                  { y: -10, duration: dur * 0.6, ease: "none" },
+                  seg + dur * 0.35
+                );
               }
 
               if (card) {
-                gsap.set(card, { backdropFilter: "blur(0px)", borderColor: "transparent" });
-                tl.to(card, {
-                  backdropFilter: "blur(12px)",
-                  borderColor: "rgba(255,255,255,0.06)",
-                  duration: dur * 0.2,
-                  ease: "power2.inOut",
-                }, seg + dur * 0.3);
+                if (isMobile) {
+                  gsap.set(card, {
+                    backdropFilter: "blur(0px)",
+                    borderColor: "rgba(255, 255, 255, 0.04)",
+                    backgroundColor: "rgba(24, 24, 27, 0.3)",
+                    scale: 0.96,
+                    boxShadow: "0 0 0px rgba(0,0,0,0)",
+                  });
+                  tl.to(
+                    card,
+                    {
+                      backdropFilter: "blur(16px)",
+                      borderColor: "rgba(255, 255, 255, 0.28)",
+                      backgroundColor: "rgba(24, 24, 27, 0.75)",
+                      scale: 1.0,
+                      boxShadow: "0 10px 30px -10px rgba(0, 0, 0, 0.5)",
+                      duration: dur * 0.2,
+                      ease: "power3.out",
+                    },
+                    seg + dur * 0.2
+                  );
+                } else {
+                  gsap.set(card, { backdropFilter: "blur(0px)", borderColor: "transparent" });
+                  tl.to(
+                    card,
+                    {
+                      backdropFilter: "blur(12px)",
+                      borderColor: "rgba(255,255,255,0.06)",
+                      duration: dur * 0.2,
+                      ease: "power2.inOut",
+                    },
+                    seg + dur * 0.3
+                  );
+                }
               }
 
-              // ══════════════════════════════════════
-              //  DEPARTURE — visible blur, gradual
-              // ══════════════════════════════════════
               if (!isLast) {
                 const exitSeg = seg + dur * 0.82;
                 const exitDur = dur * 0.18;
 
-                tl.to(scene, {
-                  opacity: 0,
-                  y: isMobile ? -18 : -35,
-                  scale: scale * 0.97,
-                  filter: "blur(5px)",
-                  duration: exitDur,
-                  ease: "power2.in",
-                }, exitSeg);
-
-                if (card) {
-                  tl.to(card, {
-                    backdropFilter: "blur(0px)",
-                    borderColor: "transparent",
+                tl.to(
+                  scene,
+                  {
+                    opacity: 0,
+                    y: isMobile ? -18 : -35,
+                    scale: scale * 0.97,
+                    filter: "blur(5px)",
                     duration: exitDur,
                     ease: "power2.in",
-                  }, exitSeg);
+                  },
+                  exitSeg
+                );
+
+                if (card) {
+                  if (isMobile) {
+                    tl.to(
+                      card,
+                      {
+                        backdropFilter: "blur(0px)",
+                        borderColor: "rgba(255, 255, 255, 0.04)",
+                        backgroundColor: "rgba(24, 24, 27, 0.3)",
+                        scale: 0.96,
+                        boxShadow: "0 0 0px rgba(0,0,0,0)",
+                        duration: exitDur,
+                        ease: "power2.in",
+                      },
+                      exitSeg
+                    );
+                  } else {
+                    tl.to(
+                      card,
+                      {
+                        backdropFilter: "blur(0px)",
+                        borderColor: "transparent",
+                        duration: exitDur,
+                        ease: "power2.in",
+                      },
+                      exitSeg
+                    );
+                  }
+                }
+
+                if (dot && isMobile) {
+                  tl.to(
+                    dot,
+                    {
+                      scale: 0.8,
+                      opacity: 0.3,
+                      boxShadow: "0 0 0px rgba(255,255,255,0)",
+                      duration: exitDur,
+                      ease: "power2.in",
+                    },
+                    exitSeg
+                  );
                 }
               }
 
-              // ══════════════════════════════════════
-              //  CINEMATIC ENDING
-              // ══════════════════════════════════════
               if (isLast) {
-                tl.to(scene, {
-                  scale: scale * 0.95,
-                  opacity: 0.65,
-                  filter: "blur(4px)",
-                  duration: dur * 0.3,
-                  ease: "power2.inOut",
-                }, seg + dur * 0.7);
-
+                tl.to(
+                  scene,
+                  {
+                    scale: scale * 0.95,
+                    opacity: 0.65,
+                    filter: "blur(4px)",
+                    duration: dur * 0.3,
+                    ease: "power2.inOut",
+                  },
+                  seg + dur * 0.7
+                );
                 if (spinePulseRef.current) {
-                  tl.to(spinePulseRef.current, {
-                    opacity: 0,
-                    duration: dur * 0.25,
-                    ease: "power2.in",
-                  }, seg + dur * 0.75);
+                  tl.to(
+                    spinePulseRef.current,
+                    { opacity: 0, duration: dur * 0.25, ease: "power2.in" },
+                    seg + dur * 0.75
+                  );
                 }
               }
             }
@@ -464,10 +532,9 @@ export default function JourneyTimeline() {
       });
     });
 
-    // ── Cursor micro-interactions ──
     document.addEventListener("mousemove", handleMouseMove);
-
     const cursorRAF = () => {
+      if (window.innerWidth < 768) return;
       cardRefs.current.forEach((card) => {
         if (!card) return;
         const rect = card.getBoundingClientRect();
@@ -477,7 +544,6 @@ export default function JourneyTimeline() {
         const dy = mouseRef.current.y - cy;
         const dist = Math.sqrt(dx * dx + dy * dy);
         const maxDist = 400;
-
         if (dist < maxDist) {
           const intensity = 1 - dist / maxDist;
           const rotateY = (dx / rect.width) * 1.5 * intensity;
@@ -503,7 +569,6 @@ export default function JourneyTimeline() {
 
   return (
     <>
-      {/* ── Header ── */}
       <div className="h-screen flex flex-col items-center justify-center px-6">
         <div ref={eyebrowRef} className="mb-6 opacity-0">
           <span className="font-mono text-[0.7rem] font-semibold uppercase tracking-[0.12em] text-text-4">
@@ -512,7 +577,7 @@ export default function JourneyTimeline() {
         </div>
         <h2
           ref={headingRef}
-          className="text-[clamp(2.5rem,5vw,4.5rem)] font-medium leading-[1.12] tracking-[-0.03em] text-text-1"
+          className="text-[clamp(2.5rem,5vw,4.5rem)] font-medium leading-[1.12] tracking-[-0.03em] text-text-1 text-center"
         >
           From classroom
           <br />
@@ -520,51 +585,51 @@ export default function JourneyTimeline() {
         </h2>
       </div>
 
-      {/* ── Pin wrapper ── */}
       <div ref={pinWrapRef} className="relative">
         <div ref={stickyRef} className="h-screen w-full">
           <div className="mx-auto max-w-[860px] h-full relative">
-            {/* ── Spine ── */}
             <div
               ref={spineRef}
               className="absolute top-0 bottom-0 left-6 md:left-1/2 w-px bg-border-hi origin-top"
               style={{ transform: "translateX(-50%) scaleY(0)" }}
             />
-
-            {/* ── Energy pulse ── */}
             <div
               ref={spinePulseRef}
               className="absolute left-6 md:left-1/2 -translate-x-1/2 w-px h-24 pointer-events-none z-20"
               style={{
-                background: "linear-gradient(to bottom, transparent, var(--text-2) 40%, var(--text-1) 50%, var(--text-2) 60%, transparent)",
+                background:
+                  "linear-gradient(to bottom, transparent, var(--text-2) 40%, var(--text-1) 50%, var(--text-2) 60%, transparent)",
                 opacity: 0,
               }}
             />
 
-            {/* ── Scenes ── */}
             {MILESTONES.map((m, i) => {
               const isLeft = i % 2 === 0;
               return (
                 <div
                   key={`${m.year}-${i}`}
-                  ref={(el) => { if (el) sceneRefs.current[i] = el; }}
+                  ref={(el) => {
+                    if (el) sceneRefs.current[i] = el;
+                  }}
                   className="absolute inset-0 flex items-center justify-center pointer-events-none"
                 >
                   <div className="w-full max-w-[780px] relative pl-12 pr-6 md:px-0">
-                    {/* Dot */}
                     <div
-                      ref={(el) => { if (el) dotRefs.current[i] = el; }}
-                      className="absolute left-6 md:left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-2.5 h-2.5 bg-text-1 z-10 opacity-0"
+                      ref={(el) => {
+                        if (el) dotRefs.current[i] = el;
+                      }}
+                      className="absolute left-6 md:left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-2.5 h-2.5 bg-text-1 rounded-full z-10 opacity-0"
                     />
-                    {/* Dot ring pulse */}
                     <div
-                      ref={(el) => { if (el) dotRingsRef.current[i] = el; }}
-                      className="absolute left-6 md:left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-2.5 h-2.5 border border-text-3 z-[9] opacity-0"
+                      ref={(el) => {
+                        if (el) dotRingsRef.current[i] = el;
+                      }}
+                      className="absolute left-6 md:left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-2.5 h-2.5 border border-text-3 rounded-full z-[9] opacity-0"
                     />
-
-                    {/* Connector */}
                     <div
-                      ref={(el) => { if (el) connectorRefs.current[i] = el; }}
+                      ref={(el) => {
+                        if (el) connectorRefs.current[i] = el;
+                      }}
                       className={`absolute h-px bg-border-hi opacity-0 z-[8] left-6 origin-left ${
                         isLeft
                           ? "md:left-1/2 md:origin-left"
@@ -577,61 +642,79 @@ export default function JourneyTimeline() {
                       }}
                     />
 
-                    {/* Content */}
                     <div
                       className={`flex items-center flex-col ${
                         isLeft ? "md:flex-row" : "md:flex-row-reverse"
                       }`}
                     >
-                      {/* Card side */}
                       <div
                         className={`w-full md:w-[calc(50%-2.5rem)] pointer-events-auto text-left ${
                           isLeft ? "md:text-right" : "md:text-left"
                         }`}
                       >
                         <div
-                          ref={(el) => { if (el) cardRefs.current[i] = el; }}
-                          className="inline-block px-5 py-4 rounded-none"
-                          style={{ textAlign: "left", willChange: "transform" }}
+                          ref={(el) => {
+                            if (el) cardRefs.current[i] = el;
+                          }}
+                          className="inline-block w-full md:w-auto px-5 py-5 md:py-4 rounded-xl md:rounded-none bg-surface-2/60 md:bg-transparent border border-border/40 md:border-transparent shadow-xl md:shadow-none transition-transform duration-300 active:scale-[0.98] md:active:scale-100"
+                          style={{
+                            textAlign: "left",
+                            willChange: "transform, border-color, background-color, box-shadow",
+                          }}
                         >
-                          {/* Motif background */}
                           <div
-                            ref={(el) => { if (el) motifRefs.current[i] = el; }}
+                            ref={(el) => {
+                              if (el) motifRefs.current[i] = el;
+                            }}
                             className={`absolute -z-10 opacity-0 top-1/2 -translate-y-1/2 ${
-                              isLeft ? "left-[-1.5rem] md:left-auto md:right-[-2rem]" : "left-[-1.5rem] md:left-[-2rem]"
+                              isLeft
+                                ? "left-[-1.25rem] md:left-auto md:right-[-2rem]"
+                                : "left-[-1.25rem] md:left-[-2rem]"
                             }`}
                           >
                             <MotifSVG type={m.motif} />
                           </div>
 
-                          <span
-                            ref={(el) => { if (el) yearRefs.current[i] = el; }}
-                            className="tl-year font-mono text-[0.65rem] font-semibold uppercase tracking-[0.15em] text-text-4 block mb-2 opacity-0"
-                          >
-                            {m.year}
-                          </span>
+                          <div className="flex items-center justify-between md:justify-start gap-4 mb-2 md:mb-2">
+                            <span
+                              ref={(el) => {
+                                if (el) yearRefs.current[i] = el;
+                              }}
+                              className="tl-year font-mono text-xs md:text-[0.65rem] font-bold md:font-semibold uppercase tracking-[0.15em] text-text-2 md:text-text-4 opacity-0 bg-surface-2 md:bg-transparent px-2 py-0.5 md:p-0 rounded md:rounded-none border border-border/40 md:border-transparent"
+                            >
+                              {m.year}
+                            </span>
+                            <span className="flex md:hidden font-mono text-[0.6rem] uppercase tracking-widest text-text-4">
+                              // STEP 0{i + 1}
+                            </span>
+                          </div>
+
                           <h3
-                            ref={(el) => { if (el) titleRefs.current[i] = el; }}
+                            ref={(el) => {
+                              if (el) titleRefs.current[i] = el;
+                            }}
                             className="tl-title text-xl md:text-[1.35rem] font-medium text-text-1 tracking-[-0.02em] mb-1 opacity-0"
                           >
                             {m.title}
                           </h3>
                           <span
-                            ref={(el) => { if (el) institutionRefs.current[i] = el; }}
-                            className="tl-institution block text-[0.8rem] text-text-3 mb-2.5 opacity-0"
+                            ref={(el) => {
+                              if (el) institutionRefs.current[i] = el;
+                            }}
+                            className="tl-institution block text-[0.8rem] text-text-3 mb-2.5 opacity-0 font-mono"
                           >
                             {m.institution}
                           </span>
                           <p
-                            ref={(el) => { if (el) descRefs.current[i] = el; }}
+                            ref={(el) => {
+                              if (el) descRefs.current[i] = el;
+                            }}
                             className="tl-description text-text-2 text-[0.82rem] leading-[1.7] max-w-none md:max-w-[320px] opacity-0"
                           >
                             {m.description}
                           </p>
                         </div>
                       </div>
-
-                      {/* Empty half */}
                       <div className="hidden md:block w-[calc(50%-2.5rem)]" />
                     </div>
                   </div>
