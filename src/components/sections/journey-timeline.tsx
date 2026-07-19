@@ -174,13 +174,17 @@ export default function JourneyTimeline() {
       ctx = gsap.context(() => {
         mm.add(
           {
+            isMobile: "(max-width: 767px)",
+            isDesktop: "(min-width: 768px)",
             isReduced: "(prefers-reduced-motion: reduce)",
             isNormal: "(prefers-reduced-motion: no-preference)",
           },
           (context) => {
-            const { isReduced } = context.conditions as {
+            const { isReduced, isMobile } = context.conditions as {
               isReduced: boolean;
               isNormal: boolean;
+              isMobile: boolean;
+              isDesktop: boolean;
             };
 
             // ── Heading reveal ──
@@ -295,7 +299,7 @@ export default function JourneyTimeline() {
               //  ARRIVAL — clear settle, visible blur
               // ══════════════════════════════════════
               gsap.set(scene, {
-                opacity: 0, y: 50, scale: scale * 0.96,
+                opacity: 0, y: isMobile ? 25 : 50, scale: scale * 0.96,
                 filter: "blur(6px)",
               });
 
@@ -341,11 +345,13 @@ export default function JourneyTimeline() {
               // ══════════════════════════════════════
               if (year) {
                 gsap.set(year, {
-                  opacity: 0, x: isLeft ? -15 : 15,
+                  opacity: 0,
+                  x: isMobile ? 0 : (isLeft ? -15 : 15),
+                  y: isMobile ? -8 : 0,
                   letterSpacing: "0.25em",
                 });
                 tl.to(year, {
-                  opacity: 1, x: 0,
+                  opacity: 1, x: 0, y: 0,
                   letterSpacing: "0.15em",
                   duration: dur * 0.2,
                   ease: "power3.out",
@@ -415,7 +421,7 @@ export default function JourneyTimeline() {
 
                 tl.to(scene, {
                   opacity: 0,
-                  y: -35,
+                  y: isMobile ? -18 : -35,
                   scale: scale * 0.97,
                   filter: "blur(5px)",
                   duration: exitDur,
@@ -521,14 +527,14 @@ export default function JourneyTimeline() {
             {/* ── Spine ── */}
             <div
               ref={spineRef}
-              className="absolute top-0 bottom-0 left-1/2 w-px bg-border-hi origin-top"
+              className="absolute top-0 bottom-0 left-6 md:left-1/2 w-px bg-border-hi origin-top"
               style={{ transform: "translateX(-50%) scaleY(0)" }}
             />
 
             {/* ── Energy pulse ── */}
             <div
               ref={spinePulseRef}
-              className="absolute left-1/2 -translate-x-1/2 w-px h-24 pointer-events-none z-20"
+              className="absolute left-6 md:left-1/2 -translate-x-1/2 w-px h-24 pointer-events-none z-20"
               style={{
                 background: "linear-gradient(to bottom, transparent, var(--text-2) 40%, var(--text-1) 50%, var(--text-2) 60%, transparent)",
                 opacity: 0,
@@ -544,41 +550,44 @@ export default function JourneyTimeline() {
                   ref={(el) => { if (el) sceneRefs.current[i] = el; }}
                   className="absolute inset-0 flex items-center justify-center pointer-events-none"
                 >
-                  <div className="w-full max-w-[780px] relative px-6 md:px-0">
+                  <div className="w-full max-w-[780px] relative pl-12 pr-6 md:px-0">
                     {/* Dot */}
                     <div
                       ref={(el) => { if (el) dotRefs.current[i] = el; }}
-                      className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-2.5 h-2.5 bg-text-1 z-10 opacity-0"
+                      className="absolute left-6 md:left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-2.5 h-2.5 bg-text-1 z-10 opacity-0"
                     />
                     {/* Dot ring pulse */}
                     <div
                       ref={(el) => { if (el) dotRingsRef.current[i] = el; }}
-                      className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-2.5 h-2.5 border border-text-3 z-[9] opacity-0"
+                      className="absolute left-6 md:left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-2.5 h-2.5 border border-text-3 z-[9] opacity-0"
                     />
 
                     {/* Connector */}
                     <div
                       ref={(el) => { if (el) connectorRefs.current[i] = el; }}
-                      className="absolute h-px bg-border-hi opacity-0 z-[8]"
+                      className={`absolute h-px bg-border-hi opacity-0 z-[8] left-6 origin-left ${
+                        isLeft
+                          ? "md:left-1/2 md:origin-left"
+                          : "md:left-auto md:right-1/2 md:origin-right"
+                      }`}
                       style={{
                         top: "50%",
                         width: "3.5rem",
-                        left: isLeft ? "50%" : undefined,
-                        right: isLeft ? undefined : "50%",
-                        transformOrigin: isLeft ? "left" : "right",
                         transform: "scaleX(0)",
                       }}
                     />
 
                     {/* Content */}
                     <div
-                      className="flex items-center"
-                      style={{ flexDirection: isLeft ? "row" : "row-reverse" }}
+                      className={`flex items-center flex-col ${
+                        isLeft ? "md:flex-row" : "md:flex-row-reverse"
+                      }`}
                     >
                       {/* Card side */}
                       <div
-                        className="w-[calc(50%-2.5rem)] pointer-events-auto"
-                        style={{ textAlign: isLeft ? "right" : "left" }}
+                        className={`w-full md:w-[calc(50%-2.5rem)] pointer-events-auto text-left ${
+                          isLeft ? "md:text-right" : "md:text-left"
+                        }`}
                       >
                         <div
                           ref={(el) => { if (el) cardRefs.current[i] = el; }}
@@ -618,7 +627,7 @@ export default function JourneyTimeline() {
                           </span>
                           <p
                             ref={(el) => { if (el) descRefs.current[i] = el; }}
-                            className="tl-description text-text-2 text-[0.82rem] leading-[1.7] max-w-[320px] opacity-0"
+                            className="tl-description text-text-2 text-[0.82rem] leading-[1.7] max-w-none md:max-w-[320px] opacity-0"
                           >
                             {m.description}
                           </p>
@@ -626,7 +635,7 @@ export default function JourneyTimeline() {
                       </div>
 
                       {/* Empty half */}
-                      <div className="w-[calc(50%-2.5rem)]" />
+                      <div className="hidden md:block w-[calc(50%-2.5rem)]" />
                     </div>
                   </div>
                 </div>
