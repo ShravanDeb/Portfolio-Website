@@ -11,6 +11,8 @@ export interface GlobeLocation {
   /** ISO 3166-1 alpha-2 code (e.g. "US", "JP", "FR"), used to look up the
    * flag image. If omitted, no flag is shown for this location. */
   countryCode?: string;
+  /** IANA timezone (e.g. "Asia/Kolkata", "Europe/London") for live clock. */
+  tz?: string;
 }
 
 interface GlobeProps {

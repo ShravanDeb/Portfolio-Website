@@ -7,11 +7,88 @@ import Globe, { type GlobeLocation } from "@/components/ui/globe";
 
 gsap.registerPlugin(ScrollTrigger);
 
+function useLiveClock(tz?: string) {
+  const [display, setDisplay] = useState({ time: "", zone: "" });
+
+  useEffect(() => {
+    if (!tz) return;
+    const tick = () => {
+      const parts = new Intl.DateTimeFormat("en-US", {
+        timeZone: tz,
+        hour: "numeric",
+        minute: "2-digit",
+        hour12: true,
+        timeZoneName: "short",
+      }).formatToParts(new Date());
+      const time = parts
+        .filter((p) => p.type !== "timeZoneName")
+        .map((p) => p.value)
+        .join("");
+      const zone = parts.find((p) => p.type === "timeZoneName")?.value ?? "";
+      setDisplay({ time: time.trim(), zone });
+    };
+    tick();
+    const id = setInterval(tick, 1000);
+    return () => clearInterval(id);
+  }, [tz]);
+
+  return display;
+}
+
 const LOCATIONS: GlobeLocation[] = [
-  { name: "Guwahati, India", shortName: "IN", lat: 26.1445, lon: 91.7362, countryCode: "in" },
-  { name: "London, UK", shortName: "UK", lat: 51.5074, lon: -0.1278, countryCode: "gb" },
-  { name: "Washington, US", shortName: "US", lat: 38.9072, lon: -77.0369, countryCode: "us" },
+  { name: "Guwahati, India", shortName: "IN", lat: 26.1445, lon: 91.7362, countryCode: "in", tz: "Asia/Kolkata" },
+  { name: "London, UK", shortName: "UK", lat: 51.5074, lon: -0.1278, countryCode: "gb", tz: "Europe/London" },
+  { name: "Washington, US", shortName: "US", lat: 38.9072, lon: -77.0369, countryCode: "us", tz: "America/New_York" },
 ];
+
+function LocationButton({
+  loc,
+  isActive,
+  onClick,
+}: {
+  loc: GlobeLocation;
+  isActive: boolean;
+  onClick: () => void;
+}) {
+  const { time, zone } = useLiveClock(loc.tz);
+
+  return (
+    <button
+      onClick={onClick}
+      className={`group flex flex-col gap-1 text-left transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-text-1 rounded p-1 -ml-1 ${
+        isActive ? "text-text-1" : "text-text-4 hover:text-text-2"
+      }`}
+    >
+      <div className="flex items-center gap-4">
+        <span className="font-mono text-[0.65rem] font-semibold uppercase tracking-[0.15em] w-8">
+          {loc.shortName}
+        </span>
+        <span
+          className={`h-px transition-all duration-300 ${
+            isActive
+              ? "w-8 bg-text-1"
+              : "w-3 bg-text-4 group-hover:w-5 group-hover:bg-text-2"
+          }`}
+        />
+        <span className="text-sm">{loc.name}</span>
+      </div>
+      <div
+        className={`flex items-center gap-3 ml-12 transition-all duration-300 ${
+          isActive
+            ? "opacity-100 max-h-8"
+            : "opacity-0 max-h-0 overflow-hidden"
+        }`}
+      >
+        <span className="font-mono text-[0.6rem] tracking-[0.06em] text-text-3">
+          {time}
+        </span>
+        <span className="font-mono text-[0.55rem] tracking-[0.1em] text-text-4">
+          {zone}
+        </span>
+      </div>
+    </button>
+  );
+}
 
 export default function GlobeSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -107,29 +184,17 @@ export default function GlobeSection() {
             </p>
 
             <div className="flex flex-col gap-4">
-              {LOCATIONS.map((loc) => (
-                <button
-                  key={loc.shortName}
-                  onClick={() => handleLocationClick(loc)}
-                  className={`group flex items-center gap-4 text-left transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-text-1 rounded p-1 -ml-1 ${
-                    activeLocation.shortName === loc.shortName
-                      ? "text-text-1"
-                      : "text-text-4 hover:text-text-2"
-                  }`}
-                >
-                  <span className="font-mono text-[0.65rem] font-semibold uppercase tracking-[0.15em] w-8">
-                    {loc.shortName}
-                  </span>
-                  <span
-                    className={`h-px transition-all duration-300 ${
-                      activeLocation.shortName === loc.shortName
-                        ? "w-8 bg-text-1"
-                        : "w-3 bg-text-4 group-hover:w-5 group-hover:bg-text-2"
-                    }`}
+              {LOCATIONS.map((loc) => {
+                const isActive = activeLocation.shortName === loc.shortName;
+                return (
+                  <LocationButton
+                    key={loc.shortName}
+                    loc={loc}
+                    isActive={isActive}
+                    onClick={() => handleLocationClick(loc)}
                   />
-                  <span className="text-sm">{loc.name}</span>
-                </button>
-              ))}
+                );
+              })}
             </div>
           </div>
 
