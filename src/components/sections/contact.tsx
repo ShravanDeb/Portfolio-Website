@@ -105,7 +105,7 @@ export default function InvertedContact() {
           <a
             ref={emailRef}
             href="mailto:hello@shravandeb.com"
-            className="inline-block text-[clamp(2rem,4vw,4rem)] font-medium tracking-[-0.02em] text-foreground hover:text-text-3 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-foreground transition-colors"
+            className="inline-block text-[clamp(1.65rem,4.5vw,4rem)] font-medium tracking-[-0.02em] text-foreground hover:text-text-3 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-foreground transition-colors break-all sm:break-normal"
             style={{
               backgroundImage:
                 "linear-gradient(to right, currentColor 100%, transparent 100%)",

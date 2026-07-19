@@ -597,12 +597,9 @@ export default function JourneyTimeline() {
                           {/* Motif background */}
                           <div
                             ref={(el) => { if (el) motifRefs.current[i] = el; }}
-                            className="absolute -z-10 opacity-0"
-                            style={{
-                              [isLeft ? "right" : "left"]: "-2rem",
-                              top: "50%",
-                              transform: "translateY(-50%)",
-                            }}
+                            className={`absolute -z-10 opacity-0 top-1/2 -translate-y-1/2 ${
+                              isLeft ? "left-[-1.5rem] md:left-auto md:right-[-2rem]" : "left-[-1.5rem] md:left-[-2rem]"
+                            }`}
                           >
                             <MotifSVG type={m.motif} />
                           </div>
