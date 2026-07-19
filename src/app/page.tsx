@@ -1,7 +1,6 @@
 import SmoothScrollProvider from "@/components/smooth-scroll-provider";
 import NoiseOverlay from "@/components/noise-overlay";
 import ScrollProgress from "@/components/scroll-progress";
-import { MagneticCursor } from "@/components/ui/magnetic-cursor";
 import Nav from "@/components/nav";
 import Hero from "@/components/sections/hero";
 import ProjectChapter from "@/components/sections/project-chapter";
@@ -49,35 +48,27 @@ const projects = [
 
 export default function Home() {
   return (
-    <MagneticCursor
-      magneticFactor={0.55}
-      blendMode="exclusion"
-      cursorSize={40}
-      contrastBoost={1.5}
-      disableOnTouch
-    >
-      <SmoothScrollProvider>
-        <NoiseOverlay />
-        <ScrollProgress />
-        <Nav />
+    <SmoothScrollProvider>
+      <NoiseOverlay />
+      <ScrollProgress />
+      <Nav />
 
-        <main>
-          <Hero />
+      <main>
+        <Hero />
 
-          <section className="py-32 md:py-48 space-y-32 md:space-y-48">
-            {projects.map((project) => (
-              <ProjectChapter key={project.number} {...project} />
-            ))}
-          </section>
+        <section className="py-32 md:py-48 space-y-32 md:space-y-48">
+          {projects.map((project) => (
+            <ProjectChapter key={project.number} {...project} />
+          ))}
+        </section>
 
-          <SkillMarquee />
-          <GlobeSection />
-          <About />
-          <InvertedContact />
-        </main>
+        <SkillMarquee />
+        <GlobeSection />
+        <About />
+        <InvertedContact />
+      </main>
 
-        <Footer />
-      </SmoothScrollProvider>
-    </MagneticCursor>
+      <Footer />
+    </SmoothScrollProvider>
   );
 }
