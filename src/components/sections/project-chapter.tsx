@@ -121,7 +121,7 @@ export default function ProjectChapter({
                 numberRef.current,
                 { opacity: 0, scale: isReduced ? 1 : 0.8 },
                 {
-                  opacity: 0.5,
+                  opacity: 0.22,
                   scale: 1,
                   duration: 1.5,
                   ease: "power2.out",
@@ -251,7 +251,9 @@ export default function ProjectChapter({
   const desktopWatermark = (
     <span
       ref={numberRef}
-      className="hidden md:block absolute -top-16 left-0 text-[clamp(6rem,15vw,14rem)] font-[100] leading-[0.85] tracking-[-0.05em] text-text-4 pointer-events-none select-none z-0 opacity-0"
+      className={`hidden md:block absolute -top-16 text-[clamp(6rem,15vw,14rem)] font-[100] leading-[0.85] tracking-[-0.05em] text-text-4 pointer-events-none select-none z-0 opacity-0 ${
+        layout === "image-right" ? "right-0 left-auto" : "left-0"
+      }`}
     >
       {number}
     </span>
