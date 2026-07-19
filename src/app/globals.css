@@ -167,6 +167,7 @@
 
 html {
   background: #09090b;
+  overflow-x: hidden;
 }
 
 /* Film grain noise overlay */
