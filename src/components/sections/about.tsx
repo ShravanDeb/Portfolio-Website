@@ -15,87 +15,105 @@ export default function About() {
   const dividerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      // Heading SplitText mask reveal
-      if (headingRef.current) {
-        const splitHeading = SplitText.create(headingRef.current, {
-          type: "lines,chars",
-          mask: "lines",
-          linesClass: "heading-line",
-        });
-        gsap.set(splitHeading.chars, { yPercent: 110 });
-        gsap.to(splitHeading.chars, {
-          yPercent: 0,
-          duration: 0.8,
-          ease: "power4.out",
-          stagger: 0.02,
-          scrollTrigger: {
-            trigger: headingRef.current,
-            start: "top 85%",
-            toggleActions: "play none none reverse",
+    let ctx: gsap.Context;
+    let mm = gsap.matchMedia();
+
+    document.fonts.ready.then(() => {
+      ctx = gsap.context(() => {
+        mm.add(
+          {
+            isReduced: "(prefers-reduced-motion: reduce)",
+            isNormal: "(prefers-reduced-motion: no-preference)",
           },
-        });
-      }
+          (context) => {
+            const { isReduced } = context.conditions as { isReduced: boolean; isNormal: boolean };
 
-      // Pull quote border animation
-      if (pullQuoteRef.current) {
-        gsap.fromTo(
-          pullQuoteRef.current,
-          { borderLeftColor: "transparent" },
-          {
-            borderLeftColor: "#3f3f46",
-            duration: 0.8,
-            ease: "power2.out",
-            scrollTrigger: {
-              trigger: pullQuoteRef.current,
-              start: "top 80%",
-              toggleActions: "play none none reverse",
-            },
+            if (headingRef.current) {
+              if (isReduced) {
+                gsap.fromTo(headingRef.current, { opacity: 0 }, { opacity: 1, duration: 0.8 });
+              } else {
+                const splitHeading = SplitText.create(headingRef.current, {
+                  type: "lines,chars",
+                  mask: "lines",
+                  linesClass: "heading-line",
+                });
+                gsap.set(splitHeading.chars, { yPercent: 110 });
+                gsap.to(splitHeading.chars, {
+                  yPercent: 0,
+                  duration: 0.8,
+                  ease: "power4.out",
+                  stagger: 0.02,
+                  scrollTrigger: {
+                    trigger: headingRef.current,
+                    start: "top 85%",
+                    toggleActions: "play none none reverse",
+                  },
+                });
+              }
+            }
+
+            if (pullQuoteRef.current) {
+              gsap.fromTo(
+                pullQuoteRef.current,
+                { borderLeftColor: "transparent" },
+                {
+                  borderLeftColor: "#3f3f46",
+                  duration: 0.8,
+                  ease: "power2.out",
+                  scrollTrigger: {
+                    trigger: pullQuoteRef.current,
+                    start: "top 80%",
+                    toggleActions: "play none none reverse",
+                  },
+                }
+              );
+            }
+
+            if (dividerRef.current) {
+              gsap.fromTo(
+                dividerRef.current,
+                { scaleX: 0 },
+                {
+                  scaleX: 1,
+                  duration: 1.2,
+                  ease: "power2.inOut",
+                  scrollTrigger: {
+                    trigger: dividerRef.current,
+                    start: "top 90%",
+                    toggleActions: "play none none reverse",
+                  },
+                }
+              );
+            }
+
+            const statValues = sectionRef.current?.querySelectorAll(".stat-value");
+            if (statValues) {
+              gsap.fromTo(
+                statValues,
+                { opacity: 0, y: isReduced ? 0 : 20 },
+                {
+                  opacity: 1,
+                  y: 0,
+                  duration: 0.6,
+                  stagger: 0.1,
+                  ease: "power2.out",
+                  scrollTrigger: {
+                    trigger: statValues[0],
+                    start: "top 88%",
+                    toggleActions: "play none none reverse",
+                  },
+                }
+              );
+            }
           }
         );
-      }
-
-      // Divider line animation
-      if (dividerRef.current) {
-        gsap.fromTo(
-          dividerRef.current,
-          { scaleX: 0 },
-          {
-            scaleX: 1,
-            duration: 1.2,
-            ease: "power2.inOut",
-            scrollTrigger: {
-              trigger: dividerRef.current,
-              start: "top 90%",
-              toggleActions: "play none none reverse",
-            },
-          }
-        );
-      }
-
-      // Stats counter animation
-      const statValues = sectionRef.current?.querySelectorAll(".stat-value");
-      if (statValues) {
-        gsap.fromTo(
-          statValues,
-          { opacity: 0, y: 20 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.6,
-            stagger: 0.1,
-            ease: "power2.out",
-            scrollTrigger: {
-              trigger: statValues[0],
-              start: "top 88%",
-              toggleActions: "play none none reverse",
-            },
-          }
-        );
-      }
+      }, sectionRef);
     });
 
-    return () => ctx.revert();
+    return () => {
+      if (ctx) ctx.revert();
+      if (mm) mm.revert();
+    };
   }, []);
 
   return (
@@ -146,7 +164,6 @@ export default function About() {
           </ScrollReveal>
         </div>
 
-        {/* Pull quote */}
         <div
           ref={pullQuoteRef}
           className="my-16 border-l border-transparent pl-8"
@@ -168,19 +185,17 @@ export default function About() {
           </ScrollReveal>
         </div>
 
-        {/* Animated divider */}
         <div ref={dividerRef} className="my-16 h-px bg-border origin-left" />
 
-        {/* Stats */}
-        <div className="flex flex-wrap gap-x-12 gap-y-4">
+        <div className="flex flex-wrap gap-x-12 gap-y-6">
           {[
-            { label: "Years", value: "4+" },
-            { label: "Projects", value: "15+" },
+            { label: "Total Systems Built", value: "15+" },
+            { label: "Prod Deployments", value: "3" },
             { label: "GitHub Stars", value: "500+" },
             { label: "Lines of Code", value: "100K+" },
           ].map((stat) => (
             <div key={stat.label} className="stat-value">
-              <span className="block text-2xl font-medium text-text-1 tracking-tight">
+              <span className="block text-2xl font-medium text-text-1 tracking-tight tabular-nums">
                 {stat.value}
               </span>
               <span className="font-mono text-[0.7rem] uppercase tracking-[0.12em] text-text-4">

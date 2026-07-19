@@ -27,40 +27,58 @@ export default function ScrollReveal({
     const el = ref.current;
     if (!el) return;
 
-    const fromVars: gsap.TweenVars = {
-      opacity: 0,
-      duration: 0.8,
-      ease: "power3.out",
-      delay,
+    let ctx: gsap.Context;
+    let mm = gsap.matchMedia();
+
+    mm.add(
+      {
+        isReduced: "(prefers-reduced-motion: reduce)",
+        isNormal: "(prefers-reduced-motion: no-preference)",
+      },
+      (context) => {
+        const { isReduced } = context.conditions as { isReduced: boolean; isNormal: boolean };
+
+        const fromVars: gsap.TweenVars = {
+          opacity: 0,
+          duration: isReduced ? 0.3 : 0.8,
+          ease: isReduced ? "power1.out" : "power3.out",
+          delay,
+        };
+
+        if (!isReduced) {
+          switch (direction) {
+            case "up":
+              fromVars.y = distance;
+              break;
+            case "down":
+              fromVars.y = -distance;
+              break;
+            case "left":
+              fromVars.x = distance;
+              break;
+            case "right":
+              fromVars.x = -distance;
+              break;
+          }
+        }
+
+        ctx = gsap.context(() => {
+          gsap.from(el, {
+            ...fromVars,
+            scrollTrigger: {
+              trigger: el,
+              start: "top 88%",
+              toggleActions: "play none none reverse",
+            },
+          });
+        });
+      }
+    );
+
+    return () => {
+      if (ctx) ctx.revert();
+      if (mm) mm.revert();
     };
-
-    switch (direction) {
-      case "up":
-        fromVars.y = distance;
-        break;
-      case "down":
-        fromVars.y = -distance;
-        break;
-      case "left":
-        fromVars.x = distance;
-        break;
-      case "right":
-        fromVars.x = -distance;
-        break;
-    }
-
-    const ctx = gsap.context(() => {
-      gsap.from(el, {
-        ...fromVars,
-        scrollTrigger: {
-          trigger: el,
-          start: "top 88%",
-          toggleActions: "play none none reverse",
-        },
-      });
-    });
-
-    return () => ctx.revert();
   }, [delay, direction, distance]);
 
   return (

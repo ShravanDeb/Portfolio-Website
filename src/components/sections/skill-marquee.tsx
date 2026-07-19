@@ -117,8 +117,6 @@ const capabilities = [
 export default function SkillMarquee() {
   return (
     <section className="py-28 md:py-40 border-t border-border overflow-hidden relative bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,rgba(0,0,0,0.02),transparent)] dark:bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,rgba(255,255,255,0.03),transparent)]">
-
-      {/* Editorial Header Section */}
       <div className="mx-auto max-w-[1100px] px-6 mb-10 relative z-10">
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8">
           <div>
@@ -145,13 +143,12 @@ export default function SkillMarquee() {
         </div>
       </div>
 
-      {/* Stats Bar */}
       <div className="mx-auto max-w-[1100px] px-6 mb-12 relative z-10">
         <div className="flex flex-wrap items-center gap-8 md:gap-16 border-t border-b border-border py-6">
           <div className="flex items-baseline gap-2">
             <NumberTicker
               value={23}
-              className="text-2xl md:text-3xl font-medium tracking-tight text-text-1"
+              className="text-2xl md:text-3xl font-medium tracking-tight text-text-1 tabular-nums"
             />
             <span className="font-mono text-[0.65rem] uppercase tracking-[0.15em] text-text-4">
               Technologies
@@ -160,7 +157,7 @@ export default function SkillMarquee() {
           <div className="flex items-baseline gap-2">
             <NumberTicker
               value={4}
-              className="text-2xl md:text-3xl font-medium tracking-tight text-text-1"
+              className="text-2xl md:text-3xl font-medium tracking-tight text-text-1 tabular-nums"
             />
             <span className="font-mono text-[0.65rem] uppercase tracking-[0.15em] text-text-4">
               Domains
@@ -169,16 +166,15 @@ export default function SkillMarquee() {
           <div className="flex items-baseline gap-2">
             <NumberTicker
               value={3}
-              className="text-2xl md:text-3xl font-medium tracking-tight text-text-1"
+              className="text-2xl md:text-3xl font-medium tracking-tight text-text-1 tabular-nums"
             />
             <span className="font-mono text-[0.65rem] uppercase tracking-[0.15em] text-text-4">
-              Projects Shipped
+              Prod Deployments
             </span>
           </div>
         </div>
       </div>
 
-      {/* Full Technical Stack Marquee */}
       <div className="mx-auto max-w-[1100px] px-6 mb-16 relative z-10">
         <LogoLoop
           logos={allLogos}
@@ -193,7 +189,6 @@ export default function SkillMarquee() {
         />
       </div>
 
-      {/* 12-Column Asymmetric Portfolio Matrix */}
       <div className="mx-auto max-w-[1100px] px-6 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 md:gap-6">
           {capabilities.map((cat, idx) => (
@@ -209,20 +204,19 @@ export default function SkillMarquee() {
             >
               <SpotlightCard
                 spotlightColor="rgba(120, 120, 120, 0.15)"
-                className="w-full flex flex-col justify-between p-8 md:p-10 rounded-[28px] border border-black/[0.08] dark:border-white/[0.08] bg-zinc-50/80 dark:bg-zinc-950/60 backdrop-blur-xl shadow-[inset_0_1px_0_0_rgba(0,0,0,0.03)] dark:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06)] hover:border-black/[0.18] dark:hover:border-white/[0.18] hover:shadow-[0_16px_48px_rgba(0,0,0,0.08)] dark:hover:shadow-[0_16px_48px_rgba(0,0,0,0.5)] transition-all duration-500"
+                className="w-full flex flex-col justify-between p-8 md:p-10 rounded-[28px] border border-black/[0.08] dark:border-white/[0.08] bg-zinc-50/80 dark:bg-zinc-950/60 backdrop-blur-xl shadow-[inset_0_1px_0_0_rgba(0,0,0,0.03)] dark:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06)] hover:border-black/[0.18] dark:hover:border-white/[0.18] transition-all duration-500"
               >
-                {/* Card Header */}
                 <div className="relative z-10">
                   <div className="flex items-center justify-between gap-4 mb-8">
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-black/[0.06] dark:border-white/[0.06] bg-black/[0.02] dark:bg-white/[0.015] transition-colors duration-300">
-                      <span className="h-1 w-1 rounded-full bg-text-4 transition-colors duration-300" />
-                      <span className="font-mono text-[0.65rem] font-medium uppercase tracking-[0.15em] text-text-4 transition-colors duration-300">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-black/[0.06] dark:border-white/[0.06] bg-black/[0.02] dark:bg-white/[0.015]">
+                      <span className="h-1 w-1 rounded-full bg-text-4" />
+                      <span className="font-mono text-[0.65rem] font-medium uppercase tracking-[0.15em] text-text-4">
                         {cat.tag}
                       </span>
                     </div>
                   </div>
 
-                  <h3 className="text-2xl md:text-3xl font-medium text-text-1 tracking-tight mb-3 transition-transform duration-500">
+                  <h3 className="text-2xl md:text-3xl font-medium text-text-1 tracking-tight mb-3">
                     {cat.label}
                   </h3>
 
@@ -238,10 +232,7 @@ export default function SkillMarquee() {
                   </div>
                 </div>
 
-                {/* Card Footer: 2-Tier Stack Display */}
-                <div className="space-y-6 pt-6 border-t border-black/[0.06] dark:border-white/[0.06] transition-colors duration-500 relative z-10">
-
-                  {/* Tier 1: Core Daily Drivers */}
+                <div className="space-y-6 pt-6 border-t border-black/[0.06] dark:border-white/[0.06] relative z-10">
                   <div>
                     <span className="font-mono text-[0.6rem] uppercase tracking-[0.15em] text-text-4 block mb-3">
                       Daily Drivers
@@ -250,7 +241,8 @@ export default function SkillMarquee() {
                       {cat.coreStack.map((item) => (
                         <div
                           key={item.title}
-                          className="group/pill relative inline-flex items-center gap-2.5 px-3.5 py-2 rounded-xl border border-black/[0.08] dark:border-white/[0.08] bg-white dark:bg-white/[0.02] hover:bg-black/[0.04] dark:hover:bg-white/[0.08] hover:border-black/20 dark:hover:border-white/25 text-text-3 hover:text-text-1 transition-all duration-300 shadow-sm hover:shadow-md hover:-translate-y-0.5 cursor-default"
+                          tabIndex={0}
+                          className="group/pill relative inline-flex items-center gap-2.5 px-3.5 py-2 rounded-xl border border-black/[0.08] dark:border-white/[0.08] bg-white dark:bg-white/[0.02] hover:bg-black/[0.04] dark:hover:bg-white/[0.08] text-text-3 hover:text-text-1 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-text-1 transition-all duration-300 shadow-sm hover:shadow-md hover:-translate-y-0.5 cursor-default"
                         >
                           <span className="text-base text-text-2 group-hover/pill:text-text-1 group-hover/pill:scale-110 transition-all duration-300">
                             {item.node}
@@ -263,7 +255,6 @@ export default function SkillMarquee() {
                     </div>
                   </div>
 
-                  {/* Tier 2: Supporting Ecosystem */}
                   <div>
                     <span className="font-mono text-[0.6rem] uppercase tracking-[0.15em] text-text-4 block mb-2.5">
                       Supporting Ecosystem
@@ -272,21 +263,19 @@ export default function SkillMarquee() {
                       {cat.ecosystem.map((tool) => (
                         <span
                           key={tool}
-                          className="font-mono text-[0.7rem] px-2.5 py-1 rounded-md bg-black/[0.03] dark:bg-white/[0.015] border border-black/[0.05] dark:border-white/[0.04] text-text-4 transition-colors duration-300"
+                          className="font-mono text-[0.7rem] px-2.5 py-1 rounded-md bg-black/[0.03] dark:bg-white/[0.015] border border-black/[0.05] dark:border-white/[0.04] text-text-4"
                         >
                           +{tool}
                         </span>
                       ))}
                     </div>
                   </div>
-
                 </div>
               </SpotlightCard>
             </BlurFade>
           ))}
         </div>
       </div>
-
     </section>
   );
 }

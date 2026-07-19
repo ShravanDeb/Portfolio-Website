@@ -21,6 +21,7 @@ const projects = [
     imageSrc: "/images/devmon.jpg",
     imageAlt: "DevMon dashboard",
     layout: "image-left" as const,
+    annotation: "[STATUS: PROD // LANG: Python, Go // VERIF: OK]",
   },
   {
     number: "02",
@@ -32,6 +33,7 @@ const projects = [
     imageSrc: "/images/kiran.jpg",
     imageAlt: "Kiran AI interface",
     layout: "image-right" as const,
+    annotation: "[STATUS: PROD // LANG: Python, React // VERIF: OK]",
   },
   {
     number: "03",
@@ -43,6 +45,8 @@ const projects = [
     imageSrc: "/images/prism.jpg",
     imageAlt: "Prism analytics view",
     layout: "full-width" as const,
+    isFlagship: true,
+    annotation: "[STATUS: PROD // LANG: TypeScript // VERIF: OK]",
   },
 ];
 

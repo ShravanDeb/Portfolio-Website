@@ -46,50 +46,70 @@ export default function SkillList() {
   const headingRef = useRef<HTMLHeadingElement>(null);
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      // Heading reveal
-      if (headingRef.current) {
-        const splitH = SplitText.create(headingRef.current, {
-          type: "lines,chars",
-          mask: "lines",
-        });
-        gsap.set(splitH.chars, { yPercent: 110 });
-        gsap.to(splitH.chars, {
-          yPercent: 0,
-          duration: 0.8,
-          ease: "power4.out",
-          stagger: 0.02,
-          scrollTrigger: {
-            trigger: headingRef.current,
-            start: "top 85%",
-            toggleActions: "play none none reverse",
-          },
-        });
-      }
+    let ctx: gsap.Context;
+    let mm = gsap.matchMedia();
 
-      // Rows staggered fade
-      const rows = sectionRef.current?.querySelectorAll(".skill-row");
-      if (rows) {
-        gsap.fromTo(
-          rows,
-          { opacity: 0, x: -20 },
+    document.fonts.ready.then(() => {
+      ctx = gsap.context(() => {
+        mm.add(
           {
-            opacity: 1,
-            x: 0,
-            duration: 0.5,
-            stagger: 0.06,
-            ease: "power2.out",
-            scrollTrigger: {
-              trigger: rows[0],
-              start: "top 88%",
-              toggleActions: "play none none reverse",
-            },
+            isReduced: "(prefers-reduced-motion: reduce)",
+            isNormal: "(prefers-reduced-motion: no-preference)",
+          },
+          (context) => {
+            const { isReduced } = context.conditions as { isReduced: boolean; isNormal: boolean };
+
+            if (headingRef.current) {
+              if (isReduced) {
+                gsap.fromTo(headingRef.current, { opacity: 0 }, { opacity: 1, duration: 0.8 });
+              } else {
+                const splitH = SplitText.create(headingRef.current, {
+                  type: "lines,chars",
+                  mask: "lines",
+                });
+                gsap.set(splitH.chars, { yPercent: 110 });
+                gsap.to(splitH.chars, {
+                  yPercent: 0,
+                  duration: 0.8,
+                  ease: "power4.out",
+                  stagger: 0.02,
+                  scrollTrigger: {
+                    trigger: headingRef.current,
+                    start: "top 85%",
+                    toggleActions: "play none none reverse",
+                  },
+                });
+              }
+            }
+
+            const rows = sectionRef.current?.querySelectorAll(".skill-row");
+            if (rows) {
+              gsap.fromTo(
+                rows,
+                { opacity: 0, x: isReduced ? 0 : -20 },
+                {
+                  opacity: 1,
+                  x: 0,
+                  duration: 0.5,
+                  stagger: 0.06,
+                  ease: "power2.out",
+                  scrollTrigger: {
+                    trigger: rows[0],
+                    start: "top 88%",
+                    toggleActions: "play none none reverse",
+                  },
+                }
+              );
+            }
           }
         );
-      }
+      }, sectionRef);
     });
 
-    return () => ctx.revert();
+    return () => {
+      if (ctx) ctx.revert();
+      if (mm) mm.revert();
+    };
   }, []);
 
   return (
