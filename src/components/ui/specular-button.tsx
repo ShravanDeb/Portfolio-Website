@@ -215,7 +215,10 @@ const SpecularButton = ({
     const lineC = new Color();
     const baseC = new Color();
 
+    let paused = false;
+
     const update = (now: number) => {
+      if (paused) return;
       raf = requestAnimationFrame(update);
       const dt = Math.min((now - last) / 1000, 0.05);
       last = now;
@@ -242,10 +245,24 @@ const SpecularButton = ({
       program.uniforms.uThickness.value = p.thickness * dpr;
       renderer.render({ scene: mesh });
     };
+
+    const visibility = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting && paused) {
+        paused = false;
+        last = performance.now();
+        raf = requestAnimationFrame(update);
+      } else if (!entry.isIntersecting && !paused) {
+        paused = true;
+        cancelAnimationFrame(raf);
+      }
+    }, { threshold: 0 });
+    visibility.observe(btn);
+
     raf = requestAnimationFrame(update);
 
     return () => {
       cancelAnimationFrame(raf);
+      visibility.disconnect();
       ro.disconnect();
       window.removeEventListener('pointermove', onPointerMove);
       if (gl.canvas.parentNode === fx) fx.removeChild(gl.canvas);

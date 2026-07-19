@@ -224,6 +224,7 @@ export default function Globe({
     let width = 0;
     let raf = 0;
     let destroyed = false;
+    let visibility: IntersectionObserver | null = null;
 
     function readWidth() {
       if (canvas!.parentElement) {
@@ -329,6 +330,33 @@ export default function Globe({
         }
       };
 
+      let paused = false;
+
+      const resume = () => {
+        if (!paused) return;
+        paused = false;
+        if (modeRef.current !== "auto" && modeRef.current !== "drag") {
+          if (phiRef.current !== null && focusToPhiRef.current !== 0) {
+            phiRef.current = focusToPhiRef.current;
+          }
+          modeRef.current = "auto";
+        }
+        raf = requestAnimationFrame(update);
+      };
+
+      const pause = () => {
+        if (paused) return;
+        paused = true;
+        cancelAnimationFrame(raf);
+      };
+
+      const io = new IntersectionObserver(([entry]) => {
+        if (entry.isIntersecting) resume();
+        else pause();
+      }, { threshold: 0 });
+      io.observe(canvas.parentElement!);
+      visibility = io;
+
       raf = requestAnimationFrame(update);
 
       setTimeout(() => {
@@ -353,6 +381,7 @@ export default function Globe({
       return () => {
         destroyed = true;
         ro.disconnect();
+        visibility?.disconnect();
         cancelAnimationFrame(raf);
         globeRef.current?.destroy();
         globeRef.current = null;
@@ -361,6 +390,7 @@ export default function Globe({
 
     return () => {
       destroyed = true;
+      visibility?.disconnect();
       cancelAnimationFrame(raf);
       globeRef.current?.destroy();
       globeRef.current = null;
