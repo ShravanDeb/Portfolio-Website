@@ -24,8 +24,10 @@ export default function GlobeSection() {
   }, []);
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      const mm = gsap.matchMedia();
+    let ctx: gsap.Context;
+    let mm = gsap.matchMedia();
+
+    ctx = gsap.context(() => {
       mm.add(
         {
           isReduced: "(prefers-reduced-motion: reduce)",
@@ -74,16 +76,19 @@ export default function GlobeSection() {
       );
     }, sectionRef);
 
-    return () => ctx.revert();
+    return () => {
+      if (ctx) ctx.revert();
+      if (mm) mm.revert();
+    };
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative px-6 py-32 md:py-48 border-t border-border">
+    <section ref={sectionRef} className="relative px-6 py-32 md:py-48">
       <div className="mx-auto max-w-[1100px]">
         <div className="grid gap-16 md:grid-cols-2 md:items-center">
           <div>
             <span className="font-mono text-[0.7rem] font-semibold uppercase tracking-[0.12em] text-text-4 block mb-6">
-              Availability // Network Trace
+              Availability
             </span>
             <h2
               ref={headingRef}
@@ -98,7 +103,7 @@ export default function GlobeSection() {
               className="text-text-3 text-sm leading-relaxed max-w-[380px] mb-10"
             >
               Adaptable across time zones. Based in Guwahati, India — working
-              with teams across the UK and US. Select a coordinate to trace connectivity.
+              with teams across the UK and US. Ready for international projects.
             </p>
 
             <div className="flex flex-col gap-4">
@@ -122,15 +127,15 @@ export default function GlobeSection() {
                         : "w-3 bg-text-4 group-hover:w-5 group-hover:bg-text-2"
                     }`}
                   />
-                  <span className="text-sm font-medium">{loc.name}</span>
+                  <span className="text-sm">{loc.name}</span>
                 </button>
               ))}
             </div>
           </div>
 
-          <div className="flex justify-center items-center">
+          <div className="flex justify-center">
             <Globe
-              className="w-full max-w-[440px] cursor-grab active:cursor-grabbing"
+              className="w-full max-w-[420px]"
               locations={LOCATIONS}
               activeLocation={activeLocation}
               onLocationChange={setActiveLocation}
