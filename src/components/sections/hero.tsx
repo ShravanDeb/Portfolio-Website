@@ -37,7 +37,7 @@ export default function Hero() {
             if (isReduced) {
               gsap.to(
                 [nameRef.current, eyebrowRef.current, subtitleRef.current, linksRef.current, lineRef.current],
-                { opacity: 1, duration: 0.8, stagger: 0.1, ease: "power2.out" }
+                { opacity: 1, duration: 0.5, stagger: 0.1, ease: "power2.out" }
               );
               return;
             }
@@ -53,32 +53,32 @@ export default function Hero() {
 
             tl.to(splitName.chars, {
               yPercent: 0,
-              duration: 1,
+              duration: 0.6,
               ease: "power4.out",
               stagger: 0.025,
             })
               .fromTo(
                 eyebrowRef.current,
                 { opacity: 0, x: -20 },
-                { opacity: 1, x: 0, duration: 0.8, ease: "power3.out" },
+                { opacity: 1, x: 0, duration: 0.5, ease: "power3.out" },
                 "-=0.6"
               )
               .fromTo(
                 subtitleRef.current,
                 { opacity: 0, y: 20 },
-                { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" },
+                { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" },
                 "-=0.4"
               )
               .fromTo(
                 linksRef.current,
                 { opacity: 0, y: 15 },
-                { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" },
+                { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" },
                 "-=0.3"
               )
               .fromTo(
                 lineRef.current,
                 { scaleX: 0 },
-                { scaleX: 1, duration: 1.2, ease: "power2.inOut" },
+                { scaleX: 1, duration: 0.5, ease: "power2.out" },
                 "-=0.6"
               );
 

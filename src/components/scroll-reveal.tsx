@@ -19,7 +19,7 @@ export default function ScrollReveal({
   className = "",
   delay = 0,
   direction = "up",
-  distance = 30,
+  distance = 20,
 }: ScrollRevealProps) {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -40,8 +40,8 @@ export default function ScrollReveal({
 
         const fromVars: gsap.TweenVars = {
           opacity: 0,
-          duration: isReduced ? 0.3 : 0.8,
-          ease: isReduced ? "power1.out" : "power3.out",
+          duration: isReduced ? 0.3 : 0.5,
+          ease: isReduced ? "power1.out" : "power2.out",
           delay,
         };
 

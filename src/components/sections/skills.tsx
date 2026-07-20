@@ -61,7 +61,7 @@ export default function SkillList() {
 
             if (headingRef.current) {
               if (isReduced) {
-                gsap.fromTo(headingRef.current, { opacity: 0 }, { opacity: 1, duration: 0.8 });
+                gsap.fromTo(headingRef.current, { opacity: 0 }, { opacity: 1, duration: 0.5 });
               } else {
                 const splitH = SplitText.create(headingRef.current, {
                   type: "lines,chars",
@@ -70,7 +70,7 @@ export default function SkillList() {
                 gsap.set(splitH.chars, { yPercent: 110 });
                 gsap.to(splitH.chars, {
                   yPercent: 0,
-                  duration: 0.8,
+                  duration: 0.5,
                   ease: "power4.out",
                   stagger: 0.02,
                   scrollTrigger: {

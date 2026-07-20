@@ -30,7 +30,7 @@ export default function About() {
 
             if (headingRef.current) {
               if (isReduced) {
-                gsap.fromTo(headingRef.current, { opacity: 0 }, { opacity: 1, duration: 0.8 });
+                gsap.fromTo(headingRef.current, { opacity: 0 }, { opacity: 1, duration: 0.5 });
               } else {
                 const splitHeading = SplitText.create(headingRef.current, {
                   type: "lines,chars",
@@ -40,7 +40,7 @@ export default function About() {
                 gsap.set(splitHeading.chars, { yPercent: 110 });
                 gsap.to(splitHeading.chars, {
                   yPercent: 0,
-                  duration: 0.8,
+                  duration: 0.5,
                   ease: "power4.out",
                   stagger: 0.02,
                   scrollTrigger: {
@@ -75,8 +75,8 @@ export default function About() {
                 { scaleX: 0 },
                 {
                   scaleX: 1,
-                  duration: 1.2,
-                  ease: "power2.inOut",
+                  duration: 0.5,
+                  ease: "power2.out",
                   scrollTrigger: {
                     trigger: dividerRef.current,
                     start: "top 90%",
@@ -117,7 +117,7 @@ export default function About() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="px-6 py-32 md:py-48">
+    <section ref={sectionRef} className="relative z-10 px-6 py-32 md:py-48">
       <div className="mx-auto max-w-[720px]">
         <ScrollReveal>
           <span className="font-mono text-[0.7rem] font-semibold uppercase tracking-[0.12em] text-text-4 block mb-6">

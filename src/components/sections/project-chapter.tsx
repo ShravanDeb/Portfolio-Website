@@ -85,7 +85,7 @@ export default function ProjectChapter({
                 {
                   clipPath: "inset(0% 0 0 0)",
                   opacity: 1,
-                  duration: 1.2,
+                  duration: 0.6,
                   ease: "power4.out",
                   scrollTrigger: {
                     trigger: imageRef.current,
@@ -104,7 +104,7 @@ export default function ProjectChapter({
                   scale: 1,
                   opacity: 1,
                   borderColor: "rgba(255, 255, 255, 0.25)",
-                  duration: 0.8,
+                  duration: 0.6,
                   ease: "power3.out",
                   scrollTrigger: {
                     trigger: imageRef.current,
@@ -123,7 +123,7 @@ export default function ProjectChapter({
                 {
                   opacity: 0.22,
                   scale: 1,
-                  duration: 1.5,
+                  duration: 0.8,
                   ease: "power2.out",
                   scrollTrigger: {
                     trigger: sectionRef.current,
@@ -136,7 +136,7 @@ export default function ProjectChapter({
 
             if (titleRef.current) {
               if (isReduced) {
-                gsap.fromTo(titleRef.current, { opacity: 0 }, { opacity: 1, duration: 0.8 });
+                gsap.fromTo(titleRef.current, { opacity: 0 }, { opacity: 1, duration: 0.5 });
               } else {
                 const splitTitle = SplitText.create(titleRef.current, {
                   type: "lines,chars",
@@ -148,7 +148,7 @@ export default function ProjectChapter({
                 gsap.set(splitTitle.chars, { yPercent: 110 });
                 gsap.to(splitTitle.chars, {
                   yPercent: 0,
-                  duration: 0.8,
+                  duration: 0.5,
                   ease: "power4.out",
                   stagger: 0.02,
                   scrollTrigger: {
@@ -167,7 +167,7 @@ export default function ProjectChapter({
                 {
                   opacity: 1,
                   y: 0,
-                  duration: 0.8,
+                  duration: 0.5,
                   ease: "power3.out",
                   delay: isMobile ? 0.1 : 0.3,
                   scrollTrigger: {
@@ -240,7 +240,7 @@ export default function ProjectChapter({
       </div>
       <Link
         href={href}
-        className="group inline-flex items-center justify-between md:justify-start gap-3 text-sm font-medium text-text-1 md:text-text-2 transition-all hover:text-text-1 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-text-1 w-full md:w-max py-2.5 md:py-0 px-4 md:px-0 rounded-lg md:rounded-none bg-surface-2 md:bg-transparent border border-border/60 md:border-transparent"
+        className="group inline-flex items-center justify-between md:justify-start gap-3 text-sm font-medium text-text-1 md:text-text-2 transition-[color,transform] duration-300 [cubic-bezier(0.23,1,0.32,1)] hover:text-text-1 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-text-1 w-full md:w-max py-2.5 md:py-0 px-4 md:px-0 rounded-lg md:rounded-none bg-surface-2 md:bg-transparent border border-border/60 md:border-transparent"
       >
         <span>View Case Study</span>
         <span className="transition-transform group-hover:translate-x-1">→</span>

@@ -44,7 +44,7 @@ export const metadata: Metadata = {
         url: "/opengraph-image.svg",
         width: 1200,
         height: 630,
-        alt: "Shravan Deb — AI/ML Engineer",
+        alt: "Shravan Deb - AI/ML Engineer",
       },
     ],
   },

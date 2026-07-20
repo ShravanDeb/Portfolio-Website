@@ -30,7 +30,7 @@ export default function InvertedContact() {
 
             if (headingRef.current) {
               if (isReduced) {
-                gsap.fromTo(headingRef.current, { opacity: 0 }, { opacity: 1, duration: 0.8 });
+                gsap.fromTo(headingRef.current, { opacity: 0 }, { opacity: 1, duration: 0.5 });
               } else {
                 const splitH = SplitText.create(headingRef.current, {
                   type: "lines,chars",
@@ -39,7 +39,7 @@ export default function InvertedContact() {
                 gsap.set(splitH.chars, { yPercent: 110 });
                 gsap.to(splitH.chars, {
                   yPercent: 0,
-                  duration: 0.8,
+                  duration: 0.5,
                   ease: "power4.out",
                   stagger: 0.02,
                   scrollTrigger: {
@@ -57,8 +57,8 @@ export default function InvertedContact() {
                 { backgroundSize: "0% 1px" },
                 {
                   backgroundSize: "100% 1px",
-                  duration: 1,
-                  ease: "power2.inOut",
+                  duration: 0.5,
+                  ease: "power2.out",
                   scrollTrigger: {
                     trigger: emailRef.current,
                     start: "top 85%",
@@ -79,7 +79,7 @@ export default function InvertedContact() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="bg-background inverted-section px-6 py-32 md:py-48">
+    <section ref={sectionRef} className="relative z-10 bg-background inverted-section px-6 py-32 md:py-48">
       <div className="mx-auto max-w-[720px]">
         <ScrollReveal>
           <span className="font-mono text-[0.7rem] font-semibold uppercase tracking-[0.12em] text-text-4 block mb-6">

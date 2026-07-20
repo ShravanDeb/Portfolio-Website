@@ -6,11 +6,11 @@ import Nav from "@/components/nav";
 import Footer from "@/components/footer";
 
 export const metadata: Metadata = {
-  title: "Prism — Collaborative Analytics",
+  title: "Prism - Collaborative Analytics",
   description:
     "Collaborative analytics platform that turns raw data into actionable insights.",
   openGraph: {
-    title: "Prism — Shravan Deb",
+    title: "Prism - Shravan Deb",
     description:
       "Collaborative analytics platform that turns raw data into actionable insights.",
     images: [
@@ -18,13 +18,13 @@ export const metadata: Metadata = {
         url: "/work/prism/opengraph-image.svg",
         width: 1200,
         height: 630,
-        alt: "Prism — Collaborative Analytics",
+        alt: "Prism - Collaborative Analytics",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Prism — Shravan Deb",
+    title: "Prism - Shravan Deb",
     images: ["/work/prism/opengraph-image.svg"],
   },
 };

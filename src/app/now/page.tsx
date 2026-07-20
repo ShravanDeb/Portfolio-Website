@@ -30,7 +30,7 @@ export default function NowPage() {
 
           <div className="text-text-2 text-base leading-[1.7] space-y-6">
             <p>
-              Focused on building production AI systems — specifically working on
+              Focused on building production AI systems - specifically working on
               improving RAG pipeline performance and exploring multi-agent
               architectures for complex task decomposition.
             </p>

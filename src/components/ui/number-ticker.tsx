@@ -26,7 +26,7 @@ export function NumberTicker({
   const motionValue = useMotionValue(direction === "down" ? value : startValue)
   const springValue = useSpring(motionValue, {
     damping: 60,
-    stiffness: 100,
+    stiffness: 200,
   })
   const isInView = useInView(ref, { once: true, margin: "0px" })
 
@@ -34,9 +34,14 @@ export function NumberTicker({
     let timer: ReturnType<typeof setTimeout> | null = null
 
     if (isInView) {
-      timer = setTimeout(() => {
+      const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      if (prefersReduced) {
         motionValue.set(direction === "down" ? startValue : value)
-      }, delay * 1000)
+      } else {
+        timer = setTimeout(() => {
+          motionValue.set(direction === "down" ? startValue : value)
+        }, delay * 1000)
+      }
     }
 
     return () => {

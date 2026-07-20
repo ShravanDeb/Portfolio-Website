@@ -6,11 +6,11 @@ import Nav from "@/components/nav";
 import Footer from "@/components/footer";
 
 export const metadata: Metadata = {
-  title: "Kiran AI — Intelligent Virtual Assistant",
+  title: "Kiran AI - Intelligent Virtual Assistant",
   description:
     "Intelligent virtual assistant powered by custom-trained language models.",
   openGraph: {
-    title: "Kiran AI — Shravan Deb",
+    title: "Kiran AI - Shravan Deb",
     description:
       "Intelligent virtual assistant powered by custom-trained language models.",
     images: [
@@ -18,13 +18,13 @@ export const metadata: Metadata = {
         url: "/work/kiran-ai/opengraph-image.svg",
         width: 1200,
         height: 630,
-        alt: "Kiran AI — Intelligent Virtual Assistant",
+        alt: "Kiran AI - Intelligent Virtual Assistant",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Kiran AI — Shravan Deb",
+    title: "Kiran AI - Shravan Deb",
     images: ["/work/kiran-ai/opengraph-image.svg"],
   },
 };
@@ -68,7 +68,7 @@ export default function KiranAIPage() {
               <p>
                 Kiran AI is an intelligent virtual assistant built on
                 custom-trained language models. Unlike generic AI assistants,
-                Kiran is designed for deep context awareness — it understands
+                Kiran is designed for deep context awareness - it understands
                 user preferences, remembers past interactions, and provides
                 responses that feel genuinely helpful rather than generic.
               </p>
@@ -80,7 +80,7 @@ export default function KiranAIPage() {
                 Building an AI that actually feels intelligent requires solving
                 multiple hard problems simultaneously: efficient inference at
                 scale, real-time voice interaction, context management across
-                sessions, and multi-language support — all while keeping
+                sessions, and multi-language support - all while keeping
                 response latency under 200ms.
               </p>
             </div>

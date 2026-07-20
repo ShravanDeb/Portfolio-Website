@@ -201,7 +201,7 @@ export default function JourneyTimeline() {
                 gsap.to(split.chars, {
                   yPercent: 0,
                   opacity: 1,
-                  duration: 1.2,
+                  duration: 0.6,
                   ease: "power4.out",
                   stagger: 0.03,
                   scrollTrigger: {
@@ -233,17 +233,16 @@ export default function JourneyTimeline() {
 
             if (isReduced || !stickyRef.current || !spineRef.current || !pinWrapRef.current) return;
 
-            // ── Dynamic scroll distance ──
+            // ── Scroll distance: 1 screen per milestone ──
             const vh = window.innerHeight;
-            const scrollDistance = TOTAL * vh;
-            pinWrapRef.current.style.height = `${scrollDistance}px`;
+            const pinDistance = TOTAL * vh;
 
             // ── Master timeline ──
             const tl = gsap.timeline({
               scrollTrigger: {
                 trigger: pinWrapRef.current,
                 start: "top top",
-                end: "bottom bottom",
+                end: `+=${pinDistance}`,
                 scrub: 0.8,
                 pin: stickyRef.current,
                 anticipatePin: 1,
@@ -257,12 +256,12 @@ export default function JourneyTimeline() {
 
             // ── Energy pulse travels down spine ──
             if (spinePulseRef.current) {
-              gsap.set(spinePulseRef.current, { top: "0%", opacity: 0 });
+              gsap.set(spinePulseRef.current, { top: 0, yPercent: 0, opacity: 0 });
               tl.to(spinePulseRef.current, {
                 keyframes: [
-                  { top: "20%", opacity: 0.8, duration: 0.3 },
-                  { top: "80%", opacity: 0.8, duration: 0.5 },
-                  { top: "100%", opacity: 0, duration: 0.2 },
+                  { yPercent: 20, opacity: 0.8, duration: 0.3 },
+                  { yPercent: 80, opacity: 0.8, duration: 0.5 },
+                  { yPercent: 100, opacity: 0, duration: 0.2 },
                 ],
                 ease: "none",
               }, 0);
@@ -323,7 +322,7 @@ export default function JourneyTimeline() {
               }
 
               if (dot) {
-                gsap.set(dot, { scale: 0, opacity: 0 });
+                gsap.set(dot, { scale: 0.01, opacity: 0 });
                 tl.to(dot, {
                   scale: 1, opacity: 1,
                   duration: dur * 0.15,
@@ -408,7 +407,7 @@ export default function JourneyTimeline() {
                   backdropFilter: "blur(12px)",
                   borderColor: "rgba(255,255,255,0.06)",
                   duration: dur * 0.2,
-                  ease: "power2.inOut",
+                  ease: "power2.out",
                 }, seg + dur * 0.3);
               }
 
@@ -447,7 +446,7 @@ export default function JourneyTimeline() {
                   opacity: 0.65,
                   filter: "blur(4px)",
                   duration: dur * 0.3,
-                  ease: "power2.inOut",
+                  ease: "power2.out",
                 }, seg + dur * 0.7);
 
                 if (spinePulseRef.current) {

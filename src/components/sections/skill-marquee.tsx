@@ -204,7 +204,7 @@ export default function SkillMarquee() {
             >
               <SpotlightCard
                 spotlightColor="rgba(120, 120, 120, 0.15)"
-                className="w-full flex flex-col justify-between p-8 md:p-10 rounded-[28px] border border-black/[0.08] dark:border-white/[0.08] bg-zinc-50/80 dark:bg-zinc-950/60 backdrop-blur-xl shadow-[inset_0_1px_0_0_rgba(0,0,0,0.03)] dark:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06)] hover:border-black/[0.18] dark:hover:border-white/[0.18] transition-all duration-500"
+                className="w-full flex flex-col justify-between p-8 md:p-10 rounded-[28px] border border-black/[0.08] dark:border-white/[0.08] bg-zinc-50/80 dark:bg-zinc-950/60 backdrop-blur-xl shadow-[inset_0_1px_0_0_rgba(0,0,0,0.03)] dark:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06)] hover:border-black/[0.18] dark:hover:border-white/[0.18] transition-[border-color,box-shadow] duration-300 [cubic-bezier(0.23,1,0.32,1)]"
               >
                 <div className="relative z-10">
                   <div className="flex items-center justify-between gap-4 mb-8">
@@ -242,9 +242,9 @@ export default function SkillMarquee() {
                         <div
                           key={item.title}
                           tabIndex={0}
-                          className="group/pill relative inline-flex items-center gap-2.5 px-3.5 py-2 rounded-xl border border-black/[0.08] dark:border-white/[0.08] bg-white dark:bg-white/[0.02] hover:bg-black/[0.04] dark:hover:bg-white/[0.08] text-text-3 hover:text-text-1 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-text-1 transition-all duration-300 shadow-sm hover:shadow-md hover:-translate-y-0.5 cursor-default"
+                          className="group/pill relative inline-flex items-center gap-2.5 px-3.5 py-2 rounded-xl border border-black/[0.08] dark:border-white/[0.08] bg-white dark:bg-white/[0.02] hover:bg-black/[0.04] dark:hover:bg-white/[0.08] text-text-3 hover:text-text-1 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-text-1 transition-[background-color,border-color,box-shadow,transform,color] duration-300 [cubic-bezier(0.23,1,0.32,1)] shadow-sm hover:shadow-md hover:-translate-y-0.5 cursor-default"
                         >
-                          <span className="text-base text-text-2 group-hover/pill:text-text-1 group-hover/pill:scale-110 transition-all duration-300">
+                          <span className="text-base text-text-2 group-hover/pill:text-text-1 group-hover/pill:scale-110 transition-[transform,color] duration-300 [cubic-bezier(0.23,1,0.32,1)]">
                             {item.node}
                           </span>
                           <span className="font-mono text-[0.75rem] tracking-tight font-medium text-text-2 group-hover/pill:text-text-1">

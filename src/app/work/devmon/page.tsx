@@ -6,11 +6,11 @@ import Nav from "@/components/nav";
 import Footer from "@/components/footer";
 
 export const metadata: Metadata = {
-  title: "DevMon — Real-time System Monitoring",
+  title: "DevMon - Real-time System Monitoring",
   description:
     "Real-time system monitoring and alerting platform built for modern infrastructure.",
   openGraph: {
-    title: "DevMon — Shravan Deb",
+    title: "DevMon - Shravan Deb",
     description:
       "Real-time system monitoring and alerting platform built for modern infrastructure.",
     images: [
@@ -18,13 +18,13 @@ export const metadata: Metadata = {
         url: "/work/devmon/opengraph-image.svg",
         width: 1200,
         height: 630,
-        alt: "DevMon — Real-time System Monitoring",
+        alt: "DevMon - Real-time System Monitoring",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "DevMon — Shravan Deb",
+    title: "DevMon - Shravan Deb",
     images: ["/work/devmon/opengraph-image.svg"],
   },
 };
@@ -78,7 +78,7 @@ export default function DevMonPage() {
               <p>
                 Existing monitoring solutions were either too expensive for
                 startups or too complex to set up. Teams needed something that
-                could be deployed in minutes, not weeks — and actually provided
+                could be deployed in minutes, not weeks - and actually provided
                 actionable insights, not just dashboards full of numbers.
               </p>
             </div>

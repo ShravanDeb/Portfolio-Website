@@ -64,7 +64,7 @@ function LocationButton({
           {loc.shortName}
         </span>
         <span
-          className={`h-px transition-all duration-300 ${
+          className={`h-px transition-[width,background-color] duration-300 [cubic-bezier(0.23,1,0.32,1)] ${
             isActive
               ? "w-8 bg-text-1"
               : "w-3 bg-text-4 group-hover:w-5 group-hover:bg-text-2"
@@ -73,7 +73,7 @@ function LocationButton({
         <span className="text-sm">{loc.name}</span>
       </div>
       <div
-        className={`flex items-center gap-3 ml-12 transition-all duration-300 ${
+        className={`flex items-center gap-3 ml-12 transition-[opacity,max-height] duration-300 [cubic-bezier(0.23,1,0.32,1)] ${
           isActive
             ? "opacity-100 max-h-8"
             : "opacity-0 max-h-0 overflow-hidden"

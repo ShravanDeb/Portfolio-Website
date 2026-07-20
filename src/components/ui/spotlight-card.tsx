@@ -54,12 +54,14 @@ export default function SpotlightCard({
             transparent 60%
           );
           opacity: 0;
-          transition: opacity 0.5s ease;
+          transition: opacity 0.3s cubic-bezier(0.23, 1, 0.32, 1);
           pointer-events: none;
           z-index: 0;
         }
-        .spotlight-card:hover::before {
-          opacity: 1;
+        @media (hover: hover) and (pointer: fine) {
+          .spotlight-card:hover::before {
+            opacity: 1;
+          }
         }
       `}</style>
     </div>
