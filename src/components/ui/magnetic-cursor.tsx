@@ -177,7 +177,36 @@ export const MagneticCursor: FC<MagneticCursorProps> = ({
 
     const handleMouseLeave = () => gsap.to(cursorEl, { opacity: 0, duration: 0.3 });
     const handleMouseEnter = () => gsap.to(cursorEl, { opacity: 1, duration: 0.3 });
-    const handleClick = (event: MouseEvent) => {};
+
+    const handleRouteChange = () => {
+      const state = cursorStateRef.current;
+      if (!state) return;
+      state.hover.isHovered = false;
+      state.isDetaching = false;
+      const { cursorSize } = configRef.current;
+      const shapeBorderRadius = shape === 'circle' ? '50%' : shape === 'square' ? '0' : '8px';
+      gsap.killTweensOf(cursorEl);
+      gsap.to(cursorEl, {
+        width: cursorSize,
+        height: cursorSize,
+        borderRadius: shapeBorderRadius,
+        backgroundColor: cursorColor,
+        scaleX: 1,
+        scaleY: 1,
+        rotate: 0,
+        duration: 0.3,
+        ease: 'power3.out',
+        overwrite: 'auto',
+      });
+    };
+
+    const handleClick = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      const anchor = target.closest('a[href]');
+      if (anchor) {
+        handleRouteChange();
+      }
+    };
 
     gsap.ticker.add(update);
     window.addEventListener('pointermove', onMouseMove);
@@ -185,6 +214,7 @@ export const MagneticCursor: FC<MagneticCursorProps> = ({
     document.addEventListener('mouseleave', handleMouseLeave);
     document.addEventListener('mouseenter', handleMouseEnter);
     window.addEventListener('click', handleClick);
+    window.addEventListener('popstate', handleRouteChange);
 
     const cleanupFunctions: (() => void)[] = [];
 
@@ -291,6 +321,7 @@ export const MagneticCursor: FC<MagneticCursorProps> = ({
       document.removeEventListener('mouseleave', handleMouseLeave);
       document.removeEventListener('mouseenter', handleMouseEnter);
       window.removeEventListener('click', handleClick);
+      window.removeEventListener('popstate', handleRouteChange);
       cleanupFunctions.forEach((cleanup) => cleanup());
     };
   }, [disableOnTouch, isTouchDevice, hoverPadding, hoverAttribute, cursorColor, shape]);
