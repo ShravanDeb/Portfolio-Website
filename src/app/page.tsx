@@ -1,4 +1,3 @@
-import SmoothScrollProvider from "@/components/smooth-scroll-provider";
 import NoiseOverlay from "@/components/noise-overlay";
 import ScrollProgress from "@/components/scroll-progress";
 import Nav from "@/components/nav";
@@ -53,7 +52,7 @@ const projects = [
 
 export default function Home() {
   return (
-    <SmoothScrollProvider>
+    <>
       <NoiseOverlay />
       <ScrollProgress />
       <Nav />
@@ -75,6 +74,6 @@ export default function Home() {
       </main>
 
       <Footer />
-    </SmoothScrollProvider>
+    </>
   );
 }
