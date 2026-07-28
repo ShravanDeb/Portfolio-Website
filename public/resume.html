@@ -1,518 +1,278 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Shravan Deb — Resume</title>
-  <style>
-    /* ── RESET ──────────────────────────────────────────── */
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shravan Kumar Deb - Resume</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-    /* ── PAGE ───────────────────────────────────────────── */
-    @page {
-      size: A4 portrait;
-      margin: 5.5mm 6mm;
-    }
+        @page {
+            size: A4;
+            margin: 6mm;
+        }
 
-    html {
-      -webkit-print-color-adjust: exact;
-      print-color-adjust: exact;
-    }
+        html {
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
 
-    body {
-      font-family: 'Inter', 'Source Sans Pro', 'Segoe UI', Calibri, Arial, sans-serif;
-      font-size: 10.5pt;
-      line-height: 1.45;
-      color: #000;
-      background: #fff;
-    }
+        body {
+            font-family: "Latin Modern Roman", "Computer Modern", "Times New Roman", Times, serif;
+            color: #000000;
+            background-color: #ffffff;
+            line-height: 1.35;
+            font-size: 14px;
+            padding: 30px;
+            -webkit-font-smoothing: antialiased;
+        }
 
-    /* ── LINKS ──────────────────────────────────────────── */
-    a, a:visited, a:hover, a:active {
-      color: #000;
-      text-decoration: none;
-    }
+        /* ── LINKS ─────────────────────────────── */
+        a, a:visited, a:hover, a:active {
+            color: #000000;
+            text-decoration: none;
+        }
 
-    /* ── CONTAINER ──────────────────────────────────────── */
-    .page {
-      width: 100%;
-      max-width: 195mm;
-      margin: 0 auto;
-    }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
 
-    /* ── HEADER ─────────────────────────────────────────── */
-    .header {
-      text-align: center;
-      margin-bottom: 2px;
-    }
+        /* Header Styling */
+        header {
+            text-align: center;
+            margin-bottom: 12px;
+        }
 
-    .header h1 {
-      font-size: 24pt;
-      font-weight: 700;
-      letter-spacing: 0.01em;
-      line-height: 1.15;
-      margin: 0 0 1px 0;
-    }
+        h1 {
+            font-size: 26px;
+            font-weight: normal;
+            margin-bottom: 6px;
+            letter-spacing: 0.5px;
+        }
 
-    .header .title {
-      font-size: 11.5pt;
-      font-weight: 400;
-      color: #111;
-      letter-spacing: 0.02em;
-      margin: 0 0 5px 0;
-    }
+        .contact-info {
+            font-size: 13.5px;
+            line-height: 1.5;
+        }
 
-    .header .contact {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 5px;
-      flex-wrap: wrap;
-      font-size: 9.5pt;
-      line-height: 1.4;
-      color: #111;
-    }
+        .contact-info a {
+            color: #000000;
+            text-decoration: none;
+        }
 
-    .header .contact .sep {
-      color: #999;
-      font-size: 7pt;
-      user-select: none;
-    }
+        .contact-icon {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            vertical-align: -1.5px;
+            margin-right: 1px;
+            fill: #000;
+        }
 
-    .header .contact a {
-      display: inline-flex;
-      align-items: center;
-      gap: 2.5px;
-      color: #000;
-      white-space: nowrap;
-    }
+        /* Section Styling */
+        .section-title {
+            font-size: 15px;
+            font-weight: bold;
+            border-bottom: 1px solid #000000;
+            margin-top: 14px;
+            margin-bottom: 6px;
+            padding-bottom: 1px;
+        }
 
-    .header .contact a:hover {
-      text-decoration: none;
-    }
+        /* Layout Rows */
+        .row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-top: 4px;
+        }
 
-    .contact-icon {
-      width: 10.5px;
-      height: 10.5px;
-      flex-shrink: 0;
-      vertical-align: middle;
-    }
+        .row .left {
+            text-align: left;
+        }
 
-    /* ── RULE ───────────────────────────────────────────── */
-    .rule {
-      border: none;
-      border-top: 1px solid #000;
-      margin: 5px 0 0 0;
-      padding: 0;
-    }
+        .row .right {
+            text-align: right;
+            white-space: nowrap;
+            padding-left: 15px;
+        }
 
-    /* ── SECTION ────────────────────────────────────────── */
-    .section {
-      margin-top: 7px;
-      break-inside: avoid;
-    }
+        /* Lists & Bullet Points */
+        ul {
+            list-style-type: disc;
+            margin-top: 3px;
+            margin-bottom: 6px;
+            padding-left: 18px;
+        }
 
-    .section-title {
-      font-size: 11.5pt;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.09em;
-      border-top: 1px solid #000;
-      border-bottom: 1px solid #000;
-      padding: 2.5px 0;
-      margin: 0 0 5px 0;
-    }
+        li {
+            margin-bottom: 2px;
+            padding-left: 2px;
+        }
 
-    /* ── PROFILE ────────────────────────────────────────── */
-    .profile-text {
-      font-size: 10.2pt;
-      line-height: 1.45;
-      color: #111;
-    }
+        /* Skills Section Specifics */
+        .skills-list {
+            margin-top: 4px;
+        }
 
-    /* ── ENTRY ──────────────────────────────────────────── */
-    .entry {
-      margin-bottom: 6px;
-      break-inside: avoid;
-    }
+        .skills-list div {
+            margin-bottom: 3px;
+        }
 
-    .entry:last-child {
-      margin-bottom: 0;
-    }
+        /* SVG Link Icon Styling */
+        .link-icon {
+            display: inline-block;
+            width: 11px;
+            height: 11px;
+            vertical-align: -1px;
+            margin-right: 2px;
+            fill: none;
+            stroke: #000;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
 
-    .entry-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 8px;
-    }
+        .project-links {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
 
-    .entry-left {
-      display: flex;
-      align-items: baseline;
-      gap: 5px;
-      flex: 1;
-      min-width: 0;
-    }
+        .project-links a {
+            color: #000000;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+        }
 
-    .entry-role {
-      font-size: 10.5pt;
-      font-weight: 700;
-      white-space: nowrap;
-    }
-
-    .entry-org {
-      font-size: 10.2pt;
-      font-weight: 400;
-      color: #111;
-      white-space: nowrap;
-    }
-
-    .entry-date {
-      font-size: 9.8pt;
-      font-weight: 400;
-      color: #111;
-      white-space: nowrap;
-      flex-shrink: 0;
-    }
-
-    /* ── BULLETS ────────────────────────────────────────── */
-    .bullets {
-      list-style: none;
-      margin: 2px 0 0 0;
-      padding: 0;
-    }
-
-    .bullets li {
-      font-size: 10pt;
-      line-height: 1.35;
-      margin: 1.5px 0;
-      padding-left: 12px;
-      text-indent: -12px;
-      color: #111;
-    }
-
-    .bullets li::before {
-      content: "\2022";
-      display: inline;
-      width: 12px;
-      margin-left: -12px;
-      text-indent: 0;
-    }
-
-    /* ── SKILLS ─────────────────────────────────────────── */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: 110px 1fr;
-      gap: 2px 0;
-      font-size: 10pt;
-      line-height: 1.45;
-    }
-
-    .skill-label {
-      font-weight: 700;
-      font-size: 10pt;
-    }
-
-    .skill-value {
-      color: #111;
-    }
-
-    /* ── LANGUAGES ──────────────────────────────────────── */
-    .lang-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1px 0;
-      font-size: 10pt;
-      line-height: 1.45;
-    }
-
-    .lang-name {
-      font-weight: 400;
-    }
-
-    .lang-level {
-      text-align: right;
-      color: #111;
-    }
-
-    /* ── PROJECTS ───────────────────────────────────────── */
-    .project-entry {
-      margin-bottom: 5px;
-      break-inside: avoid;
-    }
-
-    .project-entry:last-child {
-      margin-bottom: 0;
-    }
-
-    .project-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 8px;
-    }
-
-    .project-left {
-      display: flex;
-      align-items: baseline;
-      gap: 4px;
-      flex: 1;
-      min-width: 0;
-    }
-
-    .project-name {
-      font-size: 10.2pt;
-      font-weight: 700;
-      white-space: nowrap;
-    }
-
-    .project-desc {
-      font-size: 9.8pt;
-      font-weight: 400;
-      color: #111;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .project-links {
-      display: flex;
-      gap: 5px;
-      flex-shrink: 0;
-    }
-
-    .project-links a {
-      display: inline-flex;
-      align-items: center;
-      gap: 2px;
-      font-size: 9pt;
-      color: #000;
-      white-space: nowrap;
-    }
-
-    .project-icon {
-      width: 10px;
-      height: 10px;
-      flex-shrink: 0;
-    }
-
-    /* ── PRINT OVERRIDES ────────────────────────────────── */
-    @media print {
-      body {
-        background: #fff;
-      }
-      .page {
-        width: 100%;
-        max-width: none;
-      }
-    }
-  </style>
+        /* ── PRINT ─────────────────────────────── */
+        @media print {
+            body { padding: 0; background: #fff; }
+            .container { max-width: 100%; }
+            ul, .row, li, .project-entry, .skills-list div, header {
+                break-inside: avoid;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="page">
 
-    <!-- ════════════════════════════════════════════════════ HEADER -->
-    <header class="header">
-      <h1>Shravan Deb</h1>
-      <div class="title">AI/ML Engineer</div>
-      <nav class="contact" aria-label="Contact information">
-        <a href="mailto:shravan@email.com" aria-label="Email">
-          <!-- Mail icon -->
-          <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-          shravan@email.com
-        </a>
-        <span class="sep" aria-hidden="true">|</span>
-        <a href="tel:+919876543210" aria-label="Phone">
-          <!-- Phone icon -->
-          <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-          +91 98765 43210
-        </a>
-        <span class="sep" aria-hidden="true">|</span>
-        <a href="https://linkedin.com/in/shravandeb" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile">
-          <!-- LinkedIn icon -->
-          <svg class="contact-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-          linkedin.com/in/shravandeb
-        </a>
-        <span class="sep" aria-hidden="true">|</span>
-        <a href="https://github.com/shravandeb" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile">
-          <!-- GitHub icon -->
-          <svg class="contact-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-          github.com/shravandeb
-        </a>
-      </nav>
+<div class="container">
+    <!-- Header -->
+    <header>
+        <h1>Shravan Kumar Deb</h1>
+        <div class="contact-info">
+            Assam Science and Technology University &nbsp;|&nbsp; <a href="mailto:shubhashish.shukla23b@iiitg.ac.in">shubhashish.shukla23b@iiitg.ac.in</a> &nbsp;|&nbsp; <a href="tel:+916307542454">+91 6307542454</a><br>
+            <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg class="contact-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a> &nbsp;|&nbsp; <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg class="contact-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg> GitHub</a>
+        </div>
     </header>
-    <hr class="rule">
 
-    <!-- ═══════════════════════════════════════════════════ PROFILE -->
-    <section class="section">
-      <h2 class="section-title">Profile</h2>
-      <p class="profile-text">
-        AI/ML engineer with 4+ years of experience building production systems
-        spanning real-time infrastructure, natural language processing, and
-        collaborative analytics. Specialized in deploying intelligent systems
-        at scale &mdash; from anomaly detection pipelines processing 12k
-        events/sec to virtual assistants serving 500+ daily users. Focused on
-        the intersection of machine learning, systems engineering, and developer
-        tooling.
-      </p>
-    </section>
+    <!-- Education Section -->
+    <div class="section-title">Education</div>
+    <div class="row">
+        <div class="left"><strong>Indian Institute of Information Technology Guwahati:</strong> B.Tech. in Computer Science and Engineering (CGPA: 9.17/10)</div>
+        <div class="right">2023 &ndash; 2027</div>
+    </div>
+    <div style="margin-top: 3px;">
+        <strong>Puranchandra Vidyaniketan, Kanpur:</strong> 12th (95.8%), 10th (89.9%)
+    </div>
 
-    <!-- ══════════════════════════════════════════════════ EXPERIENCE -->
-    <section class="section">
-      <h2 class="section-title">Experience</h2>
+    <!-- Skills Section -->
+    <div class="section-title">Skills</div>
+    <div class="skills-list">
+        <div><strong>Languages:</strong> C++, C, Java, Python, Golang, SQL</div>
+        <div><strong>Computer Science:</strong> Algorithms, Data Structures, Blockchain Technology, Neural Networks, Artificial Intelligence, Machine Learning, Operating Systems, Cloud Computing, Computer Networks, Quantum Computing</div>
+        <div><strong>Operating Systems:</strong> Linux (Ubuntu, Arch), Windows</div>
+        <div><strong>Development Tools:</strong> Git, GitHub, CMake, Gnuplot, ffmpeg</div>
+    </div>
 
-      <div class="entry">
-        <div class="entry-row">
-          <div class="entry-left">
-            <span class="entry-role">ML Engineer Intern</span>
-            <span class="entry-org">&mdash; SRM Embedded Research Lab</span>
-          </div>
-          <span class="entry-date">Jan 2025 &ndash; May 2025</span>
+    <!-- Experience Section -->
+    <div class="section-title">Experience</div>
+    <div class="row">
+        <div class="left"><strong>IIIT Guwahati &mdash; Semester VI Project</strong></div>
+        <div class="right">Jan 2026 &ndash; Present</div>
+    </div>
+    <ul>
+        <li>Currently studying and experimenting with <strong>QAOA</strong>-based pathfinding approaches for UAV navigation in simulated environments.</li>
+        <li>Analyzing baseline heuristic methods to understand potential improvements in trajectory efficiency and collision avoidance.</li>
+    </ul>
+
+    <div class="row">
+        <div class="left"><strong>IIIT Guwahati &mdash; Winter Intern</strong></div>
+        <div class="right">Dec 2025 &ndash; Present</div>
+    </div>
+    <ul>
+        <li>Contributed to the development of a distributed asset ledger in <strong>Golang</strong>, supporting concurrent operations across multiple simulated nodes.</li>
+        <li>Created the database layer to ensure data consistency and integrity under high-concurrency workloads.</li>
+    </ul>
+
+    <div class="row">
+        <div class="left"><strong>Google Developer Groups on Campus &mdash; Lead</strong></div>
+        <div class="right">Aug 2025 &ndash; Present</div>
+    </div>
+    <ul>
+        <li>Led the Google Developer Group on campus, engaging 100+ students through workshops and community events.</li>
+        <li>Conducted hands-on sessions on Git, GitHub, and Google Cloud, and co-organized a campus hackathon with strong participation.</li>
+    </ul>
+
+    <!-- Projects Section -->
+    <div class="section-title">Projects</div>
+    <div class="row">
+        <div class="left"><strong>Trajectory: A Retro 2D RPG Cross-Platform Game in Java</strong></div>
+        <div class="right project-links">
+            <a href="https://example.com" target="_blank" rel="noopener noreferrer" aria-label="Play Trajectory"><svg class="link-icon" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>Game</a> &nbsp;|&nbsp;
+            <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="Trajectory source code"><svg class="link-icon" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>Trajectory</a>
         </div>
-        <ul class="bullets">
-          <li>Designed and deployed a real-time anomaly detection pipeline using PyTorch and Redis Streams, processing 12k+ events/sec across distributed IoT sensors</li>
-          <li>Reduced false positive rate by 38% through custom ensemble architecture combining transformer encoders with statistical process control</li>
-          <li>Built internal CLI tooling in Go for model versioning and A/B deployment, adopted by 4 research teams within first month</li>
-          <li>Authored technical documentation and runbooks adopted as onboarding standard for incoming lab members</li>
-        </ul>
-      </div>
+    </div>
+    <ul>
+        <li>Built a cross-platform retro 2D RPG game with procedurally generated mazes and enemy pathfinding.</li>
+        <li>Designed all character sprites and tile textures from scratch, and packaged the game as a <strong>JAR</strong>.</li>
+    </ul>
 
-      <div class="entry">
-        <div class="entry-row">
-          <div class="entry-left">
-            <span class="entry-role">Frontend Developer</span>
-            <span class="entry-org">&mdash; SRM Tech Club</span>
-          </div>
-          <span class="entry-date">Aug 2023 &ndash; Dec 2023</span>
+    <div class="row">
+        <div class="left"><strong>OpenANN: Autoencoder Neural Network in C++</strong></div>
+        <div class="right project-links">
+            <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="OpenANN source code"><svg class="link-icon" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>OpenANN</a>
         </div>
-        <ul class="bullets">
-          <li>Shipped event portal with Next.js serving 2,000+ students across 3 major hackathons</li>
-          <li>Implemented real-time leaderboards via WebSockets, reducing perceived latency from 3s to under 200ms</li>
-          <li>Coordinated design handoff with 2 graphic designers, maintaining a component library used by 3 subsequent event teams</li>
-        </ul>
-      </div>
-    </section>
+    </div>
+    <ul>
+        <li>Implemented an autoencoder neural network from scratch in C++ to understand core machine learning fundamentals.</li>
+        <li>Wrote backpropagation and gradient descent logic for training the model.</li>
+    </ul>
 
-    <!-- ══════════════════════════════════════════════════ EDUCATION -->
-    <section class="section">
-      <h2 class="section-title">Education</h2>
-
-      <div class="entry">
-        <div class="entry-row">
-          <div class="entry-left">
-            <span class="entry-role">B.Tech Computer Science &mdash; AI &amp; Machine Learning</span>
-            <span class="entry-org">&mdash; SRM IST, Chennai</span>
-          </div>
-          <span class="entry-date">2022 &ndash; 2026</span>
+    <div class="row">
+        <div class="left"><strong>Boids: Flocking Simulation</strong></div>
+        <div class="right project-links">
+            <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="Boids source code"><svg class="link-icon" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>Boids</a>
         </div>
-        <ul class="bullets">
-          <li>CGPA: 8.5 / 10 &middot; Relevant coursework: Deep Learning, NLP, Computer Vision, Distributed Systems</li>
-          <li>Teaching Assistant for Machine Learning (CS6001), 2 semesters, 60+ students per section</li>
-        </ul>
-      </div>
-    </section>
+    </div>
+    <ul>
+        <li>Simulated flocking behavior using the Boids algorithm in C++.</li>
+        <li>Visualized group movement with Gnuplot and generated video output using ffmpeg.</li>
+    </ul>
 
-    <!-- ══════════════════════════════════════════════════ PROJECTS -->
-    <section class="section">
-      <h2 class="section-title">Projects</h2>
+    <!-- Coding Profiles Section -->
+    <div class="section-title">Coding Profiles</div>
+    <ul>
+        <li><a href="https://leetcode.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="LeetCode profile"><strong>LeetCode</strong></a></li>
+        <li><a href="https://codeforces.com/profile/yourusername" target="_blank" rel="noopener noreferrer" aria-label="CodeForces profile"><strong>CodeForces</strong></a></li>
+    </ul>
 
-      <div class="project-entry">
-        <div class="project-row">
-          <div class="project-left">
-            <span class="project-name">Kiran AI</span>
-            <span class="project-desc">&mdash; Multimodal virtual assistant for education</span>
-          </div>
-          <div class="project-links">
-            <a href="https://github.com/shravandeb/kiran-ai" target="_blank" rel="noopener noreferrer" aria-label="Kiran AI GitHub repository">
-              <svg class="project-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-              Code
-            </a>
-          </div>
-        </div>
-        <ul class="bullets">
-          <li>Built multimodal RAG pipeline combining vision and language models for contextual tutoring, serving 500+ daily active users</li>
-          <li>Deployed on AWS with auto-scaling inference, achieving sub-second response times across 10k+ monthly sessions</li>
-        </ul>
-      </div>
+    <!-- Team Work Experience Section -->
+    <div class="section-title">Team Work Experience</div>
+    <ul>
+        <li><strong>Event Management Head, Cultural Fest Yuvaan &apos;25:</strong> Managed promotional events that increased participation across major activities.</li>
+        <li><strong>Core Team Member, Innovation and Entrepreneurship Cell:</strong> Helped organize workshops and speaker sessions on startups and technology.</li>
+        <li><strong>Core Team Member, Tech Fest Entropy &apos;24:</strong> Coordinated &apos;Tech Hunt&apos;, one of the fest&apos;s largest events with 200+ participants.</li>
+        <li><strong>Volunteer, Yuvaan &apos;24 &amp; Entropy &apos;24:</strong> Assisted in event operations and logistics.</li>
+    </ul>
+</div>
 
-      <div class="project-entry">
-        <div class="project-row">
-          <div class="project-left">
-            <span class="project-name">Prism</span>
-            <span class="project-desc">&mdash; Real-time collaborative analytics dashboard</span>
-          </div>
-          <div class="project-links">
-            <a href="https://github.com/shravandeb/prism" target="_blank" rel="noopener noreferrer" aria-label="Prism GitHub repository">
-              <svg class="project-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-              Code
-            </a>
-            <a href="https://prism-demo.example.com" target="_blank" rel="noopener noreferrer" aria-label="Prism live demo">
-              <svg class="project-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-              Demo
-            </a>
-          </div>
-        </div>
-        <ul class="bullets">
-          <li>Full-stack collaborative analytics platform with WebSockets, custom query engine, and role-based access for team workspaces</li>
-          <li>Processed 100k+ data points in real-time with sub-200ms render updates using Redis caching and optimized chart rendering</li>
-        </ul>
-      </div>
-
-      <div class="project-entry">
-        <div class="project-row">
-          <div class="project-left">
-            <span class="project-name">DevMon</span>
-            <span class="project-desc">&mdash; Developer productivity monitoring CLI</span>
-          </div>
-          <div class="project-links">
-            <a href="https://github.com/shravandeb/devmon" target="_blank" rel="noopener noreferrer" aria-label="DevMon GitHub repository">
-              <svg class="project-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-              Code
-            </a>
-            <a href="https://devmon-docs.example.com" target="_blank" rel="noopener noreferrer" aria-label="DevMon documentation">
-              <svg class="project-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-              Docs
-            </a>
-          </div>
-        </div>
-        <ul class="bullets">
-          <li>Go-based CLI tool for tracking development metrics with terminal UI, exporting structured reports for team retrospectives</li>
-          <li>Integrated with GitHub API for automated PR velocity tracking and code review cycle time analysis</li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- ═══════════════════════════════════════════════════ SKILLS -->
-    <section class="section">
-      <h2 class="section-title">Skills</h2>
-      <div class="skills-grid">
-        <span class="skill-label">LANGUAGES</span>
-        <span class="skill-value">Python, Go, TypeScript, C/C++, SQL</span>
-        <span class="skill-label">BACKEND</span>
-        <span class="skill-value">Docker, Kubernetes, Prometheus, Grafana, FastAPI</span>
-        <span class="skill-label">CLOUD</span>
-        <span class="skill-value">AWS, GCP, Git, PostgreSQL, Redis, CI/CD</span>
-        <span class="skill-label">PRACTICES</span>
-        <span class="skill-value">MLOps, System Design, Real-time Data Pipelines, Technical Writing</span>
-      </div>
-    </section>
-
-    <!-- ══════════════════════════════════════════════════ LANGUAGES -->
-    <section class="section">
-      <h2 class="section-title">Languages</h2>
-      <div class="lang-grid">
-        <span class="lang-name">English</span>
-        <span class="lang-level">Fluent</span>
-        <span class="lang-name">Hindi</span>
-        <span class="lang-level">Native</span>
-        <span class="lang-name">Bengali</span>
-        <span class="lang-level">Native</span>
-        <span class="lang-name">Tamil</span>
-        <span class="lang-level">Conversational</span>
-      </div>
-    </section>
-
-  </div>
 </body>
 </html>
