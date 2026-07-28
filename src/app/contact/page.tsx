@@ -3,6 +3,7 @@ import NoiseOverlay from "@/components/noise-overlay";
 import ScrollProgress from "@/components/scroll-progress";
 import Nav from "@/components/nav";
 import Footer from "@/components/footer";
+import BackButton from "@/components/back-button";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -18,6 +19,7 @@ export default function ContactPage() {
 
       <main className="pt-32 pb-48">
         <div className="mx-auto max-w-[720px] px-6">
+          <BackButton />
           <span className="font-mono text-[0.7rem] font-semibold uppercase tracking-[0.12em] text-text-4 block mb-6">
             Contact
           </span>

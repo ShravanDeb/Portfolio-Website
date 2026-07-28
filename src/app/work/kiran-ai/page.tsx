@@ -4,6 +4,7 @@ import NoiseOverlay from "@/components/noise-overlay";
 import ScrollProgress from "@/components/scroll-progress";
 import Nav from "@/components/nav";
 import Footer from "@/components/footer";
+import BackButton from "@/components/back-button";
 
 export const metadata: Metadata = {
   title: "Kiran AI - Intelligent Virtual Assistant",
