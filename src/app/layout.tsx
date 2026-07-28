@@ -1,10 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { ThemeProvider } from "@/components/theme-provider";
-import { MagneticCursor } from "@/components/ui/magnetic-cursor";
-import SmoothScrollProvider from "@/components/smooth-scroll-provider";
-import Preloader from "@/components/preloader";
-import CinematicVignette from "@/components/cinematic-vignette";
+import ClientShell from "@/components/client-shell";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -72,21 +68,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="min-h-full bg-background text-foreground cursor-none">
-        <Preloader />
-        <CinematicVignette />
-        <ThemeProvider>
-          <SmoothScrollProvider>
-            <MagneticCursor
-              magneticFactor={0.55}
-              blendMode="exclusion"
-              cursorSize={40}
-              contrastBoost={1.5}
-              disableOnTouch
-            >
-              {children}
-            </MagneticCursor>
-          </SmoothScrollProvider>
-        </ThemeProvider>
+        <ClientShell>{children}</ClientShell>
       </body>
     </html>
   );
