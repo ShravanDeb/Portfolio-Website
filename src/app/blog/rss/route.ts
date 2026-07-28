@@ -14,21 +14,21 @@ export async function GET() {
 
   const items = [
     {
-      title: "DevMon — Real-time System Monitoring",
+      title: "DevMon: Developer Credential Platform",
       link: `${BASE_URL}/work/devmon`,
       description:
-        "Real-time system monitoring and alerting platform built for modern infrastructure. Python, Go, Prometheus, Grafana, Kubernetes.",
+        "A collectible credential card scored from your real GitHub activity. Next.js, TypeScript, Supabase, Redis.",
       pubDate: now,
     },
     {
-      title: "Kiran AI — Intelligent Virtual Assistant",
+      title: "Kiran AI: Intelligent Virtual Assistant",
       link: `${BASE_URL}/work/kiran-ai`,
       description:
         "Intelligent virtual assistant powered by custom-trained language models. Python, PyTorch, FastAPI, React, PostgreSQL.",
       pubDate: now,
     },
     {
-      title: "Prism — Collaborative Analytics",
+      title: "Prism: Collaborative Analytics",
       link: `${BASE_URL}/work/prism`,
       description:
         "Collaborative analytics platform that turns raw data into actionable insights. Next.js, TypeScript, DuckDB, Tailwind CSS.",

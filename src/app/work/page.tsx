@@ -14,8 +14,8 @@ const projects = [
   {
     number: "01",
     title: "DevMon",
-    description: "Real-time system monitoring and alerting platform.",
-    tags: ["Python", "Go", "Prometheus", "Grafana"],
+    description: "A collectible credential card scored from your real GitHub activity.",
+    tags: ["Next.js", "TypeScript", "Supabase", "Redis"],
     href: "/work/devmon",
     imageAlt: "DevMon",
   },

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
@@ -20,6 +21,7 @@ interface ProjectChapterProps {
   layout: "image-left" | "image-right" | "full-width";
   isFlagship?: boolean;
   annotation?: string;
+  iframeSrc?: string;
 }
 
 export default function ProjectChapter({
@@ -32,7 +34,8 @@ export default function ProjectChapter({
   imageAlt,
   layout,
   isFlagship = false,
-  annotation = "[STATUS: PROD // VERIF: OK]",
+  annotation,
+  iframeSrc,
 }: ProjectChapterProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
@@ -54,8 +57,9 @@ export default function ProjectChapter({
   }, []);
 
   const handleMouseLeave = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    e.currentTarget.style.transform = "perspective(800px) rotateX(0deg) rotateY(0deg)";
-    e.currentTarget.style.transition = "transform 0.5s cubic-bezier(0.23, 1, 0.32, 1)";
+    const target = e.currentTarget;
+    target.style.transform = "perspective(800px) rotateX(0deg) rotateY(0deg)";
+    target.style.transition = "transform 0.5s cubic-bezier(0.23, 1, 0.32, 1)";
 
     if (imageInnerRef.current) {
       imageInnerRef.current.style.transform = "translate(0px, 0px) scale(1)";
@@ -63,7 +67,7 @@ export default function ProjectChapter({
     }
 
     setTimeout(() => {
-      e.currentTarget.style.transition = "";
+      target.style.transition = "";
       if (imageInnerRef.current) {
         imageInnerRef.current.style.transition = "";
       }
@@ -233,9 +237,27 @@ export default function ProjectChapter({
         className="relative aspect-[4/3] md:aspect-[16/10] bg-surface-2 group"
         style={{ willChange: "transform" }}
       >
-        <div className="absolute inset-0 flex items-center justify-center text-text-4 font-mono text-xs md:text-sm uppercase tracking-widest transition-opacity duration-500 group-hover:opacity-50">
-          {imageAlt}
-        </div>
+        {iframeSrc ? (
+          <iframe
+            src={iframeSrc}
+            title={imageAlt}
+            className="absolute inset-0 w-full h-full border-0 pointer-events-none"
+            loading="lazy"
+            sandbox="allow-scripts allow-same-origin"
+          />
+        ) : imageSrc ? (
+          <Image
+            src={imageSrc}
+            alt={imageAlt}
+            fill
+            className="object-cover transition-opacity duration-500 group-hover:opacity-80"
+            sizes="(max-width: 768px) 100vw, 50vw"
+          />
+        ) : (
+          <div className="absolute inset-0 flex items-center justify-center text-text-4 font-mono text-xs md:text-sm uppercase tracking-widest transition-opacity duration-500 group-hover:opacity-50">
+            {imageAlt}
+          </div>
+        )}
         <div className="absolute inset-0 border border-border-hi opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500" />
       </div>
       <ShineBorder shineColor={["#3f3f46", "#fafafa"]} duration={10} borderWidth={1} />

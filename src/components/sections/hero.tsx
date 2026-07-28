@@ -263,7 +263,7 @@ export default function Hero() {
           </div>
           <h1
             ref={nameRef}
-            className="mb-8 text-[clamp(3.5rem,10vw,9rem)] font-medium leading-[0.88] tracking-[-0.04em] text-text-1 overflow-hidden"
+            className="mb-8 text-[clamp(3rem,9vw,8rem)] font-medium leading-[0.88] tracking-[-0.04em] text-text-1 overflow-hidden"
           >
             Shravan Deb
           </h1>
