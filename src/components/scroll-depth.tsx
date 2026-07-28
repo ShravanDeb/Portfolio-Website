@@ -37,33 +37,19 @@ export default function ScrollDepth({ children, className = "" }: ScrollDepthPro
         ctx = gsap.context(() => {
           gsap.fromTo(
             el,
-            { scale: 0.97, filter: "blur(2px)", opacity: 0.7 },
+            { scale: 0.97, opacity: 0 },
             {
               scale: 1,
-              filter: "blur(0px)",
               opacity: 1,
               duration: 0.8,
               ease: "power2.out",
               scrollTrigger: {
                 trigger: el,
                 start: "top 92%",
-                toggleActions: "play none none reverse",
+                toggleActions: "play none none none",
               },
             }
           );
-
-          gsap.to(el, {
-            scale: 0.985,
-            filter: "blur(1.5px)",
-            opacity: 0.85,
-            ease: "none",
-            scrollTrigger: {
-              trigger: el,
-              start: "bottom 60%",
-              end: "bottom top",
-              scrub: 0.5,
-            },
-          });
         });
       }
     );
@@ -75,7 +61,7 @@ export default function ScrollDepth({ children, className = "" }: ScrollDepthPro
   }, []);
 
   return (
-    <div ref={ref} className={className} style={{ willChange: "transform, filter" }}>
+    <div ref={ref} className={className} style={{ willChange: "transform, opacity" }}>
       {children}
     </div>
   );

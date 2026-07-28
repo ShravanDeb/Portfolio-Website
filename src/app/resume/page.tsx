@@ -5,313 +5,342 @@ import React from "react";
 export const metadata: Metadata = {
   title: "Resume — Shravan Deb",
   description:
-    "Resume of Shravan Deb — AI/ML engineer, systems builder, product developer.",
+    "Resume of Shravan Deb — AI/ML Engineer, Systems Builder, and Software Developer.",
 };
 
+// ── ARCHITECTURAL STYLE SYSTEM ──────────────────────────────────────────
 const S = {
-  page: {
-    fontFamily: "Georgia, 'Times New Roman', Times, serif",
-    width: "8.5in",
-    minHeight: "11in",
-    boxSizing: "border-box" as const,
-    background: "#fff",
-    color: "#111",
-    margin: "20px auto",
-    padding: "0.5in 0.6in",
-    fontSize: "10pt",
-    lineHeight: "1.4",
-    WebkitFontSmoothing: "antialiased",
-    boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
+  container: {
+    minHeight: "100vh",
+    background: "#f8fafc",
+    padding: "32px 16px",
+    display: "flex",
+    justifyContent: "center",
   } as React.CSSProperties,
 
+  page: {
+    // Modern editorial sans-serif stack; zero external font-loading shifts during print
+    fontFamily:
+      '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+    width: "8.5in",
+    minHeight: "11in",
+    maxHeight: "11in",
+    boxSizing: "border-box" as const,
+    background: "#ffffff",
+    color: "#0f172a", // Deep charcoal for superior readability over harsh #000
+    padding: "0.36in 0.45in",
+    fontSize: "9.5pt",
+    lineHeight: "1.4",
+    WebkitFontSmoothing: "antialiased",
+    boxShadow: "0 20px 25px -5px rgba(0,0,0,0.08), 0 8px 10px -6px rgba(0,0,0,0.04)",
+    margin: "0 auto",
+    position: "relative" as const,
+  } as React.CSSProperties,
+
+  // ── Header Typography
   header: {
     textAlign: "center" as const,
-    marginBottom: "12pt",
+    marginBottom: "10pt",
   },
   headerName: {
-    fontSize: "20pt",
-    fontWeight: 700,
-    margin: "0 0 4pt 0",
-    letterSpacing: "-0.3px",
-    color: "#000",
+    fontSize: "24pt",
+    fontWeight: 800,
+    margin: "0 0 2pt 0",
+    letterSpacing: "-0.6px",
+    color: "#0f172a",
+    lineHeight: "1.05",
   },
   headerTitle: {
-    fontSize: "12pt",
-    fontWeight: 400,
-    margin: "0 0 6pt 0",
-    color: "#333",
+    fontSize: "11pt",
+    fontWeight: 600,
+    margin: "0 0 5pt 0",
+    color: "#1e40af", // Deep editorial indigo accent
+    letterSpacing: "0.5px",
+    textTransform: "uppercase" as const,
   },
   headerContact: {
-    fontSize: "9.5pt",
-    lineHeight: "1.5",
-    color: "#444",
+    fontSize: "8.5pt",
+    lineHeight: "1.4",
+    color: "#475569",
+    fontWeight: 500,
   },
 
+  // ── Sections & Dividers
   section: {
-    marginBottom: "11pt",
+    marginBottom: "8.5pt",
   },
   sectionHeader: {
-    fontSize: "10.5pt",
-    fontWeight: 700,
-    letterSpacing: "0.06em",
-    textTransform: "uppercase" as const,
-    color: "#000",
-    borderBottom: "1px solid #000",
-    paddingBottom: "2pt",
-    marginBottom: "6pt",
-  },
-
-  detailsGrid: {
-    display: "grid",
-    gridTemplateColumns: "1fr 1fr",
-    gap: "4pt 20pt",
     fontSize: "9.5pt",
-    background: "#f8f9fa",
-    padding: "6pt 8pt",
-    borderRadius: "4px",
-    marginBottom: "12pt",
-  },
-  detailsItem: {
-    display: "flex",
-    justifyContent: "space-between",
-  },
-  detailsLabel: {
-    fontWeight: 600,
-    color: "#444",
+    fontWeight: 700,
+    letterSpacing: "0.09em",
+    textTransform: "uppercase" as const,
+    color: "#0f172a",
+    borderBottom: "1.5px solid #0f172a",
+    paddingBottom: "1.5pt",
+    marginBottom: "5pt",
   },
 
+  // ── Professional Summary
   profileText: {
-    fontSize: "10pt",
+    fontSize: "9.2pt",
     lineHeight: "1.45",
     margin: 0,
+    color: "#1e293b",
     textAlign: "justify" as const,
   },
 
+  // ── Work & Education Entries
   expEntry: {
-    marginBottom: "10pt",
+    marginBottom: "6.5pt",
   },
   expTopLine: {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "baseline",
-    marginBottom: "1pt",
+    marginBottom: "0.5pt",
   },
   expRole: {
-    fontSize: "10.5pt",
+    fontSize: "10pt",
     fontWeight: 700,
-    color: "#000",
+    color: "#0f172a",
   },
   expDate: {
-    fontSize: "9.5pt",
+    fontSize: "8.5pt",
     fontWeight: 600,
-    color: "#333",
+    color: "#475569",
+    letterSpacing: "0.2px",
   },
   expSubLine: {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "baseline",
-    marginBottom: "4pt",
+    marginBottom: "2.5pt",
   },
   expOrg: {
-    fontSize: "10pt",
-    fontStyle: "italic",
-    color: "#333",
+    fontSize: "9.2pt",
+    fontWeight: 600,
+    color: "#1e40af", // Accent branding mapped to organizations
   },
   expLocation: {
-    fontSize: "9.5pt",
-    color: "#555",
+    fontSize: "8.5pt",
+    fontStyle: "italic",
+    color: "#64748b",
   },
+
+  // ── Scannable Bullets
   bulletList: {
     margin: "0",
     paddingLeft: "14pt",
+    color: "#1e293b",
   },
   bullet: {
-    fontSize: "9.5pt",
-    lineHeight: "1.4",
-    marginBottom: "2.5pt",
+    fontSize: "9pt",
+    lineHeight: "1.38",
+    marginBottom: "2pt",
+    paddingLeft: "2pt",
   },
 
+  // ── Categorized Skills & Meta
   skillRow: {
-    fontSize: "9.5pt",
-    lineHeight: "1.5",
-    margin: "0 0 3pt 0",
+    fontSize: "9pt",
+    lineHeight: "1.42",
+    margin: "0 0 2pt 0",
+    color: "#1e293b",
   },
   skillLabel: {
     fontWeight: 700,
-    color: "#000",
-  },
-
-  langGrid: {
-    display: "grid",
-    gridTemplateColumns: "repeat(4, 1fr)",
-    gap: "8pt",
-    fontSize: "9.5pt",
-  },
-  langItem: {
-    display: "flex",
-    flexDirection: "column" as const,
+    color: "#0f172a",
+    display: "inline-block",
+    width: "115px",
   },
 };
 
 export default function ResumePage() {
   return (
     <>
-      {/* Screen-only print button */}
+      {/* Screen-only Print Controls */}
       <div className="no-print" style={{ position: "fixed", top: "16px", right: "16px", zIndex: 100 }}>
         <PrintButton />
       </div>
 
-      <div className="resume-page" style={S.page}>
-        {/* ── HEADER ─────────────────────────────────────────── */}
-        <div style={S.header}>
-          <h1 style={S.headerName}>Shravan Deb</h1>
-          <p style={S.headerTitle}>AI/ML Engineer</p>
-          <div style={S.headerContact}>
-            <span>123 Main Street, Chennai, Tamil Nadu</span> &bull;{" "}
-            <span>+91 98765 43210</span> &bull;{" "}
-            <span>shravan@email.com</span>
-            <br />
-            <span>linkedin.com/in/shravandeb</span> &bull;{" "}
-            <span>github.com/shravandeb</span>
-          </div>
-        </div>
-
-        {/* ── PERSONAL DETAILS ──────────────────────────────── */}
-        <div style={S.detailsGrid}>
-          <div style={S.detailsItem}>
-            <span style={S.detailsLabel}>Born:</span>
-            <span>15 March 2004 (Chennai, India)</span>
-          </div>
-          <div style={S.detailsItem}>
-            <span style={S.detailsLabel}>Marital Status:</span>
-            <span>Single</span>
-          </div>
-          <div style={S.detailsItem}>
-            <span style={S.detailsLabel}>Nationality:</span>
-            <span>Indian</span>
-          </div>
-          <div style={S.detailsItem}>
-            <span style={S.detailsLabel}>Gender:</span>
-            <span>Male</span>
-          </div>
-        </div>
-
-        {/* ── PROFILE ───────────────────────────────────────── */}
-        <div style={S.section}>
-          <div style={S.sectionHeader}>Profile</div>
-          <p style={S.profileText}>
-            AI/ML engineer with 4+ years of experience building production systems spanning real-time infrastructure, natural language processing, and collaborative analytics. Specialized in deploying intelligent systems at scale — from anomaly detection pipelines processing 12k events/sec to virtual assistants serving 500+ daily users. Focused on the intersection of machine learning, systems engineering, and developer tooling.
-          </p>
-        </div>
-
-        {/* ── EXPERIENCE ────────────────────────────────────── */}
-        <div style={S.section}>
-          <div style={S.sectionHeader}>Experience</div>
+      <div style={S.container} className="resume-container">
+        <main className="resume-page" style={S.page}>
           
-          {/* Role 1 */}
-          <div style={S.expEntry}>
-            <div style={S.expTopLine}>
-              <span style={S.expRole}>ML Engineer Intern</span>
-              <span style={S.expDate}>Jan 2025 – May 2025</span>
+          {/* ── HEADER ─────────────────────────────────────────── */}
+          <header style={S.header}>
+            <h1 style={S.headerName}>Shravan Deb</h1>
+            <p style={S.headerTitle}>AI/ML Engineer &amp; Systems Builder</p>
+            <div style={S.headerContact}>
+              <span>Chennai, Tamil Nadu</span> &bull;{" "}
+              <span>+91 98765 43210</span> &bull;{" "}
+              <span>shravan@email.com</span>
+              <br />
+              <span>
+                <strong>LinkedIn:</strong> linkedin.com/in/shravandeb
+              </span>{" "}
+              &bull;{" "}
+              <span>
+                <strong>GitHub:</strong> github.com/shravandeb
+              </span>{" "}
+              &bull;{" "}
+              <span>
+                <strong>Portfolio:</strong> shravandeb.dev
+              </span>
             </div>
-            <div style={S.expSubLine}>
-              <span style={S.expOrg}>SRM Embedded Research Lab</span>
-              <span style={S.expLocation}>Chennai, India</span>
-            </div>
-            <ul style={S.bulletList}>
-              <li style={S.bullet}>Designed and deployed a real-time anomaly detection pipeline using PyTorch and Redis Streams, processing 12k+ events/sec across distributed IoT sensors.</li>
-              <li style={S.bullet}>Reduced false positive rate by 38% through custom ensemble architecture combining transformer encoders with statistical process control.</li>
-              <li style={S.bullet}>Built internal CLI tooling in Go for model versioning and A/B deployment, adopted by 4 research teams within first month.</li>
-              <li style={S.bullet}>Authored technical documentation and runbooks adopted as onboarding standard for incoming lab members.</li>
-            </ul>
-          </div>
+          </header>
 
-          {/* Role 2 */}
-          <div style={{ ...S.expEntry, marginBottom: 0 }}>
-            <div style={S.expTopLine}>
-              <span style={S.expRole}>Frontend Developer</span>
-              <span style={S.expDate}>Aug 2023 – Dec 2023</span>
-            </div>
-            <div style={S.expSubLine}>
-              <span style={S.expOrg}>SRM Tech Club</span>
-              <span style={S.expLocation}>Chennai, India</span>
-            </div>
-            <ul style={S.bulletList}>
-              <li style={S.bullet}>Shipped event portal with Next.js serving 2,000+ students across 3 major hackathons.</li>
-              <li style={S.bullet}>Implemented real-time leaderboards via WebSockets, reducing perceived latency from 3s to under 200ms.</li>
-              <li style={S.bullet}>Coordinated design handoff with 2 graphic designers, maintaining a component library used by 3 subsequent event teams.</li>
-            </ul>
-          </div>
-        </div>
+          {/* ── PROFESSIONAL SUMMARY ───────────────────────────── */}
+          <section style={S.section}>
+            <h2 style={S.sectionHeader}>Professional Summary</h2>
+            <p style={S.profileText}>
+              AI/ML Engineer specializing in high-throughput backend infrastructure, natural language processing, and scalable real-time systems. Proven track record deploying intelligent production pipelines — from distributed anomaly detection processing <strong>12k+ events/sec</strong> to full-stack platforms serving thousands of active users. Strong focus on the intersection of <strong>machine learning architectures</strong>, <strong>distributed systems</strong>, and developer tooling.
+            </p>
+          </section>
 
-        {/* ── EDUCATION ─────────────────────────────────────── */}
-        <div style={S.section}>
-          <div style={S.sectionHeader}>Education</div>
-          <div style={{ ...S.expEntry, marginBottom: 0 }}>
-            <div style={S.expTopLine}>
-              <span style={S.expRole}>B.Tech Computer Science — AI &amp; Machine Learning</span>
-              <span style={S.expDate}>2022 – 2026</span>
-            </div>
-            <div style={S.expSubLine}>
-              <span style={S.expOrg}>SRM IST</span>
-              <span style={S.expLocation}>Chennai, India</span>
-            </div>
-            <ul style={S.bulletList}>
-              <li style={S.bullet}><strong>CGPA:</strong> 8.5 / 10 &bull; <strong>Coursework:</strong> Deep Learning, NLP, Computer Vision, Distributed Systems</li>
-              <li style={S.bullet}>Teaching Assistant for Machine Learning (CS6001), 2 semesters, 60+ students per section.</li>
-            </ul>
-          </div>
-        </div>
+          {/* ── EXPERIENCE ────────────────────────────────────── */}
+          <section style={S.section}>
+            <h2 style={S.sectionHeader}>Experience</h2>
 
-        {/* ── SKILLS ────────────────────────────────────────── */}
-        <div style={S.section}>
-          <div style={S.sectionHeader}>Skills</div>
-          <p style={S.skillRow}><span style={S.skillLabel}>Languages: </span>Python, Go, TypeScript, C/C++, SQL</p>
-          <p style={S.skillRow}><span style={S.skillLabel}>Backend &amp; Infra: </span>Docker, Kubernetes, Prometheus, Grafana, FastAPI</p>
-          <p style={S.skillRow}><span style={S.skillLabel}>Cloud &amp; Tooling: </span>AWS, GCP, Git, PostgreSQL, Redis, CI/CD</p>
-          <p style={S.skillRow}><span style={S.skillLabel}>Practices: </span>MLOps, System Design, Real-time Data Pipelines, Technical Writing</p>
-        </div>
+            <div style={S.expEntry}>
+              <div style={S.expTopLine}>
+                <span style={S.expRole}>ML Engineer Intern</span>
+                <span style={S.expDate}>Jan 2025 – May 2025</span>
+              </div>
+              <div style={S.expSubLine}>
+                <span style={S.expOrg}>SRM Embedded Research Lab</span>
+                <span style={S.expLocation}>Chennai, India</span>
+              </div>
+              <ul style={S.bulletList}>
+                <li style={S.bullet}>
+                  Designed and deployed a real-time anomaly detection pipeline using <strong>PyTorch</strong> and <strong>Redis Streams</strong>, successfully processing <strong>12k+ events/sec</strong> across distributed IoT telemetry sensors.
+                </li>
+                <li style={S.bullet}>
+                  Reduced false-positive rates by <strong>38%</strong> through a custom ensemble architecture combining <strong>transformer encoders</strong> with statistical process control algorithms.
+                </li>
+                <li style={S.bullet}>
+                  Built internal CLI developer tooling in <strong>Go</strong> for automated model versioning and A/B testing, adopted by <strong>4 concurrent research teams</strong> within the first month of release.
+                </li>
+                <li style={S.bullet}>
+                  Authored comprehensive system architecture runbooks and technical documentation adopted as the standardized onboarding protocol for incoming laboratory engineers.
+                </li>
+              </ul>
+            </div>
 
-        {/* ── LANGUAGES ─────────────────────────────────────── */}
-        <div style={{ ...S.section, marginBottom: 0 }}>
-          <div style={S.sectionHeader}>Languages</div>
-          <div style={S.langGrid}>
-            <div style={S.langItem}>
-              <strong>English</strong>
-              <span style={{ color: "#555" }}>Fluent</span>
+            <div style={{ ...S.expEntry, marginBottom: 0 }}>
+              <div style={S.expTopLine}>
+                <span style={S.expRole}>Frontend Developer</span>
+                <span style={S.expDate}>Aug 2023 – Dec 2023</span>
+              </div>
+              <div style={S.expSubLine}>
+                <span style={S.expOrg}>SRM Tech Club</span>
+                <span style={S.expLocation}>Chennai, India</span>
+              </div>
+              <ul style={S.bulletList}>
+                <li style={S.bullet}>
+                  Shipped a high-concurrency event management portal using <strong>Next.js</strong> and <strong>TypeScript</strong>, reliably serving <strong>2,000+ students</strong> across 3 major university hackathons.
+                </li>
+                <li style={S.bullet}>
+                  Implemented real-time live competition leaderboards via <strong>WebSockets</strong>, reducing perceived data latency from <strong>3 seconds down to under 200ms</strong>.
+                </li>
+                <li style={S.bullet}>
+                  Designed a reusable, highly accessible UI component library styled with modern utility CSS, subsequently adopted to accelerate frontend delivery for 3 future event teams.
+                </li>
+              </ul>
             </div>
-            <div style={S.langItem}>
-              <strong>Hindi</strong>
-              <span style={{ color: "#555" }}>Native</span>
+          </section>
+
+          {/* ── EDUCATION ─────────────────────────────────────── */}
+          <section style={S.section}>
+            <h2 style={S.sectionHeader}>Education</h2>
+            <div style={{ ...S.expEntry, marginBottom: 0 }}>
+              <div style={S.expTopLine}>
+                <span style={S.expRole}>B.Tech in Computer Science &amp; Engineering (AI &amp; Machine Learning)</span>
+                <span style={S.expDate}>2022 – 2026</span>
+              </div>
+              <div style={S.expSubLine}>
+                <span style={S.expOrg}>SRM Institute of Science and Technology (SRM IST)</span>
+                <span style={S.expLocation}>Chennai, India</span>
+              </div>
+              <ul style={S.bulletList}>
+                <li style={S.bullet}>
+                  <strong>Academic Standing:</strong> CGPA: <strong>8.5 / 10.0</strong> &bull; <strong>Core Specializations:</strong> Deep Learning, NLP, Computer Vision, Distributed Systems, Data Structures &amp; Algorithms.
+                </li>
+                <li style={S.bullet}>
+                  <strong>Leadership &amp; Teaching:</strong> Teaching Assistant for Machine Learning (CS6001) across 2 academic semesters, mentoring and grading <strong>60+ undergraduate students</strong> per section.
+                </li>
+              </ul>
             </div>
-            <div style={S.langItem}>
-              <strong>Bengali</strong>
-              <span style={{ color: "#555" }}>Native</span>
-            </div>
-            <div style={S.langItem}>
-              <strong>Tamil</strong>
-              <span style={{ color: "#555" }}>Conversational</span>
-            </div>
-          </div>
-        </div>
+          </section>
+
+          {/* ── TECHNICAL SKILLS ──────────────────────────────── */}
+          <section style={S.section}>
+            <h2 style={S.sectionHeader}>Technical Skills</h2>
+            <p style={S.skillRow}>
+              <span style={S.skillLabel}>Languages:</span> Python, Go, TypeScript, JavaScript, C/C++, SQL, HTML/CSS
+            </p>
+            <p style={S.skillRow}>
+              <span style={S.skillLabel}>ML &amp; AI:</span> PyTorch, TensorFlow, Scikit-Learn, NLP, Transformers, OpenCV, Pandas, NumPy
+            </p>
+            <p style={S.skillRow}>
+              <span style={S.skillLabel}>Backend &amp; Web:</span> FastAPI, Next.js, React, Node.js, Express, REST APIs, WebSockets, Tailwind CSS
+            </p>
+            <p style={S.skillRow}>
+              <span style={S.skillLabel}>Cloud &amp; Infra:</span> Docker, Kubernetes, AWS, GCP, Git, CI/CD Pipelines, Prometheus, Grafana
+            </p>
+            <p style={S.skillRow}>
+              <span style={S.skillLabel}>Databases:</span> PostgreSQL, MySQL, Redis, MongoDB, Firebase
+            </p>
+          </section>
+
+          {/* ── CERTIFICATIONS & LANGUAGES ────────────────────── */}
+          <section style={{ ...S.section, marginBottom: 0 }}>
+            <h2 style={S.sectionHeader}>Certifications &amp; Languages</h2>
+            <p style={S.skillRow}>
+              <span style={S.skillLabel}>Certifications:</span> Basics of Machine Learning Algorithms (UniAthena / Cambridge International Qualifications, UK — <strong>92% Score</strong>)
+            </p>
+            <p style={S.skillRow}>
+              <span style={S.skillLabel}>Spoken:</span> English (Professional Proficiency), Hindi (Native), Bengali (Native), Tamil (Conversational)
+            </p>
+          </section>
+
+        </main>
       </div>
 
-      {/* Print + page styles */}
+      {/* ── BULLETPROOF PRINT STYLES ────────────────────────── */}
       <style dangerouslySetInnerHTML={{ __html: `
-        body { background: #f0f2f5; margin: 0; padding: 0; }
         @media print {
-          body { background: white !important; }
-          .no-print { display: none !important; }
-          .resume-page { 
-            box-shadow: none !important; 
-            margin: 0 !important; 
+          @page {
+            size: letter portrait;
+            margin: 0;
+          }
+          html, body {
+            background: #ffffff !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+          }
+          .no-print {
+            display: none !important;
+          }
+          .resume-container {
+            background: transparent !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            display: block !important;
+          }
+          .resume-page {
             width: 8.5in !important;
             height: 11in !important;
-            min-height: 11in !important;
-            padding: 0.5in 0.6in !important;
-            overflow: hidden !important;
+            max-height: 11in !important;
+            margin: 0 !important;
+            padding: 0.36in 0.45in !important;
+            box-shadow: none !important;
+            border: none !important;
+            overflow: visible !important;
+            page-break-after: avoid !important;
+            page-break-inside: avoid !important;
           }
-          @page { size: letter portrait; margin: 0; }
         }
       `}} />
     </>
