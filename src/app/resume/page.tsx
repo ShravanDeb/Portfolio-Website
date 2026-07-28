@@ -88,7 +88,12 @@ export default function ResumePage() {
         }
 
         @media print {
-          html, body { padding: 0; margin: 0; background: #fff !important; color: #000 !important; }
+          html, body {
+            padding: 0 !important; margin: 0 !important;
+            background: #fff !important; background-color: #fff !important;
+            color: #000 !important; min-height: 0 !important;
+            height: auto !important; overflow: hidden !important;
+          }
           .container { max-width: 100%; }
           .toolbar { display: none !important; }
           .magnetic-cursor { display: none !important; }
