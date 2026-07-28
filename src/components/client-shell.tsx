@@ -16,7 +16,17 @@ export default function ClientShell({
   const isResume = pathname === "/resume";
 
   if (isResume) {
-    return <>{children}</>;
+    return (
+      <MagneticCursor
+        magneticFactor={0.55}
+        blendMode="exclusion"
+        cursorSize={40}
+        contrastBoost={1.5}
+        disableOnTouch
+      >
+        {children}
+      </MagneticCursor>
+    );
   }
 
   return (

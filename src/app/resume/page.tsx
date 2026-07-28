@@ -88,9 +88,10 @@ export default function ResumePage() {
         }
 
         @media print {
-          body { padding: 0; margin: 0; background: #fff; }
+          html, body { padding: 0; margin: 0; background: #fff !important; color: #000 !important; }
           .container { max-width: 100%; }
-          .toolbar { display: none; }
+          .toolbar { display: none !important; }
+          .magnetic-cursor { display: none !important; }
           ul, .row, li, .skills-list div, header { break-inside: avoid; }
         }
       `}</style>
