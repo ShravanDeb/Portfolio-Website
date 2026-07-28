@@ -15,11 +15,13 @@ const NAV_LINKS = [
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
+  const [navHidden, setNavHidden] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const { theme, setTheme } = useTheme();
 
   const menuTlRef = useRef<gsap.core.Timeline | null>(null);
   const isAnimating = useRef(false);
+  const lastScrollY = useRef(0);
 
   const overlayRef = useRef<HTMLDivElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
@@ -29,10 +31,25 @@ export default function Nav() {
   const closeLabelRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 100);
+    const onScroll = () => {
+      const y = window.scrollY;
+      setScrolled(y > 100);
+
+      if (menuOpen) {
+        lastScrollY.current = y;
+        return;
+      }
+
+      if (y > 200) {
+        setNavHidden(y > lastScrollY.current);
+      } else {
+        setNavHidden(false);
+      }
+      lastScrollY.current = y;
+    };
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [menuOpen]);
 
   // Build GSAP timeline once
   useEffect(() => {
@@ -122,11 +139,11 @@ export default function Nav() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-[background-color,border-color] duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-[background-color,border-color,transform] duration-300 [cubic-bezier(0.23,1,0.32,1)] ${
         scrolled
           ? "border-b border-border bg-background/80 backdrop-blur-sm"
           : "border-b border-transparent"
-      }`}
+      } ${navHidden ? "-translate-y-full" : "translate-y-0"}`}
     >
       <div className="mx-auto flex h-14 max-w-[1100px] items-center justify-between px-6">
         {/* ── Logo ── */}

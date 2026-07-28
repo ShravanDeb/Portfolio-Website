@@ -9,6 +9,8 @@ import JourneyTimeline from "@/components/sections/journey-timeline";
 import About from "@/components/sections/about";
 import InvertedContact from "@/components/sections/contact";
 import Footer from "@/components/footer";
+import SceneDivider from "@/components/scene-divider";
+import ScrollDepth from "@/components/scroll-depth";
 
 const projects = [
   {
@@ -60,16 +62,40 @@ export default function Home() {
       <main>
         <Hero />
 
-        <section className="py-20 md:py-48 space-y-32 md:space-y-48">
-          {projects.map((project) => (
-            <ProjectChapter key={project.number} {...project} />
-          ))}
-        </section>
+        <SceneDivider />
 
-        <SkillMarquee />
-        <GlobeSection />
+        <ScrollDepth>
+          <section className="py-20 md:py-48 space-y-32 md:space-y-48">
+            {projects.map((project) => (
+              <ProjectChapter key={project.number} {...project} />
+            ))}
+          </section>
+        </ScrollDepth>
+
+        <SceneDivider />
+
+        <ScrollDepth>
+          <SkillMarquee />
+        </ScrollDepth>
+
+        <SceneDivider />
+
+        <ScrollDepth>
+          <GlobeSection />
+        </ScrollDepth>
+
+        <SceneDivider />
+
         <JourneyTimeline />
-        <About />
+
+        <SceneDivider />
+
+        <ScrollDepth>
+          <About />
+        </ScrollDepth>
+
+        <SceneDivider height="30vh" />
+
         <InvertedContact />
       </main>
 

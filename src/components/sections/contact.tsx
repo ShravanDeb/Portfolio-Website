@@ -139,6 +139,17 @@ export default function InvertedContact() {
           </div>
         </ScrollReveal>
       </div>
+
+      <div className="h-[40vh] flex items-center justify-center">
+        <span
+          className="font-mono text-sm text-text-4"
+          style={{
+            animation: "blink 1.2s steps(1) infinite",
+          }}
+        >
+          █
+        </span>
+      </div>
     </section>
   );
 }

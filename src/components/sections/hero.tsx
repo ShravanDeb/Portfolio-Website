@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -11,12 +11,23 @@ gsap.registerPlugin(ScrollTrigger, SplitText);
 
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
+  const contentWrapRef = useRef<HTMLDivElement>(null);
   const nameRef = useRef<HTMLHeadingElement>(null);
   const eyebrowRef = useRef<HTMLDivElement>(null);
   const subtitleRef = useRef<HTMLDivElement>(null);
   const linksRef = useRef<HTMLDivElement>(null);
   const lineRef = useRef<HTMLDivElement>(null);
   const scrollIndicatorRef = useRef<HTMLDivElement>(null);
+  const orbRefs = useRef<HTMLDivElement[]>([]);
+  const mouseRef = useRef({ x: 0.5, y: 0.5 });
+  const rafRef = useRef<number>(0);
+
+  const handleMouseMove = useCallback((e: PointerEvent) => {
+    mouseRef.current = {
+      x: e.clientX / window.innerWidth,
+      y: e.clientY / window.innerHeight,
+    };
+  }, []);
 
   useEffect(() => {
     let ctx: gsap.Context;
@@ -30,14 +41,28 @@ export default function Hero() {
             isNormal: "(prefers-reduced-motion: no-preference)",
           },
           (context) => {
-            const { isReduced } = context.conditions as { isReduced: boolean; isNormal: boolean };
+            const { isReduced } = context.conditions as {
+              isReduced: boolean;
+              isNormal: boolean;
+            };
 
             if (!nameRef.current) return;
 
             if (isReduced) {
               gsap.to(
-                [nameRef.current, eyebrowRef.current, subtitleRef.current, linksRef.current, lineRef.current],
-                { opacity: 1, duration: 0.5, stagger: 0.1, ease: "power2.out" }
+                [
+                  nameRef.current,
+                  eyebrowRef.current,
+                  subtitleRef.current,
+                  linksRef.current,
+                  lineRef.current,
+                ],
+                {
+                  opacity: 1,
+                  duration: 0.5,
+                  stagger: 0.1,
+                  ease: "power2.out",
+                }
               );
               return;
             }
@@ -49,7 +74,7 @@ export default function Hero() {
 
             gsap.set(splitName.chars, { yPercent: 110 });
 
-            const tl = gsap.timeline({ delay: 0.2 });
+            const tl = gsap.timeline({ delay: 2.4 });
 
             tl.to(splitName.chars, {
               yPercent: 0,
@@ -85,6 +110,8 @@ export default function Hero() {
             gsap.to(nameRef.current, {
               y: -60,
               opacity: 0,
+              scale: 0.96,
+              filter: "blur(3px)",
               ease: "none",
               scrollTrigger: {
                 trigger: sectionRef.current,
@@ -108,7 +135,7 @@ export default function Hero() {
             gsap.fromTo(
               scrollIndicatorRef.current,
               { opacity: 0 },
-              { opacity: 1, duration: 1, delay: 2, ease: "power2.out" }
+              { opacity: 1, duration: 1, delay: 3.2, ease: "power2.out" }
             );
 
             gsap.to(scrollIndicatorRef.current, {
@@ -123,18 +150,96 @@ export default function Hero() {
       }, sectionRef);
     });
 
+    window.addEventListener("pointermove", handleMouseMove);
+
+    const orbTarget = [{ x: 0.3, y: 0.4 }, { x: 0.7, y: 0.3 }, { x: 0.5, y: 0.7 }];
+    const orbCurrent = [{ x: 0.3, y: 0.4 }, { x: 0.7, y: 0.3 }, { x: 0.5, y: 0.7 }];
+
+    const animateOrbs = () => {
+      const t = Date.now() * 0.0003;
+      for (let i = 0; i < 3; i++) {
+        orbTarget[i].x = 0.3 + 0.4 * Math.sin(t + i * 2.1);
+        orbTarget[i].y = 0.3 + 0.4 * Math.cos(t * 0.7 + i * 1.7);
+        orbCurrent[i].x += (orbTarget[i].x - orbCurrent[i].x) * 0.008;
+        orbCurrent[i].y += (orbTarget[i].y - orbCurrent[i].y) * 0.008;
+        if (orbRefs.current[i]) {
+          orbRefs.current[i].style.left = `${orbCurrent[i].x * 100}%`;
+          orbRefs.current[i].style.top = `${orbCurrent[i].y * 100}%`;
+        }
+      }
+      rafRef.current = requestAnimationFrame(animateOrbs);
+    };
+    rafRef.current = requestAnimationFrame(animateOrbs);
+
+    const animatePerspective = () => {
+      if (contentWrapRef.current) {
+        const mx = (mouseRef.current.x - 0.5) * 3;
+        const my = (mouseRef.current.y - 0.5) * -2;
+        contentWrapRef.current.style.transform = `perspective(1200px) rotateY(${mx}deg) rotateX(${my}deg)`;
+      }
+      requestAnimationFrame(animatePerspective);
+    };
+    const perspRaf = requestAnimationFrame(animatePerspective);
+
     return () => {
+      window.removeEventListener("pointermove", handleMouseMove);
+      cancelAnimationFrame(rafRef.current);
+      cancelAnimationFrame(perspRaf);
       if (ctx) ctx.revert();
       if (mm) mm.revert();
     };
-  }, []);
+  }, [handleMouseMove]);
 
   return (
     <section
       ref={sectionRef}
       className="relative min-h-screen flex flex-col justify-center px-6 blueprint-grid overflow-hidden"
     >
-      <div className="mx-auto w-full max-w-[1100px]">
+      <div
+        ref={(el) => {
+          if (el) orbRefs.current[0] = el;
+        }}
+        className="absolute w-[500px] h-[500px] rounded-full pointer-events-none opacity-[0.035]"
+        style={{
+          background: "radial-gradient(circle, var(--text-1) 0%, transparent 70%)",
+          filter: "blur(80px)",
+          left: "30%",
+          top: "40%",
+          transform: "translate(-50%, -50%)",
+        }}
+      />
+      <div
+        ref={(el) => {
+          if (el) orbRefs.current[1] = el;
+        }}
+        className="absolute w-[400px] h-[400px] rounded-full pointer-events-none opacity-[0.025]"
+        style={{
+          background: "radial-gradient(circle, var(--text-2) 0%, transparent 70%)",
+          filter: "blur(100px)",
+          left: "70%",
+          top: "30%",
+          transform: "translate(-50%, -50%)",
+        }}
+      />
+      <div
+        ref={(el) => {
+          if (el) orbRefs.current[2] = el;
+        }}
+        className="absolute w-[350px] h-[350px] rounded-full pointer-events-none opacity-[0.03]"
+        style={{
+          background: "radial-gradient(circle, var(--text-3) 0%, transparent 70%)",
+          filter: "blur(90px)",
+          left: "50%",
+          top: "65%",
+          transform: "translate(-50%, -50%)",
+        }}
+      />
+
+      <div
+        ref={contentWrapRef}
+        className="mx-auto w-full max-w-[1100px]"
+        style={{ willChange: "transform" }}
+      >
         <div className="max-w-[720px]">
           <div ref={eyebrowRef} className="mb-6 opacity-0">
             <span className="font-mono text-[0.7rem] font-semibold uppercase tracking-[0.12em] text-text-4">
@@ -155,12 +260,18 @@ export default function Hero() {
             </p>
           </div>
           <div ref={linksRef} className="flex items-center gap-6 opacity-0">
-            <Link href="/work" className="focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-text-1">
+            <Link
+              href="/work"
+              className="focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-text-1"
+            >
               <SpecularButton size="md" radius={0} className="hero-btn">
                 Work
               </SpecularButton>
             </Link>
-            <Link href="/contact" className="focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-text-1">
+            <Link
+              href="/contact"
+              className="focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-text-1"
+            >
               <SpecularButton size="md" radius={0} className="hero-btn">
                 Contact
               </SpecularButton>

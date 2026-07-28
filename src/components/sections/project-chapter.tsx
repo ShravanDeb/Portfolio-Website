@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -36,9 +36,39 @@ export default function ProjectChapter({
 }: ProjectChapterProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
+  const imageInnerRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
   const numberRef = useRef<HTMLSpanElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
+
+  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+
+    e.currentTarget.style.transform = `perspective(800px) rotateX(${-y * 6}deg) rotateY(${x * 6}deg)`;
+
+    if (imageInnerRef.current) {
+      imageInnerRef.current.style.transform = `translate(${-x * 8}px, ${-y * 8}px) scale(1.02)`;
+    }
+  }, []);
+
+  const handleMouseLeave = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    e.currentTarget.style.transform = "perspective(800px) rotateX(0deg) rotateY(0deg)";
+    e.currentTarget.style.transition = "transform 0.5s cubic-bezier(0.23, 1, 0.32, 1)";
+
+    if (imageInnerRef.current) {
+      imageInnerRef.current.style.transform = "translate(0px, 0px) scale(1)";
+      imageInnerRef.current.style.transition = "transform 0.5s cubic-bezier(0.23, 1, 0.32, 1)";
+    }
+
+    setTimeout(() => {
+      e.currentTarget.style.transition = "";
+      if (imageInnerRef.current) {
+        imageInnerRef.current.style.transition = "";
+      }
+    }, 500);
+  }, []);
 
   useEffect(() => {
     let ctx: gsap.Context;
@@ -192,10 +222,17 @@ export default function ProjectChapter({
   const imageElement = (
     <div
       ref={imageRef}
-      className="relative overflow-hidden group/img rounded-xl md:rounded-none border border-border/40 md:border-transparent bg-surface-2 shadow-2xl md:shadow-none transition-transform duration-500 active:scale-[0.98] md:active:scale-100"
+      className="relative overflow-hidden group/img rounded-xl md:rounded-none border border-border/40 md:border-transparent bg-surface-2 shadow-2xl md:shadow-none transition-[border-color] duration-500 active:scale-[0.98] md:active:scale-100"
       data-cursor="project"
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{ willChange: "transform" }}
     >
-      <div className="relative aspect-[4/3] md:aspect-[16/10] bg-surface-2 group">
+      <div
+        ref={imageInnerRef}
+        className="relative aspect-[4/3] md:aspect-[16/10] bg-surface-2 group"
+        style={{ willChange: "transform" }}
+      >
         <div className="absolute inset-0 flex items-center justify-center text-text-4 font-mono text-xs md:text-sm uppercase tracking-widest transition-opacity duration-500 group-hover:opacity-50">
           {imageAlt}
         </div>
