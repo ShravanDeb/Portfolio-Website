@@ -156,7 +156,12 @@ export default function Hero() {
     });
     };
 
-    window.addEventListener("preloader-complete", startAnimation);
+    // If preloader already completed (returning via client nav), start immediately
+    if (window.__preloaderDone) {
+      startAnimation();
+    } else {
+      window.addEventListener("preloader-complete", startAnimation);
+    }
     window.addEventListener("pointermove", handleMouseMove);
 
     const orbTarget = [{ x: 0.3, y: 0.4 }, { x: 0.7, y: 0.3 }, { x: 0.5, y: 0.7 }];
@@ -189,7 +194,9 @@ export default function Hero() {
     const perspRaf = requestAnimationFrame(animatePerspective);
 
     return () => {
-      window.removeEventListener("preloader-complete", startAnimation);
+      if (!window.__preloaderDone) {
+        window.removeEventListener("preloader-complete", startAnimation);
+      }
       window.removeEventListener("pointermove", handleMouseMove);
       cancelAnimationFrame(rafRef.current);
       cancelAnimationFrame(perspRaf);

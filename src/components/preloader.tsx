@@ -36,6 +36,7 @@ export default function Preloader() {
 
     const tl = gsap.timeline({
       onComplete: () => {
+        window.__preloaderDone = true;
         window.dispatchEvent(new Event("preloader-complete"));
         setVisible(false);
       },
