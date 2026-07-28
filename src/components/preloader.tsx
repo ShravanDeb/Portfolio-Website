@@ -35,7 +35,10 @@ export default function Preloader() {
     let splitName: SplitText | null = null;
 
     const tl = gsap.timeline({
-      onComplete: () => setVisible(false),
+      onComplete: () => {
+        window.dispatchEvent(new Event("preloader-complete"));
+        setVisible(false);
+      },
     });
 
     document.fonts.ready.then(() => {

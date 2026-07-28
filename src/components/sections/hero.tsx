@@ -33,50 +33,55 @@ export default function Hero() {
     let ctx: gsap.Context;
     let mm = gsap.matchMedia();
 
-    document.fonts.ready.then(() => {
-      ctx = gsap.context(() => {
-        mm.add(
-          {
-            isReduced: "(prefers-reduced-motion: reduce)",
-            isNormal: "(prefers-reduced-motion: no-preference)",
-          },
-          (context) => {
-            const { isReduced } = context.conditions as {
-              isReduced: boolean;
-              isNormal: boolean;
-            };
+    gsap.set([eyebrowRef.current, subtitleRef.current, linksRef.current, lineRef.current, scrollIndicatorRef.current], {
+      opacity: 0,
+    });
 
-            if (!nameRef.current) return;
+    const startAnimation = () => {
+      document.fonts.ready.then(() => {
+        ctx = gsap.context(() => {
+          mm.add(
+            {
+              isReduced: "(prefers-reduced-motion: reduce)",
+              isNormal: "(prefers-reduced-motion: no-preference)",
+            },
+            (context) => {
+              const { isReduced } = context.conditions as {
+                isReduced: boolean;
+                isNormal: boolean;
+              };
 
-            if (isReduced) {
-              gsap.to(
-                [
-                  nameRef.current,
-                  eyebrowRef.current,
-                  subtitleRef.current,
-                  linksRef.current,
-                  lineRef.current,
-                ],
-                {
-                  opacity: 1,
-                  duration: 0.5,
-                  stagger: 0.1,
-                  ease: "power2.out",
-                }
-              );
-              return;
-            }
+              if (!nameRef.current) return;
 
-            const splitName = SplitText.create(nameRef.current, {
-              type: "chars",
-              charsClass: "name-char",
-            });
+              if (isReduced) {
+                gsap.to(
+                  [
+                    nameRef.current,
+                    eyebrowRef.current,
+                    subtitleRef.current,
+                    linksRef.current,
+                    lineRef.current,
+                  ],
+                  {
+                    opacity: 1,
+                    duration: 0.5,
+                    stagger: 0.1,
+                    ease: "power2.out",
+                  }
+                );
+                return;
+              }
 
-            gsap.set(splitName.chars, { yPercent: 110 });
+              const splitName = SplitText.create(nameRef.current, {
+                type: "chars",
+                charsClass: "name-char",
+              });
 
-            const tl = gsap.timeline({ delay: 2.4 });
+              gsap.set(splitName.chars, { yPercent: 110 });
 
-            tl.to(splitName.chars, {
+              const tl = gsap.timeline();
+
+              tl.to(splitName.chars, {
               yPercent: 0,
               duration: 0.6,
               ease: "power4.out",
@@ -144,12 +149,14 @@ export default function Hero() {
               yoyo: true,
               duration: 1.5,
               ease: "power1.inOut",
-            });
+            }            );
           }
         );
       }, sectionRef);
     });
+    };
 
+    window.addEventListener("preloader-complete", startAnimation);
     window.addEventListener("pointermove", handleMouseMove);
 
     const orbTarget = [{ x: 0.3, y: 0.4 }, { x: 0.7, y: 0.3 }, { x: 0.5, y: 0.7 }];
@@ -182,6 +189,7 @@ export default function Hero() {
     const perspRaf = requestAnimationFrame(animatePerspective);
 
     return () => {
+      window.removeEventListener("preloader-complete", startAnimation);
       window.removeEventListener("pointermove", handleMouseMove);
       cancelAnimationFrame(rafRef.current);
       cancelAnimationFrame(perspRaf);
