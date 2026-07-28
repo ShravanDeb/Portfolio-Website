@@ -243,6 +243,7 @@ export default function ProjectChapter({
             className="object-cover transition-opacity duration-500 group-hover:opacity-80"
             sizes="(max-width: 768px) 100vw, 600px"
             quality={100}
+            loading="eager"
           />
         ) : (
           <div className="absolute inset-0 flex items-center justify-center text-text-4 font-mono text-xs md:text-sm uppercase tracking-widest transition-opacity duration-500 group-hover:opacity-50">
