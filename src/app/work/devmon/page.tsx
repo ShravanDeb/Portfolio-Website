@@ -52,14 +52,15 @@ export default function DevMonPage() {
             Next.js 14 · TypeScript · React 18 · Tailwind CSS · Supabase · Upstash Redis · Vitest
           </p>
 
-          <div className="aspect-[16/9] bg-surface-2 mb-16 overflow-hidden">
+          <div className="bg-surface-2 mb-16 overflow-hidden">
             <Image
               src="/work/devmon/hero.png"
               alt="DevMon credential cards in five rarity tiers"
-              width={1200}
-              height={675}
-              className="w-full h-full object-cover"
+              width={2400}
+              height={1350}
+              className="w-full h-auto"
               priority
+              quality={100}
             />
           </div>
 
