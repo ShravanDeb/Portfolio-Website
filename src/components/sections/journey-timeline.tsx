@@ -10,56 +10,61 @@ gsap.registerPlugin(ScrollTrigger, SplitText);
 // ── Milestones as stories, not résumé entries ──
 const MILESTONES = [
   {
-    year: "2019",
-    title: "The First spark",
-    institution: "Don Bosco School, Guwahati",
+    year: "2022",
+    title: "A Strong Academic Foundation",
+    institution: "Kendriya Vidyalaya (OIL), Duliajan • CBSE",
     description:
-      "The first time I realised software could create worlds, not just solve equations. A borrowed laptop, a cracked IDE, and the quiet conviction that this was it.",
-    motif: "laptop",
+      "Completed my Class X with 92% marks. Those years shaped my discipline, curiosity, and problem-solving mindset. Mathematics and science gradually became more than subjects—they became ways of understanding how the world works.",
+    motif: "grid",
     typeScale: 0.88,
   },
-  {
-    year: "2021",
-    title: "Thinking in Systems",
-    institution: "Science Stream — PCM",
-    description:
-      "Physics taught me how the world connects. Mathematics taught me abstraction. But it was late-night YouTube tutorials on machine learning that made everything click.",
-    motif: "neural",
-    typeScale: 0.92,
-  },
-  {
-    year: "2021",
-    title: "Building the Foundation",
-    institution: "Institute of Engineering & Technology",
-    description:
-      "Algorithms became a language. Data structures became architecture. I stopped following tutorials and started building what didn't exist yet.",
-    motif: "grid",
-    typeScale: 0.96,
-  },
-  {
-    year: "2023",
-    title: "Shipping Under Pressure",
-    institution: "Independent",
-    description:
-      "DevMon taught me what production really means. Three AM alerts. Cascading failures. The humbling discovery that building is easy — maintaining is the craft.",
-    motif: "server",
-    typeScale: 1.0,
-  },
+
   {
     year: "2024",
-    title: "Teaching Machines to Speak",
-    institution: "Research & Development",
+    title: "Discovering Computer Science",
+    institution: "Kendriya Vidyalaya (OIL), Duliajan • CBSE",
     description:
-      "I trained models that understood context, nuance, and ambiguity. Kiran AI wasn't just code — it was the first time a system I built felt alive.",
-    motif: "brain",
-    typeScale: 1.04,
+      "Completed Class XII with 77.6% in the PCM stream, choosing Computer Science as my elective. Writing code for the first time sparked a genuine interest in software engineering and inspired me to pursue Computer Science as a career.",
+    motif: "laptop",
+    typeScale: 0.92,
   },
+
+  {
+    year: "2024–2025",
+    title: "A Year of Preparation & Self Learning",
+    institution: "JEE Preparation • Independent Learning",
+    description:
+      "Took a dedicated gap year to prepare for JEE while simultaneously teaching myself modern web technologies. Beyond competitive exams, this became a transformative period of building projects, exploring full-stack development, and understanding how real-world software is designed and deployed.",
+    motif: "neural",
+    typeScale: 0.96,
+  },
+
   {
     year: "2025",
-    title: "The Road Ahead",
-    institution: "Building & Shipping",
+    title: "Beginning My Engineering Journey",
+    institution: "Assam Science and Technology University (ASTU)",
     description:
-      "Now I build at the edge of what's possible — where AI meets infrastructure, where resilience meets intelligence. Every system a hypothesis. Every deployment a lesson.",
+      "Earned admission to Assam's premier state technical university under the Government of Assam to pursue B.Tech in Computer Science & Engineering with a specialization in Artificial Intelligence. University life introduced me to collaborative development, emerging technologies, and ambitious peers who pushed me to grow.",
+    motif: "brain",
+    typeScale: 1.00,
+  },
+
+  {
+    year: "2025–Present",
+    title: "Building Beyond the Classroom",
+    institution: "Projects • Hackathons • Communities",
+    description:
+      "Actively participating in hackathons, technical events, and developer communities while building impactful software. From AI applications and accessibility-focused solutions to full-stack platforms, every project has strengthened my engineering skills and reinforced my passion for creating technology that solves meaningful problems.",
+    motif: "server",
+    typeScale: 1.04,
+  },
+
+  {
+    year: "Future",
+    title: "The Road Ahead",
+    institution: "AI Engineer • Research • Entrepreneurship",
+    description:
+      "This is only the beginning. My goal is to build intelligent products that positively impact millions of people, contribute to cutting-edge AI research, and create technology that is both technically exceptional and genuinely useful. Every project, every failure, and every line of code is another step toward that vision.",
     motif: "constellation",
     typeScale: 1.08,
   },
@@ -299,7 +304,7 @@ export default function JourneyTimeline() {
               // ══════════════════════════════════════
               gsap.set(scene, {
                 opacity: 0, y: isMobile ? 25 : 50, scale: scale * 0.96,
-                filter: "blur(6px)",
+                filter: "blur(2px)",
               });
 
               tl.to(scene, {
@@ -402,9 +407,8 @@ export default function JourneyTimeline() {
               }
 
               if (card) {
-                gsap.set(card, { backdropFilter: "blur(0px)", borderColor: "transparent" });
+                gsap.set(card, { borderColor: "transparent" });
                 tl.to(card, {
-                  backdropFilter: "blur(12px)",
                   borderColor: "rgba(255,255,255,0.06)",
                   duration: dur * 0.2,
                   ease: "power2.out",
@@ -422,14 +426,13 @@ export default function JourneyTimeline() {
                   opacity: 0,
                   y: isMobile ? -18 : -35,
                   scale: scale * 0.97,
-                  filter: "blur(5px)",
+                  filter: "blur(1px)",
                   duration: exitDur,
                   ease: "power2.in",
                 }, exitSeg);
 
                 if (card) {
                   tl.to(card, {
-                    backdropFilter: "blur(0px)",
                     borderColor: "transparent",
                     duration: exitDur,
                     ease: "power2.in",
@@ -606,24 +609,28 @@ export default function JourneyTimeline() {
                           <span
                             ref={(el) => { if (el) yearRefs.current[i] = el; }}
                             className="tl-year font-mono text-[0.65rem] font-semibold uppercase tracking-[0.15em] text-text-4 block mb-2 opacity-0"
+                            style={{ textRendering: "geometricPrecision", WebkitFontSmoothing: "antialiased" }}
                           >
                             {m.year}
                           </span>
                           <h3
                             ref={(el) => { if (el) titleRefs.current[i] = el; }}
                             className="tl-title text-xl md:text-[1.35rem] font-medium text-text-1 tracking-[-0.02em] mb-1 opacity-0"
+                            style={{ textRendering: "geometricPrecision", WebkitFontSmoothing: "antialiased" }}
                           >
                             {m.title}
                           </h3>
                           <span
                             ref={(el) => { if (el) institutionRefs.current[i] = el; }}
                             className="tl-institution block text-[0.8rem] text-text-3 mb-2.5 opacity-0"
+                            style={{ textRendering: "geometricPrecision", WebkitFontSmoothing: "antialiased" }}
                           >
                             {m.institution}
                           </span>
                           <p
                             ref={(el) => { if (el) descRefs.current[i] = el; }}
                             className="tl-description text-text-2 text-[0.82rem] leading-[1.7] max-w-none md:max-w-[320px] opacity-0"
+                            style={{ textRendering: "geometricPrecision", WebkitFontSmoothing: "antialiased" }}
                           >
                             {m.description}
                           </p>

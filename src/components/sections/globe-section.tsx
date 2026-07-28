@@ -179,8 +179,10 @@ export default function GlobeSection() {
               ref={subtextRef}
               className="text-text-3 text-sm leading-relaxed max-w-[380px] mb-10"
             >
-              Adaptable across time zones. Based in Guwahati, India ΓÇö working
-              with teams across the UK and US. Ready for international projects.
+              Open to internships, collaborative projects, and remote
+              opportunities worldwide. Based in Guwahati, India, I&apos;m
+              excited to work with teams across different time zones and learn
+              by building impactful software together.
             </p>
 
             <div className="flex flex-col gap-4">

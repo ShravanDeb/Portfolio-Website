@@ -25,9 +25,9 @@ export default function ResumePage() {
           -webkit-font-smoothing: antialiased;
         }
 
-        a, a:visited, a:hover, a:active { color: #000000; text-decoration: none; }
+          a, a:visited, a:hover, a:active { color: #000000; text-decoration: none; }
 
-        .container { max-width: 800px; margin: 0 auto; }
+        .container { max-width: 800px; margin: 0 auto; border: 0.75pt solid #999; padding: 28px; }
 
         .toolbar {
           display: flex; justify-content: space-between; align-items: center;
@@ -107,6 +107,7 @@ export default function ResumePage() {
             max-width: 100% !important; 
             margin: 0 !important; 
             padding: 0 !important;
+            border: none !important;
             page-break-after: avoid !important;
             break-after: avoid !important;
           }
@@ -138,14 +139,14 @@ export default function ResumePage() {
           <h1>Shravan Kumar Deb</h1>
           <div className="contact-info">
             Assam Science and Technology University &nbsp;|&nbsp;{" "}
-            <a href="mailto:shubhashish.shukla23b@iiitg.ac.in">shubhashish.shukla23b@iiitg.ac.in</a> &nbsp;|&nbsp;{" "}
-            <a href="tel:+916307542454">+91 6307542454</a>
+            <a href="mailto:shravandeb@gmail.com">shravandeb@gmail.com</a> &nbsp;|&nbsp;{" "}
+            <a href="tel:+916307542454">+91 9864451186</a>
             <br />
-            <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            <a href="https://www.linkedin.com/in/shravan-kumar-deb-577b1037a" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
               <svg className="contact-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
               {" "}LinkedIn
             </a> &nbsp;|&nbsp;{" "}
-            <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+            <a href="https://github.com/ShravanDeb" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
               <svg className="contact-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
               {" "}GitHub
             </a>
@@ -155,114 +156,163 @@ export default function ResumePage() {
         {/* Education Section */}
         <div className="section-title">Education</div>
         <div className="row">
-          <div className="left"><strong>Indian Institute of Information Technology Guwahati:</strong> B.Tech. in Computer Science and Engineering (CGPA: 9.17/10)</div>
-          <div className="right">2023 &ndash; 2027</div>
+          <div className="left"><strong>Assam Science and Technology University:</strong> B.Tech. in Computer Science and Engineering (AI Specialization)</div>
+          <div className="right">2025 &ndash; 2029</div>
         </div>
         <div style={{ marginTop: "3px" }}>
-          <strong>Puranchandra Vidyaniketan, Kanpur:</strong> 12th (95.8%), 10th (89.9%)
+          <strong>Kendriya Vidyalaya (OIL) Duliajan:</strong> 12th (77.6%), 10th (92%)
         </div>
 
         {/* Skills Section */}
-        <div className="section-title">Skills</div>
-        <div className="skills-list">
-          <div><strong>Languages:</strong> C++, C, Java, Python, Golang, SQL</div>
-          <div><strong>Computer Science:</strong> Algorithms, Data Structures, Blockchain Technology, Neural Networks, Artificial Intelligence, Machine Learning, Operating Systems, Cloud Computing, Computer Networks, Quantum Computing</div>
-          <div><strong>Operating Systems:</strong> Linux (Ubuntu, Arch), Windows</div>
-          <div><strong>Development Tools:</strong> Git, GitHub, CMake, Gnuplot, ffmpeg</div>
-        </div>
+<div className="section-title">Skills</div>
+<div className="skills-list">
+  <div><strong>Programming:</strong> Python, Java, C++, TypeScript, SQL</div>
+
+  <div><strong>Web Development:</strong> Frontend Development, Backend Development, REST APIs, Responsive Design, Authentication</div>
+
+  <div><strong>Artificial Intelligence:</strong> Machine Learning,Generative AI</div>
+
+  <div><strong>Databases:</strong> Relational Databases, NoSQL Databases, Database Design</div>
+
+  <div><strong>Developer Tools:</strong> Git, GitHub, Cloud Deployment</div>
+
+  <div><strong>Core Concepts:</strong> Data Structures & Algorithms, Object-Oriented Programming, DBMS, Operating Systems, Computer Networks</div>
+</div>
 
         {/* Experience Section */}
-        <div className="section-title">Experience</div>
-        <div className="row">
-          <div className="left"><strong>IIIT Guwahati &mdash; Semester VI Project</strong></div>
-          <div className="right">Jan 2026 &ndash; Present</div>
-        </div>
-        <ul>
-          <li>Currently studying and experimenting with <strong>QAOA</strong>-based pathfinding approaches for UAV navigation in simulated environments.</li>
-          <li>Analyzing baseline heuristic methods to understand potential improvements in trajectory efficiency and collision avoidance.</li>
-        </ul>
+<div className="section-title">Experience</div>
 
-        <div className="row">
-          <div className="left"><strong>IIIT Guwahati &mdash; Winter Intern</strong></div>
-          <div className="right">Dec 2025 &ndash; Present</div>
-        </div>
-        <ul>
-          <li>Contributed to the development of a distributed asset ledger in <strong>Golang</strong>, supporting concurrent operations across multiple simulated nodes.</li>
-          <li>Created the database layer to ensure data consistency and integrity under high-concurrency workloads.</li>
-        </ul>
+<div className="row">
+  <div className="left">
+    <strong>Mrinaljyoti Rehabilitation Centre (MRC) — Social Intern</strong>
+  </div>
+  <div className="right">Jul 2025</div>
+</div>
+<ul>
+  <li>Completed a 20-day social internship focused on digital transformation and community service initiatives.</li>
+  <li>Digitized beneficiary records and assisted in preparing personalized diet charts to improve data organization and accessibility.</li>
+  <li>Collaborated with the rehabilitation team to streamline data management and support community outreach activities.</li>
+</ul>
 
-        <div className="row">
-          <div className="left"><strong>Google Developer Groups on Campus &mdash; Lead</strong></div>
-          <div className="right">Aug 2025 &ndash; Present</div>
-        </div>
-        <ul>
-          <li>Led the Google Developer Group on campus, engaging 100+ students through workshops and community events.</li>
-          <li>Conducted hands-on sessions on Git, GitHub, and Google Cloud, and co-organized a campus hackathon with strong participation.</li>
-        </ul>
+<div className="row">
+  <div className="left">
+    <strong>National Service Scheme (NSS), ASTU — Active Volunteer</strong>
+  </div>
+  <div className="right">2025 &ndash; Present</div>
+</div>
+<ul>
+  <li>Participate in community service initiatives, awareness campaigns, and campus volunteer programs.</li>
+  <li>Contribute to social impact activities promoting education, environmental sustainability, and public welfare.</li>
+</ul>
 
+<div className="row">
+  <div className="left">
+    <strong>Mobius Coding Society, ASTU — Active Member</strong>
+  </div>
+  <div className="right">2025 &ndash; Present</div>
+</div>
+<ul>
+  <li>Participate in technical workshops, coding sessions, and collaborative software development activities.</li>
+  <li>Contribute to hackathons, peer learning sessions, and discussions on AI, web development, and competitive programming.</li>
+</ul>
+
+<div className="row">
+  <div className="left">
+    <strong>Google Developer Groups (GDG) Guwahati — Community Member</strong>
+  </div>
+  <div className="right">2025 &ndash; Present</div>
+</div>
+<ul>
+  <li>Attend developer conferences, technical workshops, and hands-on sessions on AI, cloud computing, and modern software engineering.</li>
+  <li>Engage with the developer community through networking, collaborative learning, and technology-focused events.</li>
+</ul>
+<div className="row">
+  <div className="left">
+    <strong>International Association of Engineers (IAENG) — Member</strong>
+  </div>
+  <div className="right">Nov 2025 – Present</div>
+</div>
+<ul>
+  <li>Member of the IAENG Society of Artificial Intelligence.</li>
+  <li>Member of the IAENG Society of Computer Science.</li>
+  <li>Member of the IAENG Society of Software Engineering.</li>
+</ul>
         {/* Projects Section */}
         <div className="section-title">Projects</div>
         <div className="row">
-          <div className="left"><strong>Trajectory: A Retro 2D RPG Cross-Platform Game in Java</strong></div>
+          <div className="left"><strong>DevMon: A GitHub Credential Card Platform</strong></div>
           <div className="right project-links">
-            <a href="https://example.com" target="_blank" rel="noopener noreferrer" aria-label="Play Trajectory">
+            <a href="https://dev-mon-omega.vercel.app" target="_blank" rel="noopener noreferrer" aria-label="Play DevMon">
               <svg className="link-icon" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
-              Game
+              Live
             </a> &nbsp;|&nbsp;
-            <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="Trajectory source code">
+            <a href="https://github.com/ShravanDeb/DevMon" target="_blank" rel="noopener noreferrer" aria-label="DevMon source code">
               <svg className="link-icon" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
-              Trajectory
+              DevMon
             </a>
           </div>
         </div>
         <ul>
-          <li>Built a cross-platform retro 2D RPG game with procedurally generated mazes and enemy pathfinding.</li>
-          <li>Designed all character sprites and tile textures from scratch, and packaged the game as a <strong>JAR</strong>.</li>
+          <li>Built a trading-card-style developer credential platform that scores real GitHub activity across 15 metrics and 5 behavioural attributes.</li>
+          <li>Implemented HMAC-SHA-256 signed verification, 12 developer classes, 5 rarity tiers, PNG card export, and a leaderboard with company filtering.</li>
+          <li>Stack: Next.js 14, TypeScript, Supabase PostgreSQL, Upstash Redis, Zod, Motion, GSAP. Deployed on Vercel.</li>
         </ul>
 
         <div className="row">
-          <div className="left"><strong>OpenANN: Autoencoder Neural Network in C++</strong></div>
+          <div className="left"><strong>Hive: Campus Collaboration Platform</strong></div>
           <div className="right project-links">
-            <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="OpenANN source code">
+            <a href="https://hive-eight-livid.vercel.app" target="_blank" rel="noopener noreferrer" aria-label="Hive live">
               <svg className="link-icon" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
-              OpenANN
+              Live
+            </a> &nbsp;|&nbsp;
+            <a href="https://github.com/ShravanDeb/Hive" target="_blank" rel="noopener noreferrer" aria-label="Hive source code">
+              <svg className="link-icon" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+              Hive
             </a>
           </div>
         </div>
         <ul>
-          <li>Implemented an autoencoder neural network from scratch in C++ to understand core machine learning fundamentals.</li>
-          <li>Wrote backpropagation and gradient descent logic for training the model.</li>
+          <li>Built a platform where college students sign in with institutional Google accounts, create skill-based profiles, post projects, and find teammates.</li>
+          <li>Implemented Google OAuth with domain validation, smart matching, real-time notifications, admin console, and GSAP cinematic scroll animations.</li>
+          <li>Stack: Next.js 16, TypeScript, Neon PostgreSQL, Prisma, Auth.js, Tailwind CSS, GSAP + Lenis. Deployed on Vercel.</li>
         </ul>
 
+        {/* Certifications Section */}
+        <div className="section-title">Certifications & Licences</div>
         <div className="row">
-          <div className="left"><strong>Boids: Flocking Simulation</strong></div>
-          <div className="right project-links">
-            <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="Boids source code">
-              <svg className="link-icon" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
-              Boids
-            </a>
-          </div>
+          <div className="left"><strong>UniAthena – Basics of Machine Learning Algorithms</strong></div>
+          <div className="right"><a href="https://drive.google.com/file/d/1aBUMn6BLYoLTV1QUhwXFryjuhZRdAt7Y/view?usp=drive_link">View</a></div>
         </div>
-        <ul>
-          <li>Simulated flocking behavior using the Boids algorithm in C++.</li>
-          <li>Visualized group movement with Gnuplot and generated video output using ffmpeg.</li>
-        </ul>
+        <div className="row">
+          <div className="left"><strong>IBM – Web Development Fundamentals</strong></div>
+          <div className="right"><a href="https://drive.google.com/file/d/1fW--2AZq7i0GtdgNsBCc1-RTvNa6Sr0Z/view?usp=drive_link">View</a></div>
+        </div>
+        <div className="row">
+          <div className="left"><strong>Databricks – AI Agent Fundamentals</strong></div>
+          <div className="right"><a href="https://drive.google.com/file/d/19pyW6vrbdeWp2l0gha14fmU5GDeIK8YD/view?usp=drive_link">View</a></div>
+        </div>
+        <div className="row">
+          <div className="left"><strong>Anthropic – Al Fluency Framework & Foundations</strong></div>
+          <div className="right"><a href="https://drive.google.com/file/d/1VTUQ8I3QwtXWFkLp5gZnZfnlbMMfZrTX/view?usp=drive_link">View</a></div>
+        </div>
+        <div className="row">
+          <div className="left"><strong>IAENG – Membership Certificate</strong></div>
+          <div className="right"><a href="https://drive.google.com/file/d/1xFAF8_YcS7w7I2jQZ5NJJy5111uBAka2/view?usp=drive_link">View</a></div>
+        </div>
+        <div className="row">
+          <div className="left"><strong>IAENG – Society Membership Certificate</strong></div>
+          <div className="right"><a href="https://drive.google.com/file/d/1MHM7htDxDTryw0GWknRKGRl3LGJZOBzA/view?usp=drive_link">View</a></div>
+        </div>
 
-        {/* Coding Profiles Section */}
-        <div className="section-title">Coding Profiles</div>
-        <ul>
-          <li><a href="https://leetcode.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="LeetCode profile"><strong>LeetCode</strong></a></li>
-          <li><a href="https://codeforces.com/profile/yourusername" target="_blank" rel="noopener noreferrer" aria-label="CodeForces profile"><strong>CodeForces</strong></a></li>
-        </ul>
+ {/* Languages Known Section */}
+<div className="section-title">Languages Known</div>
+<ul>
+  <li><strong>English:</strong> Professional Working Proficiency</li>
+  <li><strong>Hindi:</strong> Professional Working Proficiency</li>
+  <li><strong>Assamese:</strong> Conversational Proficiency</li>
+  <li><strong>Bengali:</strong> (Native) Conversational Proficiency</li>
+</ul>
 
-        {/* Team Work Experience Section */}
-        <div className="section-title">Team Work Experience</div>
-        <ul>
-          <li><strong>Event Management Head, Cultural Fest Yuvaan &apos;25:</strong> Managed promotional events that increased participation across major activities.</li>
-          <li><strong>Core Team Member, Innovation and Entrepreneurship Cell:</strong> Helped organize workshops and speaker sessions on startups and technology.</li>
-          <li><strong>Core Team Member, Tech Fest Entropy &apos;24:</strong> Coordinated &apos;Tech Hunt&apos;, one of the fest&apos;s largest events with 200+ participants.</li>
-          <li><strong>Volunteer, Yuvaan &apos;24 &amp; Entropy &apos;24:</strong> Assisted in event operations and logistics.</li>
-        </ul>
       </div>
     </div>
   );

@@ -129,7 +129,7 @@ export default function About() {
           ref={headingRef}
           className="text-[clamp(2.5rem,5vw,4.5rem)] font-medium leading-[1.0] tracking-[-0.03em] text-text-1 mb-12 overflow-hidden"
         >
-          A builder of intelligent systems
+          Building Intelligent Software
         </h2>
 
         <div className="text-text-2 text-base leading-[1.7] space-y-6">
@@ -138,28 +138,37 @@ export default function About() {
               <span className="float-left text-[6rem] font-medium leading-[0.85] tracking-[-0.04em] text-text-1 mr-4 mt-2">
                 I
               </span>
-              &apos;m Shravan — a computer science student specializing in AI/ML
-              who builds systems that work at scale. My work sits at the
-              intersection of machine learning, real-time infrastructure, and
-              developer experience.
+              &apos;m Shravan, a Computer Science student specializing in
+              Artificial Intelligence with a passion for building software
+              that solves real problems. My interests span artificial
+              intelligence, backend engineering, full-stack development, and
+              modern web technologies. I enjoy transforming ideas into
+              products that are reliable, intuitive, and built with users in
+              mind.
             </p>
           </ScrollReveal>
 
           <ScrollReveal delay={0.15}>
             <p>
-              Over the past four years, I&apos;ve shipped production systems that
-              handle thousands of concurrent users, trained models deployed across
-              distributed networks, and built tools that other developers actually
-              want to use. I believe the best technology feels invisible — it
-              solves real problems without demanding attention.
+              My journey in software development has been driven by curiosity
+              and continuous learning. Through academic projects, hackathons,
+              and personal initiatives, I have worked on AI-powered
+              applications, web platforms, developer tools, and automation
+              systems. Every project has helped me strengthen my understanding
+              of software engineering, scalable architecture, and product
+              development.
             </p>
           </ScrollReveal>
 
           <ScrollReveal delay={0.2}>
             <p>
-              Currently exploring the space where AI meets infrastructure — how
-              we build systems that are not just intelligent, but resilient,
-              observable, and honest about their limitations.
+              I am particularly interested in the intersection of artificial
+              intelligence and software engineering. I enjoy exploring how
+              machine learning can be integrated into real-world applications
+              while maintaining performance, reliability, and a great user
+              experience. Alongside AI, I continue learning about system
+              design, distributed systems, cloud technologies, and modern
+              development practices.
             </p>
           </ScrollReveal>
         </div>
@@ -169,18 +178,19 @@ export default function About() {
           className="my-16 border-l border-transparent pl-8"
         >
           <p className="text-[2.5rem] font-[200] leading-[1.2] tracking-[-0.02em] text-text-1">
-            The best systems are the ones you never have to think about.
+            Great software solves real problems with simplicity.
+            It is reliable, intuitive, and built to last.
           </p>
         </div>
 
         <div className="text-text-2 text-base leading-[1.7] space-y-6">
           <ScrollReveal delay={0.1}>
             <p>
-              When I&apos;m not writing code, you&apos;ll find me reading about
-              systems design, experimenting with new ML architectures, or diving
-              deep into the internals of tools I use daily. I believe in building
-              in public, sharing what I learn, and contributing to the open source
-              ecosystem.
+              Outside of development, I spend time reading about software
+              architecture, experimenting with emerging AI models and
+              frameworks, contributing to open-source projects, and studying
+              the engineering decisions behind products that people use every
+              day.
             </p>
           </ScrollReveal>
         </div>
@@ -189,10 +199,10 @@ export default function About() {
 
         <div className="flex flex-wrap gap-x-12 gap-y-6">
           {[
-            { label: "Total Systems Built", value: "15+" },
+            { label: "Total Systems Built", value: "8+" },
             { label: "Prod Deployments", value: "3" },
-            { label: "GitHub Stars", value: "500+" },
-            { label: "Lines of Code", value: "100K+" },
+            { label: "Technologies Used", value: "23" },
+            { label: "Lines of Code", value: "50K+" },
           ].map((stat) => (
             <div key={stat.label} className="stat-value">
               <span className="block text-2xl font-medium text-text-1 tracking-tight tabular-nums">

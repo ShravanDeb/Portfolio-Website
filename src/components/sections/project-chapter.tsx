@@ -21,6 +21,8 @@ interface ProjectChapterProps {
   layout: "image-left" | "image-right" | "full-width";
   isFlagship?: boolean;
   annotation?: string;
+  imageElement?: React.ReactNode;
+  hideCta?: boolean;
 }
 
 export default function ProjectChapter({
@@ -34,6 +36,8 @@ export default function ProjectChapter({
   layout,
   isFlagship = false,
   annotation,
+  imageElement,
+  hideCta = false,
 }: ProjectChapterProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
@@ -221,7 +225,7 @@ export default function ProjectChapter({
     };
   }, [isFlagship]);
 
-  const imageElement = (
+  const imageRender = imageElement || (
     <div
       ref={imageRef}
       className="relative overflow-hidden group/img rounded-xl md:rounded-none border border-border/40 md:border-transparent bg-surface-2 shadow-2xl md:shadow-none transition-[border-color] duration-500 active:scale-[0.98] md:active:scale-100"
@@ -289,13 +293,15 @@ export default function ProjectChapter({
           </span>
         ))}
       </div>
-      <Link
-        href={href}
-        className="group inline-flex items-center justify-between md:justify-start gap-3 text-sm font-medium text-text-1 md:text-text-2 transition-[color,transform] duration-300 [cubic-bezier(0.23,1,0.32,1)] hover:text-text-1 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-text-1 w-full md:w-max py-2.5 md:py-0 px-4 md:px-0 rounded-lg md:rounded-none bg-surface-2 md:bg-transparent border border-border/60 md:border-transparent"
-      >
-        <span>View Case Study</span>
-        <span className="transition-transform group-hover:translate-x-1">→</span>
-      </Link>
+      {!hideCta && (
+        <Link
+          href={href}
+          className="group inline-flex items-center justify-between md:justify-start gap-3 text-sm font-medium text-text-1 md:text-text-2 transition-[color,transform] duration-300 [cubic-bezier(0.23,1,0.32,1)] hover:text-text-1 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-text-1 w-full md:w-max py-2.5 md:py-0 px-4 md:px-0 rounded-lg md:rounded-none bg-surface-2 md:bg-transparent border border-border/60 md:border-transparent"
+        >
+          <span>View Case Study</span>
+          <span className="transition-transform group-hover:translate-x-1">→</span>
+        </Link>
+      )}
     </div>
   );
 
@@ -334,7 +340,7 @@ export default function ProjectChapter({
             {desktopWatermark}
             <div className="relative z-10">
               {mobileHeaderLedger}
-              {imageElement}
+              {imageRender}
               <div className="mt-2 md:mt-8 max-w-[600px]">{textElement}</div>
             </div>
           </div>
@@ -357,7 +363,7 @@ export default function ProjectChapter({
           >
             <div className={layout === "image-right" ? "md:order-last" : ""}>
               {mobileHeaderLedger}
-              {imageElement}
+              {imageRender}
             </div>
             <div className={layout === "image-right" ? "md:order-first" : ""}>
               {textElement}

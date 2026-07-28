@@ -11,13 +11,14 @@ import InvertedContact from "@/components/sections/contact";
 import Footer from "@/components/footer";
 import SceneDivider from "@/components/scene-divider";
 import ScrollDepth from "@/components/scroll-depth";
+import HeroSlideshow from "@/components/hero-slideshow";
 
 const projects = [
   {
     number: "01",
     title: "DevMon",
     description:
-      "A collectible credential card scored from your real GitHub activity. 15 metrics, 5 rarity tiers, cryptographically signed.",
+      "Your GitHub, reimagined. A collectible credential card scored from your real engineering activity.",
     tags: ["Next.js", "TypeScript", "Supabase", "Redis", "Tailwind"],
     href: "/work/devmon",
     imageSrc: "/work/devmon/hero2.png",
@@ -27,29 +28,21 @@ const projects = [
   },
   {
     number: "02",
-    title: "Kiran AI",
+    title: "Hive",
     description:
-      "Intelligent virtual assistant powered by custom-trained language models. Features real-time voice interaction, context-aware responses, and multi-language support.",
-    tags: ["PyTorch", "FastAPI", "WebSockets", "React", "Redis"],
-    href: "/work/kiran-ai",
-    imageSrc: "",
-    imageAlt: "Kiran AI interface",
+      "Join the Hive. Build Together. Campus collaboration that actually ships.",
+    tags: ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "Auth.js"],
+    href: "/work/hive",
+    imageSrc: "/work/hive/hero.png",
+    imageAlt: "Hive collaboration platform",
     layout: "image-right" as const,
-    annotation: "[STATUS: PROD // LANG: Python, React // VERIF: OK]",
+    annotation: "[STATUS: LIVE // STACK: Next.js, Prisma // DEPLOY: Vercel]",
   },
-  {
-    number: "03",
-    title: "Prism",
-    description:
-      "Collaborative analytics platform that turns raw data into actionable insights. Built for teams that need real-time dashboards without the complexity.",
-    tags: ["Next.js", "PostgreSQL", "DuckDB", "Tailwind CSS", "Vercel"],
-    href: "/work/prism",
-    imageSrc: "",
-    imageAlt: "Prism analytics view",
-    layout: "full-width" as const,
-    isFlagship: true,
-    annotation: "[STATUS: PROD // LANG: TypeScript // VERIF: OK]",
-  },
+];
+
+const runmeImages = [
+  { src: "/work/runme/hero.png", alt: "RunMe screenshot 1" },
+  { src: "/work/runme/hero2.png", alt: "RunMe screenshot 2" },
 ];
 
 export default function Home() {
@@ -69,6 +62,24 @@ export default function Home() {
             {projects.map((project) => (
               <ProjectChapter key={project.number} {...project} />
             ))}
+            <ProjectChapter
+              number="03"
+              title="RunMe"
+              description="Still building. Check back soon."
+              tags={["Coming Soon"]}
+              href="#"
+              imageSrc=""
+              imageAlt="RunMe"
+              layout="full-width"
+              isFlagship
+              annotation="[STATUS: IN DEV // PROGRESS: BUILDING]"
+              hideCta
+              imageElement={
+                <div className="relative overflow-hidden rounded-xl md:rounded-none border border-border/40 md:border-transparent bg-surface-2 shadow-2xl md:shadow-none">
+                  <HeroSlideshow images={runmeImages} interval={5000} />
+                </div>
+              }
+            />
           </section>
         </ScrollDepth>
 

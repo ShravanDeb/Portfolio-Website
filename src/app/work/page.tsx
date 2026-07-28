@@ -14,26 +14,26 @@ const projects = [
   {
     number: "01",
     title: "DevMon",
-    description: "A collectible credential card scored from your real GitHub activity.",
+    description: "Your GitHub, reimagined. A collectible credential scored from real engineering activity.",
     tags: ["Next.js", "TypeScript", "Supabase", "Redis"],
     href: "/work/devmon",
     imageAlt: "DevMon",
   },
   {
     number: "02",
-    title: "Kiran AI",
-    description: "Intelligent virtual assistant with custom LLMs.",
-    tags: ["PyTorch", "FastAPI", "WebSockets"],
-    href: "/work/kiran-ai",
-    imageAlt: "Kiran AI",
+    title: "Hive",
+    description: "Join the Hive. Build Together. Campus collaboration that actually ships.",
+    tags: ["Next.js", "Prisma", "PostgreSQL", "Auth.js"],
+    href: "/work/hive",
+    imageAlt: "Hive",
   },
   {
     number: "03",
-    title: "Prism",
-    description: "Collaborative analytics platform for data teams.",
-    tags: ["Next.js", "PostgreSQL", "DuckDB"],
-    href: "/work/prism",
-    imageAlt: "Prism",
+    title: "RunMe",
+    description: "Still building. Check back soon.",
+    tags: ["Coming Soon"],
+    href: "#",
+    imageAlt: "RunMe",
   },
 ];
 
@@ -56,33 +56,59 @@ export default function WorkPage() {
 
           <div className="space-y-0">
             {projects.map((project) => (
-              <a
-                key={project.number}
-                href={project.href}
-                className="group block py-8 md:py-12 border-b border-border active:opacity-60 transition-opacity"
-              >
-                <div className="grid grid-cols-[40px_1fr] md:grid-cols-[80px_1fr_200px] gap-4 md:gap-8 items-start">
-                  <span className="font-mono text-text-4 text-sm">
-                    {project.number}
-                  </span>
-                  <div>
-                    <h2 className="text-2xl md:text-3xl font-medium tracking-[-0.02em] text-text-1 mb-2 group-hover:text-text-2 transition-colors">
-                      {project.title}
-                    </h2>
-                    <p className="text-text-3 text-sm">
-                      {project.description}
-                    </p>
-                  </div>
-                  <div className="hidden md:block text-right">
-                    <p className="text-text-4 text-sm mb-2">
-                      {project.tags.join(" · ")}
-                    </p>
-                    <span className="text-text-3 text-sm group-hover:text-text-1 transition-colors inline-flex items-center gap-2">
-                      View <span className="group-hover:translate-x-1 transition-transform">→</span>
+              project.href === "#" ? (
+                <div
+                  key={project.number}
+                  className="block py-8 md:py-12 border-b border-border opacity-60"
+                >
+                  <div className="grid grid-cols-[40px_1fr] md:grid-cols-[80px_1fr_200px] gap-4 md:gap-8 items-start">
+                    <span className="font-mono text-text-4 text-sm">
+                      {project.number}
                     </span>
+                    <div>
+                      <h2 className="text-2xl md:text-3xl font-medium tracking-[-0.02em] text-text-1 mb-2">
+                        {project.title}
+                      </h2>
+                      <p className="text-text-3 text-sm">
+                        {project.description}
+                      </p>
+                    </div>
+                    <div className="hidden md:block text-right">
+                      <p className="text-text-4 text-sm mb-2">
+                        {project.tags.join(" · ")}
+                      </p>
+                    </div>
                   </div>
                 </div>
-              </a>
+              ) : (
+                <a
+                  key={project.number}
+                  href={project.href}
+                  className="group block py-8 md:py-12 border-b border-border active:opacity-60 transition-opacity"
+                >
+                  <div className="grid grid-cols-[40px_1fr] md:grid-cols-[80px_1fr_200px] gap-4 md:gap-8 items-start">
+                    <span className="font-mono text-text-4 text-sm">
+                      {project.number}
+                    </span>
+                    <div>
+                      <h2 className="text-2xl md:text-3xl font-medium tracking-[-0.02em] text-text-1 mb-2 group-hover:text-text-2 transition-colors">
+                        {project.title}
+                      </h2>
+                      <p className="text-text-3 text-sm">
+                        {project.description}
+                      </p>
+                    </div>
+                    <div className="hidden md:block text-right">
+                      <p className="text-text-4 text-sm mb-2">
+                        {project.tags.join(" · ")}
+                      </p>
+                      <span className="text-text-3 text-sm group-hover:text-text-1 transition-colors inline-flex items-center gap-2">
+                        View <span className="group-hover:translate-x-1 transition-transform">→</span>
+                      </span>
+                    </div>
+                  </div>
+                </a>
+              )
             ))}
           </div>
         </div>

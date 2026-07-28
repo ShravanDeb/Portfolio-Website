@@ -14,20 +14,15 @@ import {
   SiReact,
   SiNodedotjs,
   SiFastapi,
-  SiDocker,
-  SiKubernetes,
   SiPostgresql,
   SiRedis,
   SiGraphql,
   SiTailwindcss,
   SiGit,
-  SiGithubactions,
-  SiLangchain,
   SiMongodb,
   SiSocketdotio,
   SiHuggingface,
 } from "react-icons/si";
-import { TbCloud, TbDatabase } from "react-icons/tb";
 
 const allLogos = [
   { node: <SiPython />, title: "Python" },
@@ -38,17 +33,11 @@ const allLogos = [
   { node: <SiReact />, title: "React" },
   { node: <SiNodedotjs />, title: "Node.js" },
   { node: <SiFastapi />, title: "FastAPI" },
-  { node: <SiDocker />, title: "Docker" },
-  { node: <SiKubernetes />, title: "Kubernetes" },
-  { node: <TbCloud />, title: "AWS" },
   { node: <SiPostgresql />, title: "PostgreSQL" },
   { node: <SiRedis />, title: "Redis" },
   { node: <SiGraphql />, title: "GraphQL" },
   { node: <SiTailwindcss />, title: "Tailwind CSS" },
   { node: <SiGit />, title: "Git" },
-  { node: <SiGithubactions />, title: "CI/CD" },
-  { node: <TbDatabase />, title: "Pinecone" },
-  { node: <SiLangchain />, title: "LangChain" },
   { node: <SiMongodb />, title: "MongoDB" },
   { node: <SiSocketdotio />, title: "WebSockets" },
   { node: <SiHuggingface />, title: "Hugging Face" },
@@ -56,50 +45,34 @@ const allLogos = [
 
 const capabilities = [
   {
-    colSpan: "lg:col-span-7",
+    colSpan: "lg:col-span-6",
     tag: "01 // COGNITIVE SYSTEMS",
     label: "ML & Artificial Intelligence",
     description:
-      "Training, fine-tuning, and deploying models at scale. I bridge the gap between heavy AI research and production-ready, low-latency inference endpoints.",
+      "Training, fine-tuning, and deploying models. Bridging the gap between AI research and production-ready inference endpoints.",
     coreStack: [
       { node: <SiPytorch />, title: "PyTorch" },
       { node: <SiTensorflow />, title: "TensorFlow" },
-      { node: <SiLangchain />, title: "LangChain" },
       { node: <SiHuggingface />, title: "Hugging Face" },
     ],
-    ecosystem: ["Python", "OpenAI API", "RAG Pipelines", "NumPy", "Pandas", "scikit-learn"],
+    ecosystem: ["Python", "OpenAI API", "NumPy", "Pandas", "scikit-learn"],
   },
   {
-    colSpan: "lg:col-span-5",
-    tag: "02 // INFRASTRUCTURE & DEVOPS",
-    label: "Cloud Architecture",
+    colSpan: "lg:col-span-6",
+    tag: "02 // DATA & PERSISTENCE",
+    label: "Data Pipelines & Storage",
     description:
-      "Cloud-native systems, containerization, and automated CI/CD. Building distributed, self-healing topologies designed for zero-downtime resilience.",
-    coreStack: [
-      { node: <SiDocker />, title: "Docker" },
-      { node: <SiKubernetes />, title: "Kubernetes" },
-      { node: <TbCloud />, title: "AWS" },
-      { node: <SiGithubactions />, title: "GitHub Actions" },
-    ],
-    ecosystem: ["GCP", "Terraform", "Distributed Systems", "Linux", "Grafana"],
-  },
-  {
-    colSpan: "lg:col-span-5",
-    tag: "03 // DATA & PERSISTENCE",
-    label: "Data Pipelines & Vectors",
-    description:
-      "Pipelines, real-time processing, and analytics. Engineering high-throughput data streams and vector embeddings for semantic similarity search.",
+      "Databases, caching, and persistence layers. Engineering reliable data systems for real-time applications.",
     coreStack: [
       { node: <SiPostgresql />, title: "PostgreSQL" },
       { node: <SiRedis />, title: "Redis" },
-      { node: <TbDatabase />, title: "Pinecone" },
       { node: <SiMongodb />, title: "MongoDB" },
     ],
-    ecosystem: ["Weaviate", "ChromaDB", "SQL", "Data Pipelines", "Prisma"],
+    ecosystem: ["SQL", "Prisma"],
   },
   {
-    colSpan: "lg:col-span-7",
-    tag: "04 // PRODUCT ENGINEERING",
+    colSpan: "lg:col-span-12",
+    tag: "03 // PRODUCT ENGINEERING",
     label: "Full-Stack Development",
     description:
       "End-to-end product development with modern frameworks. Crafting intuitive, high-concurrency web applications using type-safe enterprise runtimes.",
@@ -138,7 +111,7 @@ export default function SkillMarquee() {
             />
           </div>
           <p className="text-text-3 text-sm md:text-base max-w-[420px] leading-relaxed">
-            I combine deep technical foundations in machine learning with modern distributed systems architecture to ship resilient, user-centric software.
+            I combine my interest in machine learning, software engineering, and modern web technologies to build practical, user-focused applications while continuously learning and improving my skills.
           </p>
         </div>
       </div>
@@ -156,7 +129,7 @@ export default function SkillMarquee() {
           </div>
           <div className="flex items-baseline gap-2">
             <NumberTicker
-              value={4}
+              value={3}
               className="text-2xl md:text-3xl font-medium tracking-tight text-text-1 tabular-nums"
             />
             <span className="font-mono text-[0.65rem] uppercase tracking-[0.15em] text-text-4">

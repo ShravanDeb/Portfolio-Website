@@ -91,20 +91,24 @@ export default function InvertedContact() {
           ref={headingRef}
           className="text-[clamp(2.5rem,5vw,4.5rem)] font-medium leading-[1.0] tracking-[-0.03em] text-foreground mb-8 overflow-hidden"
         >
-          Let&apos;s work together
+          Let&apos;s Build Something Great
         </h2>
 
         <ScrollReveal delay={0.15}>
           <p className="text-text-3 text-base leading-relaxed mb-12 max-w-[480px]">
-            I&apos;m always interested in hearing about new projects,
-            collaborations, or opportunities to build something meaningful.
+            Whether you have a project, an internship opportunity, or simply
+            want to connect, I&apos;d love to hear from you. Feel free to
+            reach out anytime.
           </p>
         </ScrollReveal>
 
         <ScrollReveal delay={0.2}>
+          <p className="font-mono text-[0.7rem] font-semibold uppercase tracking-[0.12em] text-text-4 mb-4">
+            Email
+          </p>
           <a
             ref={emailRef}
-            href="mailto:hello@shravandeb.com"
+            href="mailto:shravandeb@gmail.com"
             className="inline-block text-[clamp(1.65rem,4.5vw,4rem)] font-medium tracking-[-0.02em] text-foreground hover:text-text-3 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-foreground transition-colors break-all sm:break-normal"
             style={{
               backgroundImage:
@@ -115,16 +119,19 @@ export default function InvertedContact() {
               paddingBottom: "4px",
             }}
           >
-            hello@shravandeb.com
+            shravandeb@gmail.com
           </a>
         </ScrollReveal>
 
         <ScrollReveal delay={0.3}>
-          <div className="mt-16 flex flex-wrap gap-x-8 gap-y-2">
+          <p className="font-mono text-[0.7rem] font-semibold uppercase tracking-[0.12em] text-text-4 mt-16 mb-4">
+            Find me on
+          </p>
+          <div className="flex flex-wrap gap-x-8 gap-y-2">
             {[
-              { label: "GitHub", href: "https://github.com/shravan20" },
-              { label: "LinkedIn", href: "https://linkedin.com/in/shravandeb" },
-              { label: "X", href: "https://x.com/shravandeb" },
+              { label: "GitHub", href: "https://github.com/ShravanDeb" },
+              { label: "LinkedIn", href: "https://www.linkedin.com/in/shravan-kumar-deb-577b1037a" },
+              { label: "Instagram", href: "https://www.instagram.com/shravnnn.code" },
             ].map((link) => (
               <Link
                 key={link.label}

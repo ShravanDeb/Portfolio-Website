@@ -38,10 +38,10 @@ export default function ContactPage() {
                 Email
               </span>
               <a
-                href="mailto:hello@shravandeb.com"
+                href="mailto:shravandeb@gmail.com"
                 className="text-2xl md:text-3xl font-medium tracking-[-0.02em] text-text-1 hover:text-text-3 transition-colors"
               >
-                hello@shravandeb.com
+                shravandeb@gmail.com
               </a>
             </div>
 
@@ -53,18 +53,18 @@ export default function ContactPage() {
                 {[
                   {
                     label: "GitHub",
-                    href: "https://github.com/shravan20",
-                    handle: "@shravan20",
+                    href: "https://github.com/ShravanDeb",
+                    handle: "@ShravanDeb",
                   },
                   {
                     label: "LinkedIn",
-                    href: "https://linkedin.com/in/shravandeb",
-                    handle: "/in/shravandeb",
+                    href: "https://www.linkedin.com/in/shravan-kumar-deb-577b1037a",
+                    handle: "Shravan Kumar Deb",
                   },
                   {
-                    label: "X",
-                    href: "https://x.com/shravandeb",
-                    handle: "@shravandeb",
+                    label: "Instagram",
+                    href: "https://www.instagram.com/shravnnn.code",
+                    handle: "@shravnnn.code",
                   },
                 ].map((link) => (
                   <a
