@@ -20,11 +20,10 @@ const projects = [
       "A collectible credential card scored from your real GitHub activity. 15 metrics, 5 rarity tiers, cryptographically signed.",
     tags: ["Next.js", "TypeScript", "Supabase", "Redis", "Tailwind"],
     href: "/work/devmon",
-    imageSrc: "",
-    imageAlt: "DevMon live preview",
+    imageSrc: "/work/devmon/hero2.png",
+    imageAlt: "DevMon credential cards",
     layout: "image-left" as const,
     annotation: "[STATUS: LIVE // STACK: Next.js, TypeScript // SIG: HMAC-SHA-256]",
-    iframeSrc: "https://dev-mon-omega.vercel.app",
   },
   {
     number: "02",

@@ -21,7 +21,6 @@ interface ProjectChapterProps {
   layout: "image-left" | "image-right" | "full-width";
   isFlagship?: boolean;
   annotation?: string;
-  iframeSrc?: string;
 }
 
 export default function ProjectChapter({
@@ -35,7 +34,6 @@ export default function ProjectChapter({
   layout,
   isFlagship = false,
   annotation,
-  iframeSrc,
 }: ProjectChapterProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
@@ -237,15 +235,7 @@ export default function ProjectChapter({
         className="relative aspect-[4/3] md:aspect-[16/10] bg-surface-2 group"
         style={{ willChange: "transform" }}
       >
-        {iframeSrc ? (
-          <iframe
-            src={iframeSrc}
-            title={imageAlt}
-            className="absolute inset-0 w-full h-full border-0 pointer-events-none"
-            loading="lazy"
-            sandbox="allow-scripts allow-same-origin"
-          />
-        ) : imageSrc ? (
+        {imageSrc ? (
           <Image
             src={imageSrc}
             alt={imageAlt}
