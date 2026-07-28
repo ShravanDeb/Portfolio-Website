@@ -60,7 +60,7 @@ export default function DevMonPage() {
               height={1350}
               className="w-full h-auto"
               priority
-              quality={100}
+              unoptimized
             />
           </div>
 

@@ -242,7 +242,7 @@ export default function ProjectChapter({
             fill
             className="object-cover transition-opacity duration-500 group-hover:opacity-80"
             sizes="(max-width: 768px) 100vw, 600px"
-            quality={100}
+            unoptimized
             loading="eager"
           />
         ) : (
