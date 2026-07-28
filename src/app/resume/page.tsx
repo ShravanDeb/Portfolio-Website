@@ -88,13 +88,32 @@ export default function ResumePage() {
         }
 
         @media print {
+          * {
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+          }
+          html, body, :root, #__next, main, div {
+            min-height: 0 !important;
+            height: auto !important;
+            box-shadow: none !important;
+          }
           html, body {
             padding: 0 !important; margin: 0 !important;
             background: #fff !important; background-color: #fff !important;
-            color: #000 !important; min-height: 0 !important;
-            height: auto !important; overflow: hidden !important;
+            color: #000 !important;
+            overflow: hidden !important;
           }
-          .container { max-width: 100%; }
+          .container { 
+            max-width: 100% !important; 
+            margin: 0 !important; 
+            padding: 0 !important;
+            page-break-after: avoid !important;
+            break-after: avoid !important;
+          }
+          .container *:last-child {
+            margin-bottom: 0 !important;
+            padding-bottom: 0 !important;
+          }
           .toolbar { display: none !important; }
           .magnetic-cursor { display: none !important; }
           ul, .row, li, .skills-list div, header { break-inside: avoid; }
