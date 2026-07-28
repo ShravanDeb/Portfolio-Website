@@ -1,9 +1,30 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { Suspense } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 
-export default function ResumePage() {
+function ResumeContent() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const isPrint = searchParams.get("print") === "1";
+
+  const handleDownload = async () => {
+    try {
+      const response = await fetch("/api/resume/pdf");
+      if (!response.ok) throw new Error("PDF generation failed");
+      const blob = await response.blob();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "Resume.pdf";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    } catch {
+      window.print();
+    }
+  };
 
   return (
     <div style={{ background: "#fff", margin: 0, padding: 0 }}>
@@ -25,9 +46,9 @@ export default function ResumePage() {
           -webkit-font-smoothing: antialiased;
         }
 
-          a, a:visited, a:hover, a:active { color: #000000; text-decoration: none; }
+        a, a:visited, a:hover, a:active { color: #000000; text-decoration: none; }
 
-        .container { max-width: 800px; margin: 0 auto; border: 0.75pt solid #999; padding: 28px; }
+        .container { max-width: 800px; margin: 0 auto; border: ${isPrint ? "none" : "0.75pt solid #999"}; padding: 28px; }
 
         .toolbar {
           display: flex; justify-content: space-between; align-items: center;
@@ -121,17 +142,18 @@ export default function ResumePage() {
         }
       `}</style>
 
-      {/* Toolbar — hidden on print */}
-      <div className="toolbar">
-        <button className="toolbar-btn" onClick={() => router.back()} aria-label="Go back">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
-          Back
-        </button>
-        <button className="toolbar-btn" onClick={() => window.print()} aria-label="Print or save as PDF">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
-          Download PDF
-        </button>
-      </div>
+      {!isPrint && (
+        <div className="toolbar">
+          <button className="toolbar-btn" onClick={() => router.back()} aria-label="Go back">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+            Back
+          </button>
+          <button className="toolbar-btn" onClick={handleDownload} aria-label="Download PDF">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+            Download PDF
+          </button>
+        </div>
+      )}
 
       <div className="container">
         {/* Header */}
@@ -315,5 +337,13 @@ export default function ResumePage() {
 
       </div>
     </div>
+  );
+}
+
+export default function ResumePage() {
+  return (
+    <Suspense fallback={null}>
+      <ResumeContent />
+    </Suspense>
   );
 }
