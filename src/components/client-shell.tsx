@@ -22,12 +22,12 @@ export default function ClientShell({
       body.style.backgroundColor = "#ffffff";
       body.style.color = "#000000";
     } else {
-      body.classList.add("bg-background", "text-foreground", "cursor-none");
+      body.classList.add("min-h-full", "bg-background", "text-foreground", "cursor-none");
     }
     return () => {
       body.style.backgroundColor = "";
       body.style.color = "";
-      body.classList.remove("bg-background", "text-foreground", "cursor-none");
+      body.classList.remove("min-h-full", "bg-background", "text-foreground", "cursor-none");
     };
   }, [isResume]);
 
