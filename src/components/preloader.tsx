@@ -25,12 +25,11 @@ export default function Preloader() {
     const el = overlayRef.current;
     const nameEl = el.querySelector(".pre-name") as HTMLElement;
     const subEl = el.querySelector(".pre-sub") as HTMLElement;
-    const counterEl = el.querySelector(".pre-counter") as HTMLElement;
     const lineEl = el.querySelector(".pre-line") as HTMLElement;
     const topHalf = el.querySelector(".pre-top") as HTMLElement;
     const bottomHalf = el.querySelector(".pre-bottom") as HTMLElement;
 
-    if (!nameEl || !subEl || !counterEl || !lineEl || !topHalf || !bottomHalf) return;
+    if (!nameEl || !subEl || !lineEl || !topHalf || !bottomHalf) return;
 
     let splitName: SplitText | null = null;
 
@@ -50,10 +49,7 @@ export default function Preloader() {
 
       gsap.set(splitName.chars, { yPercent: 110, opacity: 0 });
       gsap.set(subEl, { opacity: 0, y: 10 });
-      gsap.set(counterEl, { opacity: 0 });
       gsap.set(lineEl, { scaleX: 0 });
-
-      const counter = { value: 0 };
 
       tl
         .to(lineEl, {
@@ -81,28 +77,6 @@ export default function Preloader() {
             ease: "power3.out",
           },
           "-=0.3"
-        )
-        .to(
-          counterEl,
-          {
-            opacity: 0.4,
-            duration: 0.3,
-          },
-          "-=0.4"
-        )
-        .to(
-          counter,
-          {
-            value: 100,
-            duration: 2,
-            ease: "power2.inOut",
-            onUpdate: () => {
-              counterEl.textContent = String(
-                Math.round(counter.value)
-              ).padStart(3, "0");
-            },
-          },
-          "-=0.8"
         )
         .to(
           lineEl,
@@ -133,14 +107,6 @@ export default function Preloader() {
             ease: "power3.in",
           },
           "-=0.3"
-        )
-        .to(
-          counterEl,
-          {
-            opacity: 0,
-            duration: 0.2,
-          },
-          "-=0.25"
         )
         .to(
           topHalf,
@@ -197,14 +163,7 @@ export default function Preloader() {
         </div>
       </div>
 
-      <div className="pre-bottom absolute inset-0 flex items-center justify-center">
-        <span
-          className="pre-counter font-mono text-[0.6rem] tracking-[0.3em] tabular-nums"
-          style={{ color: "#52525b" }}
-        >
-          000
-        </span>
-      </div>
+      <div className="pre-bottom absolute inset-0 flex items-center justify-center" />
     </div>
   );
 }

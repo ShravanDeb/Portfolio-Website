@@ -61,20 +61,12 @@ export default function Nav() {
       onStart: () => {
         overlayRef.current!.style.pointerEvents = "auto";
         document.body.style.overflow = "hidden";
-        document.body.style.position = "fixed";
-        document.body.style.top = `-${window.scrollY}px`;
-        document.body.style.width = "100%";
       },
       onComplete: () => { isAnimating.current = false; },
       onReverseComplete: () => {
         isAnimating.current = false;
         overlayRef.current!.style.pointerEvents = "none";
         document.body.style.overflow = "";
-        document.body.style.position = "";
-        document.body.style.top = "";
-        document.body.style.width = "";
-        const y = parseInt(document.body.style.top || "0", 10);
-        if (y) window.scrollTo(0, -y);
       },
     });
 
