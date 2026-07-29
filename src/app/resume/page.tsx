@@ -10,18 +10,61 @@ function ResumeContent() {
 
   const handleDownload = async () => {
     try {
-      const response = await fetch("/api/resume/pdf");
-      if (!response.ok) throw new Error("PDF generation failed");
-      const blob = await response.blob();
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = "Resume.pdf";
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
-    } catch {
+      const html2canvas = (await import("html2canvas")).default;
+      const jsPDF = (await import("jspdf")).default;
+
+      const element = document.querySelector(".container") as HTMLElement;
+      if (!element) throw new Error("Container not found");
+
+      const origBorder = element.style.border;
+      element.style.border = "none";
+
+      const canvas = await html2canvas(element, {
+        scale: 2,
+        backgroundColor: "#ffffff",
+        logging: false,
+      });
+
+      element.style.border = origBorder;
+
+      const imgData = canvas.toDataURL("image/jpeg", 0.95);
+      const pdf = new jsPDF("p", "mm", "a4");
+      const pdfW = pdf.internal.pageSize.getWidth();
+      const pdfH = pdf.internal.pageSize.getHeight();
+
+      const margin = 7.9;
+      const imgW = pdfW - margin * 2;
+      const imgH = (canvas.height * imgW) / canvas.width;
+
+      if (imgH > pdfH - margin * 2) {
+        const pageContentH = pdfH - margin * 2;
+        let remainingH = imgH;
+        let srcY = 0;
+
+        while (remainingH > 0) {
+          const sliceH = Math.min(pageContentH, remainingH);
+          pdf.addImage(
+            imgData,
+            "JPEG",
+            margin,
+            margin,
+            imgW,
+            imgH,
+            undefined,
+            undefined,
+            srcY
+          );
+          remainingH -= sliceH;
+          srcY += sliceH / imgH * canvas.height;
+          if (remainingH > 0) pdf.addPage();
+        }
+      } else {
+        pdf.addImage(imgData, "JPEG", margin, margin, imgW, imgH);
+      }
+
+      pdf.save("Resume.pdf");
+    } catch (e) {
+      console.error(e);
       window.print();
     }
   };
@@ -31,13 +74,13 @@ function ResumeContent() {
       <style>{`
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
+        @page { margin: 0; }
+
         html {
           -webkit-print-color-adjust: exact;
           print-color-adjust: exact;
           background: #ffffff;
         }
-
-        @page { margin: 0; }
 
         body {
           font-family: "Latin Modern Roman", "Computer Modern", "Times New Roman", Times, serif;
@@ -119,10 +162,12 @@ function ResumeContent() {
           }
           html { background: #fff !important; }
           body {
+            padding: 0 !important;
             background: #fff !important; background-color: #fff !important;
             color: #000 !important;
           }
           .container {
+            padding: 15px !important;
             border: none !important;
           }
           .toolbar { display: none !important; }
