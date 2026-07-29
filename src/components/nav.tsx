@@ -208,12 +208,12 @@ export default function Nav() {
       {/* ── Full-screen overlay ── */}
       <div
         ref={overlayRef}
-        className="md:hidden fixed inset-0 top-14 z-40 pointer-events-none"
+        className="md:hidden fixed left-0 right-0 top-14 bottom-0 z-[60] pointer-events-none"
         style={{ pointerEvents: "none" }}
       >
         <div
           ref={panelRef}
-          className="absolute inset-0 bg-background/80 backdrop-blur-xl flex flex-col"
+          className="absolute inset-0 bg-background flex flex-col overflow-y-auto"
           style={{ transform: "scaleY(0)", transformOrigin: "bottom" }}
         >
           {/* Nav links */}
