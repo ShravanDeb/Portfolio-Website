@@ -33,7 +33,11 @@ function ResumeContent() {
 
         @page { size: A4; margin: 6mm; }
 
-        html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        html {
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+          background: #ffffff;
+        }
 
         body {
           font-family: "Latin Modern Roman", "Computer Modern", "Times New Roman", Times, serif;
@@ -113,28 +117,12 @@ function ResumeContent() {
             -webkit-print-color-adjust: exact !important;
             print-color-adjust: exact !important;
           }
-          html, body, :root, #__next, main, div {
-            min-height: 0 !important;
-            height: auto !important;
-            box-shadow: none !important;
-          }
-          html, body {
-            padding: 0 !important; margin: 0 !important;
+          body {
             background: #fff !important; background-color: #fff !important;
             color: #000 !important;
-            overflow: hidden !important;
           }
-          .container { 
-            max-width: 100% !important; 
-            margin: 0 !important; 
-            padding: 0 !important;
+          .container {
             border: none !important;
-            page-break-after: avoid !important;
-            break-after: avoid !important;
-          }
-          .container *:last-child {
-            margin-bottom: 0 !important;
-            padding-bottom: 0 !important;
           }
           .toolbar { display: none !important; }
           .magnetic-cursor { display: none !important; }
