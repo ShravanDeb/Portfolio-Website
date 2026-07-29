@@ -31,10 +31,12 @@ function ResumeContent() {
       <style>{`
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
+        @page { size: A4; margin: 6mm; }
+
         html {
           -webkit-print-color-adjust: exact;
           print-color-adjust: exact;
-          background: #ffffff !important;
+          background: #ffffff;
         }
 
         body {
@@ -115,15 +117,11 @@ function ResumeContent() {
             -webkit-print-color-adjust: exact !important;
             print-color-adjust: exact !important;
           }
-          @page { size: A4; margin: 5mm; }
-          html { background: #fff !important; }
           body {
-            padding: 5mm !important;
             background: #fff !important; background-color: #fff !important;
             color: #000 !important;
           }
           .container {
-            padding: 4mm !important;
             border: none !important;
           }
           .toolbar { display: none !important; }

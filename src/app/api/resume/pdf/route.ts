@@ -1,32 +1,21 @@
 import { NextRequest } from "next/server";
+import { generateResumePDF } from "@/lib/pdf/generate-resume-pdf";
 
-const RELEASE_URL =
-  "https://github.com/ShravanDeb/Portfolio-Website/releases/download/resume-pdf/Resume.pdf";
-
-export async function GET(_request: NextRequest) {
+export async function GET(request: NextRequest) {
   try {
-    const response = await fetch(RELEASE_URL);
+    const origin = request.nextUrl.origin;
+    const pdf = await generateResumePDF(origin);
 
-    if (!response.ok) {
-      console.error("Failed to fetch PDF from release:", response.status);
-      return Response.json(
-        { error: "Failed to fetch PDF" },
-        { status: 502 }
-      );
-    }
-
-    const pdf = await response.arrayBuffer();
-
-    return new Response(pdf, {
+    return new Response(pdf as unknown as BodyInit, {
       status: 200,
       headers: {
         "Content-Type": "application/pdf",
         "Content-Disposition": 'attachment; filename="Resume.pdf"',
-        "Content-Length": pdf.byteLength.toString(),
+        "Content-Length": pdf.length.toString(),
       },
     });
   } catch (error) {
-    console.error("PDF proxy failed:", error);
-    return Response.json({ error: "Failed to fetch PDF" }, { status: 502 });
+    console.error("PDF generation failed:", error);
+    return Response.json({ error: "Failed to generate PDF" }, { status: 500 });
   }
 }
