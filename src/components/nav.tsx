@@ -51,6 +51,8 @@ export default function Nav() {
     return () => window.removeEventListener("scroll", onScroll);
   }, [menuOpen]);
 
+  const scrollYRef = useRef(0);
+
   // Build GSAP timeline once
   useEffect(() => {
     if (!overlayRef.current || !panelRef.current) return;
@@ -60,13 +62,23 @@ export default function Nav() {
       paused: true,
       onStart: () => {
         overlayRef.current!.style.pointerEvents = "auto";
+        scrollYRef.current = window.scrollY;
+        document.body.style.position = "fixed";
+        document.body.style.top = `-${scrollYRef.current}px`;
+        document.body.style.left = "0";
+        document.body.style.right = "0";
         document.body.style.overflow = "hidden";
       },
       onComplete: () => { isAnimating.current = false; },
       onReverseComplete: () => {
         isAnimating.current = false;
         overlayRef.current!.style.pointerEvents = "none";
+        document.body.style.position = "";
+        document.body.style.top = "";
+        document.body.style.left = "";
+        document.body.style.right = "";
         document.body.style.overflow = "";
+        window.scrollTo(0, scrollYRef.current);
       },
     });
 
@@ -201,7 +213,7 @@ export default function Nav() {
       >
         <div
           ref={panelRef}
-          className="absolute inset-0 bg-background/95 backdrop-blur-xl flex flex-col"
+          className="absolute inset-0 bg-background/80 backdrop-blur-xl flex flex-col"
           style={{ transform: "scaleY(0)", transformOrigin: "bottom" }}
         >
           {/* Nav links */}
