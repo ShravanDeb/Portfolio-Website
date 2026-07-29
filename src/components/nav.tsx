@@ -69,7 +69,9 @@ export default function Nav() {
         document.body.style.right = "0";
         document.body.style.overflow = "hidden";
       },
-      onComplete: () => { isAnimating.current = false; },
+      onComplete: () => {
+        isAnimating.current = false;
+      },
       onReverseComplete: () => {
         isAnimating.current = false;
         overlayRef.current!.style.pointerEvents = "none";
@@ -83,14 +85,16 @@ export default function Nav() {
     });
 
     // Phase 1: Panel sweeps up from bottom
-    tl.fromTo(panelRef.current,
+    tl.fromTo(
+      panelRef.current,
       { scaleY: 0, transformOrigin: "bottom" },
       { scaleY: 1, duration: 0.4, ease: "power4.out" },
-      0,
+      0
     );
 
     // Phase 2: Nav items stagger up from below
-    tl.fromTo(items,
+    tl.fromTo(
+      items,
       { yPercent: 120, opacity: 0 },
       {
         yPercent: 0,
@@ -99,32 +103,37 @@ export default function Nav() {
         stagger: 0.06,
         ease: "power3.out",
       },
-      0.25,
+      0.25
     );
 
     // Phase 3: Footer fades in
     if (footerRef.current) {
-      tl.fromTo(footerRef.current,
+      tl.fromTo(
+        footerRef.current,
         { y: 20, opacity: 0 },
         { y: 0, opacity: 1, duration: 0.4, ease: "power2.out" },
-        0.5,
+        0.5
       );
     }
 
     // Label crossfade
-    tl.fromTo(menuLabelRef.current,
+    tl.fromTo(
+      menuLabelRef.current,
       { opacity: 1, y: 0 },
       { opacity: 0, y: -8, duration: 0.15, ease: "power2.in" },
-      0,
+      0
     );
-    tl.fromTo(closeLabelRef.current,
+    tl.fromTo(
+      closeLabelRef.current,
       { opacity: 0, y: 8 },
       { opacity: 1, y: 0, duration: 0.15, ease: "power2.out" },
-      0.1,
+      0.1
     );
 
     menuTlRef.current = tl;
-    return () => { tl.revert(); };
+    return () => {
+      tl.revert();
+    };
   }, []);
 
   const toggleMenu = () => {
@@ -164,7 +173,11 @@ export default function Nav() {
           {NAV_LINKS.map((link, i) => (
             <span key={link.href} className="flex items-center gap-6">
               {i > 0 && <span className="text-border-hi">·</span>}
-              <Link href={link.href} className="transition-colors hover:text-text-1" data-magnetic>
+              <Link
+                href={link.href}
+                className="transition-colors hover:text-text-1"
+                data-magnetic
+              >
                 {link.label.split("- ")[1]}
               </Link>
             </span>
@@ -184,9 +197,21 @@ export default function Nav() {
           aria-label={menuOpen ? "Close menu" : "Open menu"}
         >
           <span className="relative w-5 h-3 flex flex-col justify-between">
-            <span className={`block h-px bg-text-1 origin-center transition-transform duration-300 [cubic-bezier(0.23,1,0.32,1)] ${menuOpen ? "rotate-45 translate-y-[5px]" : ""}`} />
-            <span className={`block h-px bg-text-1 transition-[opacity,transform] duration-200 [cubic-bezier(0.23,1,0.32,1)] ${menuOpen ? "opacity-0 scale-x-0" : ""}`} />
-            <span className={`block h-px bg-text-1 origin-center transition-transform duration-300 [cubic-bezier(0.23,1,0.32,1)] ${menuOpen ? "-rotate-45 -translate-y-[5px]" : ""}`} />
+            <span
+              className={`block h-px bg-text-1 origin-center transition-transform duration-300 [cubic-bezier(0.23,1,0.32,1)] ${
+                menuOpen ? "rotate-45 translate-y-[5px]" : ""
+              }`}
+            />
+            <span
+              className={`block h-px bg-text-1 transition-[opacity,transform] duration-200 [cubic-bezier(0.23,1,0.32,1)] ${
+                menuOpen ? "opacity-0 scale-x-0" : ""
+              }`}
+            />
+            <span
+              className={`block h-px bg-text-1 origin-center transition-transform duration-300 [cubic-bezier(0.23,1,0.32,1)] ${
+                menuOpen ? "-rotate-45 -translate-y-[5px]" : ""
+              }`}
+            />
           </span>
           <span className="relative overflow-hidden h-4">
             <span
@@ -205,36 +230,39 @@ export default function Nav() {
         </button>
       </div>
 
-      {/* ── Full-screen overlay ── */}
+      {/* ── Full-screen overlay (CORRECTED) ── */}
       <div
         ref={overlayRef}
-        className="md:hidden fixed inset-0 top-14 z-40 pointer-events-none"
+        className="md:hidden fixed top-14 bottom-0 left-0 right-0 z-40 h-[calc(100vh-3.5rem)] w-full overflow-hidden pointer-events-none"
         style={{ pointerEvents: "none" }}
       >
         <div
           ref={panelRef}
-          className="absolute inset-0 bg-background flex flex-col"
+          className="absolute inset-0 w-full h-full bg-background/98 backdrop-blur-2xl shadow-2xl flex flex-col justify-between"
           style={{ transform: "scaleY(0)", transformOrigin: "bottom" }}
         >
           {/* Nav links */}
-          <nav className="flex-1 flex flex-col justify-center px-8">
+          <nav className="flex-1 flex flex-col justify-center px-8 space-y-2">
             {NAV_LINKS.map((link, i) => (
-              <Link
-                key={link.href}
-                ref={(el) => { if (el) navItemsRef.current[i] = el; }}
-                href={link.href}
-                onClick={toggleMenu}
-                className="block py-3 text-[clamp(2rem,7vw,3.5rem)] font-medium leading-[1.1] tracking-[-0.02em] text-text-1 opacity-0 hover:text-text-2 active:scale-[0.97] transition-colors"
-              >
-                {link.label}
-              </Link>
+              <div key={link.href} className="overflow-hidden">
+                <Link
+                  ref={(el) => {
+                    if (el) navItemsRef.current[i] = el;
+                  }}
+                  href={link.href}
+                  onClick={toggleMenu}
+                  className="block py-2 text-[clamp(2rem,7vw,3.5rem)] font-medium leading-[1.1] tracking-[-0.02em] text-text-1 opacity-0 hover:text-text-2 active:scale-[0.97] transition-all"
+                >
+                  {link.label}
+                </Link>
+              </div>
             ))}
           </nav>
 
           {/* Footer row */}
           <div
             ref={footerRef}
-            className="px-8 pb-8 pt-6 border-t border-border flex items-center justify-between text-text-4 text-[0.7rem] font-mono uppercase tracking-[0.12em] opacity-0"
+            className="px-8 pb-10 pt-6 border-t border-border flex items-center justify-between text-text-4 text-[0.7rem] font-mono uppercase tracking-[0.12em] opacity-0"
           >
             <span>© {new Date().getFullYear()}</span>
             <AnimatedThemeToggler
