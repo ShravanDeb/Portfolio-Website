@@ -144,7 +144,7 @@ export default function Nav() {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-[background-color,border-color,transform] duration-300 [cubic-bezier(0.23,1,0.32,1)] ${
-        scrolled
+        scrolled || menuOpen
           ? "border-b border-border bg-background/80 backdrop-blur-sm"
           : "border-b border-transparent"
       } ${navHidden ? "-translate-y-full" : "translate-y-0"}`}
@@ -208,12 +208,12 @@ export default function Nav() {
       {/* ── Full-screen overlay ── */}
       <div
         ref={overlayRef}
-        className="md:hidden fixed left-0 right-0 top-14 bottom-0 z-[60] pointer-events-none"
+        className="md:hidden fixed inset-0 z-40 pointer-events-none bg-background"
         style={{ pointerEvents: "none" }}
       >
         <div
           ref={panelRef}
-          className="absolute inset-0 bg-background flex flex-col overflow-y-auto"
+          className="absolute inset-0 flex flex-col pt-14 overflow-y-auto"
           style={{ transform: "scaleY(0)", transformOrigin: "bottom" }}
         >
           {/* Nav links */}
