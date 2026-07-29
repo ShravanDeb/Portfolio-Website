@@ -1,0 +1,66 @@
+name: Generate Resume PDF
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - "src/app/resume/**"
+      - "public/**"
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - name: Install Latin Modern Roman font
+        run: |
+          wget -q "https://www.gust.org.pl/projects/e-foundry/latin-modern/download/lm2.004otf.zip"
+          unzip -q lm2.004otf.zip
+          mkdir -p ~/.fonts
+          cp lm2.004otf/*.otf ~/.fonts/
+          fc-cache -f
+          rm -rf lm2.004otf lm2.004otf.zip
+
+      - name: Build
+        run: npm run build
+
+      - name: Start server
+        run: npm run start &
+        env:
+          PORT: 3000
+
+      - name: Wait for server
+        run: |
+          for i in $(seq 1 30); do
+            curl -s http://localhost:3000 > /dev/null 2>&1 && break
+            sleep 2
+          done
+
+      - name: Generate PDF
+        run: node scripts/generate-resume-pdf.mjs
+
+      - name: Stop server
+        run: kill $(lsof -t -i:3000) || true
+
+      - name: Upload to Release
+        uses: ncipollo/release-action@v1
+        with:
+          tag: resume-pdf
+          name: Resume PDF
+          artifacts: Resume.pdf
+          replacesArtifacts: true
+          allowUpdates: true
+          omitBody: true
+          omitNameDuringUpdate: true
+          makeLatest: true
+          token: ${{ secrets.GITHUB_TOKEN }}
