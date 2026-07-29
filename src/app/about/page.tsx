@@ -8,7 +8,7 @@ import BackButton from "@/components/back-button";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "AI/ML engineer and product builder focused on intelligent systems.",
+    "Computer Science student specializing in AI, building intelligent software.",
 };
 
 export default function AboutPage() {
@@ -25,7 +25,7 @@ export default function AboutPage() {
             About
           </span>
           <h1 className="text-[clamp(2.5rem,5vw,4.5rem)] font-medium leading-[1.0] tracking-[-0.03em] text-text-1 mb-16">
-            Building at the intersection of AI and infrastructure
+            Building Intelligent Software
           </h1>
 
           <div className="text-text-2 text-base leading-[1.7] space-y-6">
@@ -33,49 +33,49 @@ export default function AboutPage() {
               <span className="float-left text-[6rem] font-medium leading-[0.85] tracking-[-0.04em] text-text-1 mr-4 mt-2">
                 I
               </span>
-              &apos;m Shravan Deb — a B.Tech Computer Science student
-              specializing in AI/ML at SRM Institute of Science and Technology,
-              Chennai. I build production systems that sit at the intersection of
-              machine learning, real-time infrastructure, and developer
-              experience.
+              &apos;m Shravan, a Computer Science student specializing in
+              Artificial Intelligence with a passion for building software
+              that solves real problems. My interests span artificial
+              intelligence, backend engineering, full-stack development, and
+              modern web technologies. I enjoy transforming ideas into
+              products that are reliable, intuitive, and built with users in
+              mind.
             </p>
             <p>
-              Over the past four years, I&apos;ve shipped production systems that
-              handle thousands of concurrent users, trained models deployed across
-              distributed networks, and built tools that developers actually want
-              to use. My work spans from low-level systems programming in C/C++
-              to training transformer architectures in PyTorch to building
-              performant web applications with Next.js.
+              My journey in software development has been driven by curiosity
+              and continuous learning. Through academic projects, hackathons,
+              and personal initiatives, I have worked on AI-powered
+              applications, web platforms, developer tools, and automation
+              systems. Every project has helped me strengthen my understanding
+              of software engineering, scalable architecture, and product
+              development.
             </p>
             <p>
-              Currently, I&apos;m exploring the space where AI meets
-              infrastructure — how we build systems that are not just
-              intelligent, but resilient, observable, and honest about their
-              limitations. I believe the best technology feels invisible; it
-              solves real problems without demanding attention.
+              I am particularly interested in the intersection of artificial
+              intelligence and software engineering. I enjoy exploring how
+              machine learning can be integrated into real-world applications
+              while maintaining performance, reliability, and a great user
+              experience. Alongside AI, I continue learning about system
+              design, distributed systems, cloud technologies, and modern
+              development practices.
             </p>
           </div>
 
           {/* Pull quote */}
           <div className="my-16 border-l border-border-hi pl-8">
             <p className="text-[2.5rem] font-[200] leading-[1.2] tracking-[-0.02em] text-text-1">
-              The best systems are the ones you never have to think about.
+              Great software solves real problems with simplicity.
+              It is reliable, intuitive, and built to last.
             </p>
           </div>
 
           <div className="text-text-2 text-base leading-[1.7] space-y-6">
             <p>
-              When I&apos;m not writing code, you&apos;ll find me reading about
-              systems design, experimenting with new ML architectures, or diving
-              deep into the internals of tools I use daily. I believe in building
-              in public, sharing what I learn, and contributing to the open
-              source ecosystem.
-            </p>
-            <p>
-              Previously, I&apos;ve worked on building developer tools, contributing
-              to open source projects, and exploring the frontiers of what&apos;s
-              possible with modern AI systems. Every project teaches me something
-              new about building software that matters.
+              Outside of development, I spend time reading about software
+              architecture, experimenting with emerging AI models and
+              frameworks, contributing to open-source projects, and studying
+              the engineering decisions behind products that people use every
+              day.
             </p>
           </div>
 
@@ -83,31 +83,31 @@ export default function AboutPage() {
           <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 py-12 border-t border-border">
             <div>
               <span className="block text-2xl font-medium text-text-1 tracking-tight">
-                4+
+                8+
               </span>
               <span className="font-mono text-[0.7rem] uppercase tracking-[0.12em] text-text-4">
-                Years
+                Total Systems Built
               </span>
             </div>
             <div>
               <span className="block text-2xl font-medium text-text-1 tracking-tight">
-                15+
+                3
               </span>
               <span className="font-mono text-[0.7rem] uppercase tracking-[0.12em] text-text-4">
-                Projects
+                Prod Deployments
               </span>
             </div>
             <div>
               <span className="block text-2xl font-medium text-text-1 tracking-tight">
-                500+
+                23
               </span>
               <span className="font-mono text-[0.7rem] uppercase tracking-[0.12em] text-text-4">
-                GitHub Stars
+                Technologies Used
               </span>
             </div>
             <div>
               <span className="block text-2xl font-medium text-text-1 tracking-tight">
-                100K+
+                50K+
               </span>
               <span className="font-mono text-[0.7rem] uppercase tracking-[0.12em] text-text-4">
                 Lines of Code

@@ -201,7 +201,7 @@ export default function Nav() {
       >
         <div
           ref={panelRef}
-          className="absolute inset-0 bg-background flex flex-col"
+          className="absolute inset-0 bg-background/95 backdrop-blur-xl flex flex-col"
           style={{ transform: "scaleY(0)", transformOrigin: "bottom" }}
         >
           {/* Nav links */}
