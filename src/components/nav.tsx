@@ -230,7 +230,7 @@ export default function Nav() {
         </button>
       </div>
 
-      {/* ── Full-screen overlay (CORRECTED) ── */}
+      {/* ── Full-screen overlay ── */}
       <div
         ref={overlayRef}
         className="md:hidden fixed top-14 bottom-0 left-0 right-0 z-40 h-[calc(100vh-3.5rem)] w-full overflow-hidden pointer-events-none"
@@ -259,7 +259,7 @@ export default function Nav() {
             ))}
           </nav>
 
-          {/* Footer row */}
+          {/* Footer row (Theme Toggler is here inside the mobile menu contents!) */}
           <div
             ref={footerRef}
             className="px-8 pb-10 pt-6 border-t border-border flex items-center justify-between text-text-4 text-[0.7rem] font-mono uppercase tracking-[0.12em] opacity-0"
