@@ -31,13 +31,13 @@ function ResumeContent() {
       <style>{`
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-        @page { size: A4; margin: 6mm; }
-
         html {
           -webkit-print-color-adjust: exact;
           print-color-adjust: exact;
           background: #ffffff;
         }
+
+        @page { margin: 0; }
 
         body {
           font-family: "Latin Modern Roman", "Computer Modern", "Times New Roman", Times, serif;
@@ -117,6 +117,7 @@ function ResumeContent() {
             -webkit-print-color-adjust: exact !important;
             print-color-adjust: exact !important;
           }
+          html { background: #fff !important; }
           body {
             background: #fff !important; background-color: #fff !important;
             color: #000 !important;
