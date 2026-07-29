@@ -26,9 +26,9 @@ jobs:
           wget -q "https://www.gust.org.pl/projects/e-foundry/latin-modern/download/lm2.004otf.zip"
           unzip -q lm2.004otf.zip
           mkdir -p ~/.fonts
-          cp lm2.004otf/*.otf ~/.fonts/
+          find . -name "*.otf" -exec cp {} ~/.fonts/ \;
           fc-cache -f
-          rm -rf lm2.004otf lm2.004otf.zip
+          rm -rf lm2.004otf* *.zip
 
       - name: Build
         run: npm run build
