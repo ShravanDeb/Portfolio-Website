@@ -12,9 +12,9 @@ const browser = await puppeteer.launch({
 try {
   const page = await browser.newPage();
 
-  await page.goto(URL, { waitUntil: "domcontentloaded", timeout: 30000 });
+  await page.setViewport({ width: 1024, height: 768 });
 
-  await page.emulateMediaType("print");
+  await page.goto(URL, { waitUntil: "domcontentloaded", timeout: 30000 });
 
   await Promise.race([
     page.evaluate(() => document.fonts.ready),
@@ -24,7 +24,6 @@ try {
   const pdf = await page.pdf({
     format: "A4",
     printBackground: true,
-    preferCSSPageSize: true,
     displayHeaderFooter: false,
   });
 

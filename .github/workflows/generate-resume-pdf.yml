@@ -3,9 +3,6 @@ name: Generate Resume PDF
 on:
   push:
     branches: [master]
-    paths:
-      - "src/app/resume/**"
-      - "public/**"
 
 jobs:
   generate:
