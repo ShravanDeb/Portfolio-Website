@@ -34,7 +34,7 @@ function ResumeContent() {
         html {
           -webkit-print-color-adjust: exact;
           print-color-adjust: exact;
-          background: #ffffff;
+          background: #ffffff !important;
         }
 
         body {
@@ -116,6 +116,7 @@ function ResumeContent() {
             print-color-adjust: exact !important;
           }
           @page { size: A4; margin: 5mm; }
+          html { background: #fff !important; }
           body {
             padding: 5mm !important;
             background: #fff !important; background-color: #fff !important;
