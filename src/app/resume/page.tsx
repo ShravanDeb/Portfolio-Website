@@ -10,59 +10,17 @@ function ResumeContent() {
 
   const handleDownload = async () => {
     try {
-      const html2canvas = (await import("html2canvas")).default;
-      const jsPDF = (await import("jspdf")).default;
-
-      const element = document.querySelector(".container") as HTMLElement;
-      if (!element) throw new Error("Container not found");
-
-      const origBorder = element.style.border;
-      element.style.border = "none";
-
-      const canvas = await html2canvas(element, {
-        scale: 2,
-        backgroundColor: "#ffffff",
-        logging: false,
-      });
-
-      element.style.border = origBorder;
-
-      const imgData = canvas.toDataURL("image/jpeg", 0.95);
-      const pdf = new jsPDF("p", "mm", "a4");
-      const pdfW = pdf.internal.pageSize.getWidth();
-      const pdfH = pdf.internal.pageSize.getHeight();
-
-      const margin = 7.9;
-      const imgW = pdfW - margin * 2;
-      const imgH = (canvas.height * imgW) / canvas.width;
-
-      if (imgH > pdfH - margin * 2) {
-        const pageContentH = pdfH - margin * 2;
-        let remainingH = imgH;
-        let srcY = 0;
-
-        while (remainingH > 0) {
-          const sliceH = Math.min(pageContentH, remainingH);
-          pdf.addImage(
-            imgData,
-            "JPEG",
-            margin,
-            margin,
-            imgW,
-            imgH,
-            undefined,
-            undefined,
-            srcY
-          );
-          remainingH -= sliceH;
-          srcY += sliceH / imgH * canvas.height;
-          if (remainingH > 0) pdf.addPage();
-        }
-      } else {
-        pdf.addImage(imgData, "JPEG", margin, margin, imgW, imgH);
-      }
-
-      pdf.save("Resume.pdf");
+      const res = await fetch("/api/resume/pdf");
+      if (!res.ok) throw new Error("PDF generation failed");
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "Resume.pdf";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
     } catch (e) {
       console.error(e);
       window.print();
